@@ -1,0 +1,489 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+// ============================================================
+// PUBLIC CONTROLLERS
+// ============================================================
+
+use App\Http\Controllers\QuoteRequestController;
+
+// ============================================================
+// ADMIN CONTROLLERS
+// ============================================================
+
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\SeoController;
+
+use App\Http\Controllers\Admin\ServiceCategoryController;
+use App\Http\Controllers\Admin\ServiceController;
+
+use App\Http\Controllers\Admin\ProjectCategoryController;
+use App\Http\Controllers\Admin\ProjectController;
+
+use App\Http\Controllers\Admin\NewsCategoryController;
+use App\Http\Controllers\Admin\NewsController;
+
+use App\Http\Controllers\Admin\AboutUsController;
+use App\Http\Controllers\Admin\CertificateController;
+use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\AboutTimelineController;
+
+use App\Http\Controllers\Admin\QuoteRequestController as AdminQuoteRequestController;
+
+
+// ============================================================
+// PUBLIC ROUTES
+// ============================================================
+
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+
+
+// ============================================================
+// PUBLIC - QUOTE REQUEST
+// ============================================================
+
+Route::get('/quote', [
+    QuoteRequestController::class,
+    'create'
+])->name('quote.create');
+
+Route::post('/quote', [
+    QuoteRequestController::class,
+    'store'
+])->name('quote.store');
+
+
+// ============================================================
+// ADMIN AUTHENTICATION
+// ============================================================
+
+// ------------------------------------------------------------
+// Login Page
+// ------------------------------------------------------------
+
+Route::get('/admin/login', [
+    AuthController::class,
+    'showLogin'
+])->name('admin.login');
+
+
+// ------------------------------------------------------------
+// Login Submit
+// ------------------------------------------------------------
+
+Route::post('/admin/login', [
+    AuthController::class,
+    'login'
+])->name('admin.login.submit');
+
+
+// ------------------------------------------------------------
+// Logout
+// ------------------------------------------------------------
+
+Route::post('/admin/logout', [
+    AuthController::class,
+    'logout'
+])->name('admin.logout');
+
+
+// ============================================================
+// ADMIN PANEL
+// ============================================================
+
+Route::middleware('auth')
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+
+        // ========================================================
+        // DASHBOARD
+        // ========================================================
+
+        Route::get('/dashboard', [
+            DashboardController::class,
+            'index'
+        ])->name('dashboard');
+
+
+        // ========================================================
+        // SEO
+        // ========================================================
+
+        // SEO Settings
+        Route::get('/seo', [
+            SeoController::class,
+            'index'
+        ])->name('seo.index');
+
+        // Save SEO Settings
+        Route::put('/seo', [
+            SeoController::class,
+            'update'
+        ])->name('seo.update');
+
+
+        // ========================================================
+        // QUOTE REQUESTS
+        // ========================================================
+
+        // --------------------------------------------------------
+        // รายการคำขอใบเสนอราคา
+        // --------------------------------------------------------
+
+        Route::get(
+            '/quote-requests',
+            [AdminQuoteRequestController::class, 'index']
+        )->name('quote-requests.index');
+
+
+        // --------------------------------------------------------
+        // รายละเอียดคำขอ
+        // --------------------------------------------------------
+
+        Route::get(
+            '/quote-requests/{quoteRequest}',
+            [AdminQuoteRequestController::class, 'show']
+        )->name('quote-requests.show');
+
+
+        // --------------------------------------------------------
+        // เปลี่ยนสถานะ
+        // --------------------------------------------------------
+
+        Route::patch(
+            '/quote-requests/{quoteRequest}/status',
+            [AdminQuoteRequestController::class, 'updateStatus']
+        )->name('quote-requests.status');
+
+
+        // --------------------------------------------------------
+        // ลบคำขอ
+        // --------------------------------------------------------
+
+        Route::delete(
+            '/quote-requests/{quoteRequest}',
+            [AdminQuoteRequestController::class, 'destroy']
+        )->name('quote-requests.destroy');
+
+
+        // ========================================================
+        // SERVICES
+        // ========================================================
+
+        // --------------------------------------------------------
+        // Service Categories
+        // --------------------------------------------------------
+
+        Route::resource(
+            'service-categories',
+            ServiceCategoryController::class
+        )->except([
+            'show',
+        ]);
+
+
+        // --------------------------------------------------------
+        // Services
+        // --------------------------------------------------------
+
+        Route::resource(
+            'services',
+            ServiceController::class
+        );
+
+
+        // --------------------------------------------------------
+        // Toggle Service
+        // --------------------------------------------------------
+
+        Route::patch(
+            '/services/{service}/toggle',
+            [ServiceController::class, 'toggle']
+        )->name('services.toggle');
+
+
+        // --------------------------------------------------------
+        // Delete Service Image
+        // --------------------------------------------------------
+
+        Route::delete(
+            '/service-images/{serviceImage}',
+            [ServiceController::class, 'destroyImage']
+        )->name('service-images.destroy');
+
+
+        // ========================================================
+        // PROJECTS
+        // ========================================================
+
+        // --------------------------------------------------------
+        // Project Categories
+        // --------------------------------------------------------
+
+        Route::resource(
+            'project-categories',
+            ProjectCategoryController::class
+        )->except([
+            'show',
+        ]);
+
+
+        // --------------------------------------------------------
+        // Projects
+        // --------------------------------------------------------
+
+        Route::resource(
+            'projects',
+            ProjectController::class
+        );
+
+
+        // --------------------------------------------------------
+        // Toggle Project
+        // --------------------------------------------------------
+
+        Route::patch(
+            '/projects/{project}/toggle',
+            [ProjectController::class, 'toggle']
+        )->name('projects.toggle');
+
+
+        // --------------------------------------------------------
+        // Delete Project Image
+        // --------------------------------------------------------
+
+        Route::delete(
+            '/project-images/{projectImage}',
+            [ProjectController::class, 'destroyImage']
+        )->name('project-images.destroy');
+
+
+        // ========================================================
+        // NEWS
+        // ========================================================
+
+        // --------------------------------------------------------
+        // News Categories
+        // --------------------------------------------------------
+
+        Route::resource(
+            'news-categories',
+            NewsCategoryController::class
+        )->except([
+            'show',
+        ]);
+
+
+        // --------------------------------------------------------
+        // Toggle News Category
+        // --------------------------------------------------------
+
+        Route::patch(
+            '/news-categories/{news_category}/toggle',
+            [NewsCategoryController::class, 'toggle']
+        )->name('news-categories.toggle');
+
+
+        // --------------------------------------------------------
+        // News
+        // --------------------------------------------------------
+
+        Route::resource(
+            'news',
+            NewsController::class
+        )->except([
+            'show',
+        ]);
+
+
+        // --------------------------------------------------------
+        // Toggle News
+        // --------------------------------------------------------
+
+        Route::patch(
+            '/news/{news}/toggle',
+            [NewsController::class, 'toggle']
+        )->name('news.toggle');
+
+
+        // --------------------------------------------------------
+        // Delete News Image
+        // --------------------------------------------------------
+
+        Route::delete(
+            '/news-images/{newsImage}',
+            [NewsController::class, 'destroyImage']
+        )->name('news-images.destroy');
+
+
+        // ========================================================
+        // ABOUT US
+        // ========================================================
+
+        Route::prefix('about')
+            ->name('about.')
+            ->group(function () {
+
+
+                // ====================================================
+                // COMPANY PROFILE
+                // ====================================================
+
+                Route::get(
+                    '/',
+                    [AboutUsController::class, 'index']
+                )->name('index');
+
+
+                Route::put(
+                    '/',
+                    [AboutUsController::class, 'update']
+                )->name('update');
+
+
+                // ====================================================
+                // COMPANY TIMELINE
+                // ====================================================
+
+                Route::get(
+                    '/timeline',
+                    [AboutTimelineController::class, 'index']
+                )->name('timeline.index');
+
+
+                Route::get(
+                    '/timeline/create',
+                    [AboutTimelineController::class, 'create']
+                )->name('timeline.create');
+
+
+                Route::post(
+                    '/timeline',
+                    [AboutTimelineController::class, 'store']
+                )->name('timeline.store');
+
+
+                Route::get(
+                    '/timeline/{about_timeline}/edit',
+                    [AboutTimelineController::class, 'edit']
+                )->name('timeline.edit');
+
+
+                Route::put(
+                    '/timeline/{about_timeline}',
+                    [AboutTimelineController::class, 'update']
+                )->name('timeline.update');
+
+
+                Route::delete(
+                    '/timeline/{about_timeline}',
+                    [AboutTimelineController::class, 'destroy']
+                )->name('timeline.destroy');
+
+
+                Route::patch(
+                    '/timeline/{about_timeline}/toggle',
+                    [AboutTimelineController::class, 'toggle']
+                )->name('timeline.toggle');
+
+
+                // ====================================================
+                // CERTIFICATES
+                // ====================================================
+
+                Route::get(
+                    '/certificates',
+                    [CertificateController::class, 'index']
+                )->name('certificates.index');
+
+
+                Route::get(
+                    '/certificates/create',
+                    [CertificateController::class, 'create']
+                )->name('certificates.create');
+
+
+                Route::post(
+                    '/certificates',
+                    [CertificateController::class, 'store']
+                )->name('certificates.store');
+
+
+                Route::get(
+                    '/certificates/{certificate}/edit',
+                    [CertificateController::class, 'edit']
+                )->name('certificates.edit');
+
+
+                Route::put(
+                    '/certificates/{certificate}',
+                    [CertificateController::class, 'update']
+                )->name('certificates.update');
+
+
+                Route::delete(
+                    '/certificates/{certificate}',
+                    [CertificateController::class, 'destroy']
+                )->name('certificates.destroy');
+
+
+                Route::patch(
+                    '/certificates/{certificate}/toggle',
+                    [CertificateController::class, 'toggle']
+                )->name('certificates.toggle');
+
+
+                // ====================================================
+                // CLIENTS
+                // ====================================================
+
+                Route::get(
+                    '/clients',
+                    [ClientController::class, 'index']
+                )->name('clients.index');
+
+
+                Route::get(
+                    '/clients/create',
+                    [ClientController::class, 'create']
+                )->name('clients.create');
+
+
+                Route::post(
+                    '/clients',
+                    [ClientController::class, 'store']
+                )->name('clients.store');
+
+
+                Route::get(
+                    '/clients/{client}/edit',
+                    [ClientController::class, 'edit']
+                )->name('clients.edit');
+
+
+                Route::put(
+                    '/clients/{client}',
+                    [ClientController::class, 'update']
+                )->name('clients.update');
+
+
+                Route::delete(
+                    '/clients/{client}',
+                    [ClientController::class, 'destroy']
+                )->name('clients.destroy');
+
+
+                Route::patch(
+                    '/clients/{client}/toggle',
+                    [ClientController::class, 'toggle']
+                )->name('clients.toggle');
+
+            });
+
+    });
