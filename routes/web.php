@@ -32,14 +32,16 @@ use App\Http\Controllers\Admin\AboutTimelineController;
 
 use App\Http\Controllers\Admin\QuoteRequestController as AdminQuoteRequestController;
 
+use App\Http\Controllers\Public\HomeController;
+
 
 // ============================================================
 // PUBLIC ROUTES
 // ============================================================
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+
+Route::get('/', [HomeController::class, 'index'])
+    ->name('home');
 
 
 // ============================================================

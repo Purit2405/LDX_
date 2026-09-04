@@ -1,3 +1,4 @@
+
 @extends('layouts.admin.app')
 
 @section('title', 'Edit Project Category')
@@ -6,45 +7,55 @@
 
 @section('content')
 
-<div class="mx-auto max-w-3xl space-y-6">
+<div class="ldx-page ldx-page-form">
 
-    <div>
+    {{-- Header --}}
+    <div class="ldx-page-header">
 
-        <div class="flex items-center gap-2 text-sm text-gray-500">
+        <div class="ldx-breadcrumb">
 
             <a
                 href="{{ route('admin.project-categories.index') }}"
-                class="hover:text-gray-900"
+                class="ldx-breadcrumb-link"
             >
                 Project Categories
             </a>
 
-            <span>/</span>
+            <span class="ldx-breadcrumb-separator">/</span>
 
-            <span>Edit</span>
+            <span class="ldx-breadcrumb-current">
+                Edit
+            </span>
 
         </div>
 
-        <h1 class="mt-2 text-2xl font-bold text-gray-900">
+        <h1 class="ldx-page-title">
             Edit Project Category
         </h1>
+
+        <p class="ldx-page-description">
+            แก้ไขข้อมูลหมวดหมู่ {{ $projectCategory->name }}
+        </p>
 
     </div>
 
 
+    {{-- Validation Errors --}}
     @if($errors->any())
 
-        <div class="rounded-xl border border-red-200 bg-red-50 p-5">
+        <div class="ldx-alert ldx-alert-danger">
 
-            <div class="font-semibold text-red-700">
+            <div class="ldx-alert-title">
                 กรุณาตรวจสอบข้อมูล
             </div>
 
-            <ul class="mt-2 list-inside list-disc text-sm text-red-600">
+            <ul class="ldx-alert-list">
 
                 @foreach($errors->all() as $error)
 
-                    <li>{{ $error }}</li>
+                    <li>
+                        {{ $error }}
+                    </li>
 
                 @endforeach
 
@@ -55,140 +66,213 @@
     @endif
 
 
+    {{-- Form --}}
     <form
         method="POST"
         action="{{ route(
             'admin.project-categories.update',
             $projectCategory
         ) }}"
-        class="rounded-xl bg-white p-6 shadow-sm"
+        class="ldx-form"
     >
 
         @csrf
         @method('PUT')
 
 
-        <div class="space-y-6">
+        <div class="ldx-card">
 
-            {{-- Name --}}
-            <div>
+            <div class="ldx-card-header">
 
-                <label class="mb-2 block text-sm font-medium text-gray-700">
-                    Category Name <span class="text-red-500">*</span>
-                </label>
+                <h2 class="ldx-card-title">
+                    Category Information
+                </h2>
 
-                <input
-                    type="text"
-                    name="name"
-                    value="{{ old(
-                        'name',
-                        $projectCategory->name
-                    ) }}"
-                    required
-                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm"
-                >
+                <p class="ldx-card-description">
+                    แก้ไขข้อมูลพื้นฐานของ Project Category
+                </p>
 
             </div>
 
 
-            {{-- Slug --}}
-            <div>
+            <div class="ldx-card-body">
 
-                <label class="mb-2 block text-sm font-medium text-gray-700">
-                    Slug
-                </label>
+                {{-- Name --}}
+                <div class="ldx-form-group">
 
-                <input
-                    type="text"
-                    name="slug"
-                    value="{{ old(
-                        'slug',
-                        $projectCategory->slug
-                    ) }}"
-                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm"
-                >
-
-            </div>
-
-
-            {{-- Description --}}
-            <div>
-
-                <label class="mb-2 block text-sm font-medium text-gray-700">
-                    Description
-                </label>
-
-                <textarea
-                    name="description"
-                    rows="5"
-                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm"
-                >{{ old(
-                    'description',
-                    $projectCategory->description
-                ) }}</textarea>
-
-            </div>
-
-
-            {{-- Status --}}
-            <div>
-
-                <label class="mb-2 block text-sm font-medium text-gray-700">
-                    Status
-                </label>
-
-                <select
-                    name="is_active"
-                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm"
-                >
-
-                    <option
-                        value="1"
-                        @selected(old(
-                            'is_active',
-                            $projectCategory->is_active
-                                ? '1'
-                                : '0'
-                        ) === '1')
+                    <label
+                        for="name"
+                        class="ldx-label"
                     >
-                        Active
-                    </option>
+                        Category Name
+                        <span class="ldx-required">*</span>
+                    </label>
 
-                    <option
-                        value="0"
-                        @selected(old(
-                            'is_active',
-                            $projectCategory->is_active
-                                ? '1'
-                                : '0'
-                        ) === '0')
+                    <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        value="{{ old(
+                            'name',
+                            $projectCategory->name
+                        ) }}"
+                        required
+                        maxlength="255"
+                        class="ldx-input"
                     >
-                        Hidden
-                    </option>
 
-                </select>
+                    @error('name')
+
+                        <p class="ldx-error">
+                            {{ $message }}
+                        </p>
+
+                    @enderror
+
+                </div>
+
+
+                {{-- Slug --}}
+                <div class="ldx-form-group">
+
+                    <label
+                        for="slug"
+                        class="ldx-label"
+                    >
+                        Slug
+                    </label>
+
+                    <input
+                        id="slug"
+                        type="text"
+                        name="slug"
+                        value="{{ old(
+                            'slug',
+                            $projectCategory->slug
+                        ) }}"
+                        maxlength="255"
+                        class="ldx-input"
+                    >
+
+                    <p class="ldx-help">
+                        ใช้สำหรับ URL ของหมวดหมู่
+                    </p>
+
+                    @error('slug')
+
+                        <p class="ldx-error">
+                            {{ $message }}
+                        </p>
+
+                    @enderror
+
+                </div>
+
+
+                {{-- Description --}}
+                <div class="ldx-form-group">
+
+                    <label
+                        for="description"
+                        class="ldx-label"
+                    >
+                        Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="5"
+                        class="ldx-textarea"
+                    >{{ old(
+                        'description',
+                        $projectCategory->description
+                    ) }}</textarea>
+
+                    @error('description')
+
+                        <p class="ldx-error">
+                            {{ $message }}
+                        </p>
+
+                    @enderror
+
+                </div>
+
+
+                {{-- Status --}}
+                <div class="ldx-form-group">
+
+                    <label
+                        for="is_active"
+                        class="ldx-label"
+                    >
+                        Status
+                    </label>
+
+                    <select
+                        id="is_active"
+                        name="is_active"
+                        class="ldx-select"
+                    >
+
+                        <option
+                            value="1"
+                            @selected(old(
+                                'is_active',
+                                $projectCategory->is_active
+                                    ? '1'
+                                    : '0'
+                            ) === '1')
+                        >
+                            Active
+                        </option>
+
+                        <option
+                            value="0"
+                            @selected(old(
+                                'is_active',
+                                $projectCategory->is_active
+                                    ? '1'
+                                    : '0'
+                            ) === '0')
+                        >
+                            Hidden
+                        </option>
+
+                    </select>
+
+                    @error('is_active')
+
+                        <p class="ldx-error">
+                            {{ $message }}
+                        </p>
+
+                    @enderror
+
+                </div>
 
             </div>
 
+        </div>
 
-            {{-- Buttons --}}
-            <div class="flex items-center justify-between">
 
-                <a
-                    href="{{ route('admin.project-categories.index') }}"
-                    class="rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                >
-                    Cancel
-                </a>
+        {{-- Actions --}}
+        <div class="ldx-form-actions ldx-form-actions-between">
 
-                <button
-                    type="submit"
-                    class="rounded-lg bg-gray-900 px-6 py-2.5 text-sm font-semibold text-white hover:bg-gray-800"
-                >
-                    Save Changes
-                </button>
+            <a
+                href="{{ route('admin.project-categories.index') }}"
+                class="ldx-button ldx-button-secondary"
+            >
+                Cancel
+            </a>
 
-            </div>
+            <button
+                type="submit"
+                class="ldx-button ldx-button-primary"
+            >
+                Save Changes
+            </button>
 
         </div>
 
@@ -197,3 +281,4 @@
 </div>
 
 @endsection
+

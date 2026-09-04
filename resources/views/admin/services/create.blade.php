@@ -1,36 +1,37 @@
-blade
+
 @extends('layouts.admin.app')
 
 @section('title', 'Add Service')
+
 @section('page-title', 'Add Service')
 
 @section('content')
 
-<div class="mx-auto max-w-5xl space-y-6">
+<div class="ldx-page ldx-page-wide">
 
     {{-- Header --}}
-    <div>
+    <div class="ldx-page-header">
 
-        <div class="flex items-center gap-2 text-sm text-gray-500">
-
+        <div class="ldx-breadcrumb">
             <a
                 href="{{ route('admin.services.index') }}"
-                class="hover:text-gray-900"
+                class="ldx-breadcrumb-link"
             >
                 Services
             </a>
 
-            <span>/</span>
+            <span class="ldx-breadcrumb-separator">/</span>
 
-            <span>Add Service</span>
-
+            <span class="ldx-breadcrumb-current">
+                Add Service
+            </span>
         </div>
 
-        <h1 class="mt-2 text-2xl font-bold text-gray-900">
+        <h1 class="ldx-page-title">
             Add Service
         </h1>
 
-        <p class="mt-1 text-sm text-gray-500">
+        <p class="ldx-page-description">
             เพิ่มบริการใหม่ให้กับเว็บไซต์ LDX Elevator
         </p>
 
@@ -40,20 +41,16 @@ blade
     {{-- Errors --}}
     @if($errors->any())
 
-        <div class="rounded-xl border border-red-200 bg-red-50 p-5">
+        <div class="ldx-alert ldx-alert-danger">
 
-            <div class="font-semibold text-red-700">
+            <div class="ldx-alert-title">
                 กรุณาตรวจสอบข้อมูล
             </div>
 
-            <ul class="mt-2 list-inside list-disc text-sm text-red-600">
-
+            <ul class="ldx-alert-list">
                 @foreach($errors->all() as $error)
-
                     <li>{{ $error }}</li>
-
                 @endforeach
-
             </ul>
 
         </div>
@@ -65,142 +62,158 @@ blade
         method="POST"
         action="{{ route('admin.services.store') }}"
         enctype="multipart/form-data"
-        class="space-y-6"
+        class="ldx-form"
     >
 
         @csrf
 
 
-        {{-- Basic --}}
-        <div class="rounded-xl bg-white p-6 shadow-sm">
+        {{-- Basic Information --}}
+        <div class="ldx-card">
 
-            <h2 class="text-lg font-semibold text-gray-900">
-                Basic Information
-            </h2>
+            <div class="ldx-card-header">
 
-            <p class="mt-1 text-sm text-gray-500">
-                ข้อมูลหลักของบริการ
-            </p>
+                <h2 class="ldx-card-title">
+                    Basic Information
+                </h2>
+
+                <p class="ldx-card-description">
+                    ข้อมูลหลักของบริการ
+                </p>
+
+            </div>
 
 
-            <div class="mt-6 grid gap-6 md:grid-cols-2">
+            <div class="ldx-card-body">
 
-                {{-- Category --}}
-                <div>
+                <div class="ldx-form-grid ldx-form-grid-2">
 
-                    <label class="mb-2 block text-sm font-medium text-gray-700">
-                        Category <span class="text-red-500">*</span>
-                    </label>
+                    {{-- Category --}}
+                    <div class="ldx-form-group">
 
-                    <select
-                        name="category_id"
-                        required
-                        class="w-full rounded-lg border-gray-300 px-4 py-3 text-sm"
-                    >
+                        <label class="ldx-label">
+                            Category
+                            <span class="ldx-required">*</span>
+                        </label>
 
-                        <option value="">
-                            Select Category
-                        </option>
+                        <select
+                            name="category_id"
+                            required
+                            class="ldx-select"
+                        >
 
-                        @foreach($categories as $category)
-
-                            <option
-                                value="{{ $category->id }}"
-                                @selected(old('category_id') == $category->id)
-                            >
-                                {{ $category->name }}
+                            <option value="">
+                                Select Category
                             </option>
 
-                        @endforeach
+                            @foreach($categories as $category)
 
-                    </select>
+                                <option
+                                    value="{{ $category->id }}"
+                                    @selected(old('category_id') == $category->id)
+                                >
+                                    {{ $category->name }}
+                                </option>
 
-                </div>
+                            @endforeach
 
+                        </select>
 
-                {{-- Title --}}
-                <div>
-
-                    <label class="mb-2 block text-sm font-medium text-gray-700">
-                        Service Name <span class="text-red-500">*</span>
-                    </label>
-
-                    <input
-                        type="text"
-                        name="title"
-                        value="{{ old('title') }}"
-                        required
-                        placeholder="Passenger Elevator"
-                        class="w-full rounded-lg border-gray-300 px-4 py-3 text-sm"
-                    >
-
-                </div>
+                    </div>
 
 
-                {{-- Slug --}}
-                <div>
+                    {{-- Title --}}
+                    <div class="ldx-form-group">
 
-                    <label class="mb-2 block text-sm font-medium text-gray-700">
-                        Slug
-                    </label>
+                        <label class="ldx-label">
+                            Service Name
+                            <span class="ldx-required">*</span>
+                        </label>
 
-                    <input
-                        type="text"
-                        name="slug"
-                        value="{{ old('slug') }}"
-                        placeholder="passenger-elevator"
-                        class="w-full rounded-lg border-gray-300 px-4 py-3 text-sm"
-                    >
+                        <input
+                            type="text"
+                            name="title"
+                            value="{{ old('title') }}"
+                            required
+                            placeholder="Passenger Elevator"
+                            class="ldx-input"
+                        >
 
-                    <p class="mt-1 text-xs text-gray-500">
-                        หากไม่กรอก ระบบจะสร้างจาก Service Name
-                    </p>
-
-                </div>
+                    </div>
 
 
-                {{-- Publish Date --}}
-                <div>
+                    {{-- Slug --}}
+                    <div class="ldx-form-group">
 
-                    <label class="mb-2 block text-sm font-medium text-gray-700">
-                        Publish Date
-                    </label>
+                        <label class="ldx-label">
+                            Slug
+                        </label>
 
-                    <input
-                        type="date"
-                        name="publish_date"
-                        value="{{ old('publish_date', now()->format('Y-m-d')) }}"
-                        class="w-full rounded-lg border-gray-300 px-4 py-3 text-sm"
-                    >
+                        <input
+                            type="text"
+                            name="slug"
+                            value="{{ old('slug') }}"
+                            placeholder="passenger-elevator"
+                            class="ldx-input"
+                        >
 
-                    <p class="mt-1 text-xs text-gray-500">
-                        วันที่เผยแพร่ ไม่มีเวลา
-                    </p>
+                        <p class="ldx-help-text">
+                            หากไม่กรอก ระบบจะสร้างจาก Service Name
+                        </p>
 
-                </div>
+                    </div>
 
 
-                {{-- Status --}}
-                <div>
+                    {{-- Publish Date --}}
+                    <div class="ldx-form-group">
 
-                    <label class="mb-2 block text-sm font-medium text-gray-700">
-                        Status
-                    </label>
+                        <label class="ldx-label">
+                            Publish Date
+                        </label>
 
-                    <select
-                        name="is_active"
-                        class="w-full rounded-lg border-gray-300 px-4 py-3 text-sm"
-                    >
+                        <input
+                            type="date"
+                            name="publish_date"
+                            value="{{ old('publish_date', now()->format('Y-m-d')) }}"
+                            class="ldx-input"
+                        >
 
-                        <option value="1" @selected(old('is_active', '1') === '1')>
-                            Active — แสดงบนเว็บไซต์
-                        </option>
+                        <p class="ldx-help-text">
+                            วันที่เผยแพร่ ไม่มีเวลา
+                        </p>
 
-                        <option value="0" @selected(old('is_active') === '0')>
-                            Hidden — ซ่อนจากเว็บไซต์
-                        </option>
+                    </div>
 
-                    </select>
+
+                    {{-- Status --}}
+                    <div class="ldx-form-group">
+
+                        <label class="ldx-label">
+                            Status
+                        </label>
+
+                        <select
+                            name="is_active"
+                            class="ldx-select"
+                        >
+
+                            <option
+                                value="1"
+                                @selected(old('is_active', '1') === '1')
+                            >
+                                Active — แสดงบนเว็บไซต์
+                            </option>
+
+                            <option
+                                value="0"
+                                @selected(old('is_active') === '0')
+                            >
+                                Hidden — ซ่อนจากเว็บไซต์
+                            </option>
+
+                        </select>
+
+                    </div>
 
                 </div>
 
@@ -210,73 +223,96 @@ blade
 
 
         {{-- Short Description --}}
-        <div class="rounded-xl bg-white p-6 shadow-sm">
+        <div class="ldx-card">
 
-            <h2 class="text-lg font-semibold text-gray-900">
-                Short Description
-            </h2>
+            <div class="ldx-card-header">
 
-            <p class="mt-1 text-sm text-gray-500">
-                คำอธิบายสั้น ๆ ที่ใช้แสดงในรายการบริการ
-            </p>
+                <h2 class="ldx-card-title">
+                    Short Description
+                </h2>
 
-            <textarea
-                name="short_description"
-                rows="4"
-                maxlength="500"
-                class="mt-5 w-full rounded-lg border-gray-300 px-4 py-3 text-sm"
-                placeholder="อธิบายบริการโดยย่อ..."
-            >{{ old('short_description') }}</textarea>
+                <p class="ldx-card-description">
+                    คำอธิบายสั้น ๆ ที่ใช้แสดงในรายการบริการ
+                </p>
+
+            </div>
+
+            <div class="ldx-card-body">
+
+                <textarea
+                    name="short_description"
+                    rows="4"
+                    maxlength="500"
+                    class="ldx-textarea"
+                    placeholder="อธิบายบริการโดยย่อ..."
+                >{{ old('short_description') }}</textarea>
+
+            </div>
 
         </div>
 
 
         {{-- Content --}}
-        <div class="rounded-xl bg-white p-6 shadow-sm">
+        <div class="ldx-card">
 
-            <h2 class="text-lg font-semibold text-gray-900">
-                Service Details
-            </h2>
+            <div class="ldx-card-header">
 
-            <p class="mt-1 text-sm text-gray-500">
-                รายละเอียดบริการแบบเต็ม
-            </p>
+                <h2 class="ldx-card-title">
+                    Service Details
+                </h2>
 
-            <textarea
-                name="content"
-                rows="12"
-                class="mt-5 w-full rounded-lg border-gray-300 px-4 py-3 text-sm"
-                placeholder="รายละเอียดบริการ..."
-            >{{ old('content') }}</textarea>
+                <p class="ldx-card-description">
+                    รายละเอียดบริการแบบเต็ม
+                </p>
+
+            </div>
+
+            <div class="ldx-card-body">
+
+                <textarea
+                    name="content"
+                    rows="12"
+                    class="ldx-textarea"
+                    placeholder="รายละเอียดบริการ..."
+                >{{ old('content') }}</textarea>
+
+            </div>
 
         </div>
 
 
         {{-- Images --}}
-        <div class="rounded-xl bg-white p-6 shadow-sm">
+        <div class="ldx-card">
 
-            <h2 class="text-lg font-semibold text-gray-900">
-                Service Images
-            </h2>
+            <div class="ldx-card-header">
 
-            <p class="mt-1 text-sm text-gray-500">
-                สามารถเลือกหลายรูปพร้อมกันได้ สูงสุด 20 รูป
-            </p>
+                <h2 class="ldx-card-title">
+                    Service Images
+                </h2>
 
-
-            <div class="mt-5">
-
-                <input
-                    type="file"
-                    name="images[]"
-                    multiple
-                    accept="image/jpeg,image/png,image/webp,image/avif"
-                    class="block w-full rounded-lg border border-gray-300 p-3 text-sm"
-                >
-
-                <p class="mt-2 text-xs text-gray-500">
-                    JPG, PNG, WEBP หรือ AVIF — ขนาดไม่เกิน 5MB ต่อรูป
+                <p class="ldx-card-description">
+                    สามารถเลือกหลายรูปพร้อมกันได้ สูงสุด 20 รูป
                 </p>
+
+            </div>
+
+            <div class="ldx-card-body">
+
+                <div class="ldx-form-group">
+
+                    <input
+                        type="file"
+                        name="images[]"
+                        multiple
+                        accept="image/jpeg,image/png,image/webp,image/avif"
+                        class="ldx-file-input"
+                    >
+
+                    <p class="ldx-help-text">
+                        JPG, PNG, WEBP หรือ AVIF — ขนาดไม่เกิน 5MB ต่อรูป
+                    </p>
+
+                </div>
 
             </div>
 
@@ -284,18 +320,18 @@ blade
 
 
         {{-- Buttons --}}
-        <div class="flex items-center justify-between">
+        <div class="ldx-form-actions ldx-form-actions-between">
 
             <a
                 href="{{ route('admin.services.index') }}"
-                class="rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                class="ldx-button ldx-button-secondary"
             >
                 Cancel
             </a>
 
             <button
                 type="submit"
-                class="rounded-lg bg-gray-900 px-7 py-2.5 text-sm font-semibold text-white hover:bg-gray-800"
+                class="ldx-button ldx-button-primary"
             >
                 Save Service
             </button>

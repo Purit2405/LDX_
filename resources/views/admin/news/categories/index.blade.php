@@ -1,30 +1,34 @@
+
 @extends('layouts.admin.app')
 
-@section('title', 'News Categories')
-@section('page-title', 'News Categories')
+@section('title', 'Company Timeline')
 
 @section('content')
 
-<div class="mx-auto max-w-7xl space-y-6">
+<div class="ldx-page ldx-page-wide">
 
     {{-- Header --}}
-    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div class="ldx-page-header ldx-page-header-actions">
 
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">
-                News Categories
+
+            <h1 class="ldx-page-title">
+                Company Timeline
             </h1>
 
-            <p class="mt-1 text-sm text-gray-500">
-                จัดการหมวดหมู่ข่าวสาร
+            <p class="ldx-page-description">
+                จัดการประวัติและเหตุการณ์สำคัญของบริษัท
             </p>
+
         </div>
 
+
         <a
-            href="{{ route('admin.news-categories.create') }}"
-            class="inline-flex items-center justify-center rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-gray-800"
+            href="{{ route('admin.about.timeline.create') }}"
+            class="ldx-button ldx-button-primary"
         >
-            + Add Category
+            <span>+</span>
+            <span>Add Timeline</span>
         </a>
 
     </div>
@@ -33,7 +37,7 @@
     {{-- Success --}}
     @if(session('success'))
 
-        <div class="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+        <div class="ldx-alert ldx-alert-success">
             {{ session('success') }}
         </div>
 
@@ -43,296 +47,149 @@
     {{-- Error --}}
     @if(session('error'))
 
-        <div class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div class="ldx-alert ldx-alert-danger">
             {{ session('error') }}
         </div>
 
     @endif
 
 
-    {{-- Filter --}}
-    <div class="rounded-xl bg-white p-6 shadow-sm">
+    {{-- Timeline --}}
+    <div class="ldx-timeline">
 
-        <form
-            method="GET"
-            action="{{ route('admin.news-categories.index') }}"
-            class="grid gap-4 md:grid-cols-3"
-        >
+        @forelse($timelines as $timeline)
 
-            {{-- Search --}}
-            <div class="md:col-span-2">
+            <div class="ldx-timeline-item">
 
-                <label class="mb-2 block text-sm font-medium text-gray-700">
-                    Search
-                </label>
+                <div class="ldx-timeline-dot"></div>
 
-                <input
-                    type="text"
-                    name="search"
-                    value="{{ request('search') }}"
-                    placeholder="ค้นหาชื่อหมวดหมู่ หรือ Slug..."
-                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-gray-500 focus:outline-none"
-                >
+
+                <div class="ldx-timeline-card">
+
+                    <div class="ldx-timeline-content">
+
+                        {{-- Meta --}}
+                        <div class="ldx-timeline-meta">
+
+                            <span class="ldx-timeline-year">
+                                {{ $timeline->year }}
+                            </span>
+
+
+                            @if($timeline->is_active)
+
+                                <span class="ldx-badge ldx-badge-success">
+                                    Active
+                                </span>
+
+                            @else
+
+                                <span class="ldx-badge ldx-badge-muted">
+                                    Hidden
+                                </span>
+
+                            @endif
+
+                        </div>
+
+
+                        {{-- Title --}}
+                        <h2 class="ldx-timeline-title">
+                            {{ $timeline->title }}
+                        </h2>
+
+
+                        {{-- Description --}}
+                        @if($timeline->description)
+
+                            <p class="ldx-timeline-description">
+                                {{ $timeline->description }}
+                            </p>
+
+                        @endif
+
+
+                        {{-- Sort Order --}}
+                        <div class="ldx-timeline-order">
+                            Sort Order: {{ $timeline->sort_order }}
+                        </div>
+
+
+                        {{-- Actions --}}
+                        <div class="ldx-timeline-actions">
+
+                            <a
+                                href="{{ route('admin.about.timeline.edit', $timeline) }}"
+                                class="ldx-button ldx-button-secondary ldx-button-sm"
+                            >
+                                Edit
+                            </a>
+
+
+                            <form
+                                method="POST"
+                                action="{{ route('admin.about.timeline.destroy', $timeline) }}"
+                                onsubmit="return confirm('ลบ Timeline นี้หรือไม่?')"
+                            >
+
+                                @csrf
+                                @method('DELETE')
+
+                                <button
+                                    type="submit"
+                                    class="ldx-button ldx-button-danger ldx-button-sm"
+                                >
+                                    Delete
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
+        @empty
 
-            {{-- Status --}}
-            <div>
+            <div class="ldx-empty ldx-empty-full">
 
-                <label class="mb-2 block text-sm font-medium text-gray-700">
-                    Status
-                </label>
+                <div class="ldx-empty-icon">
+                    🕐
+                </div>
 
-                <select
-                    name="is_active"
-                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm"
-                >
+                <p class="ldx-empty-title">
+                    ยังไม่มี Timeline
+                </p>
 
-                    <option value="">
-                        All Status
-                    </option>
-
-                    <option
-                        value="1"
-                        @selected(request('is_active') === '1')
-                    >
-                        Active
-                    </option>
-
-                    <option
-                        value="0"
-                        @selected(request('is_active') === '0')
-                    >
-                        Hidden
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            {{-- Buttons --}}
-            <div class="flex gap-2 md:col-span-3">
-
-                <button
-                    type="submit"
-                    class="rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-gray-800"
-                >
-                    Search
-                </button>
+                <p class="ldx-empty-description">
+                    เพิ่มประวัติหรือเหตุการณ์สำคัญของบริษัท
+                </p>
 
                 <a
-                    href="{{ route('admin.news-categories.index') }}"
-                    class="rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    href="{{ route('admin.about.timeline.create') }}"
+                    class="ldx-button ldx-button-primary"
                 >
-                    Reset
+                    + Add Timeline
                 </a>
 
             </div>
 
-        </form>
+        @endforelse
 
     </div>
 
 
-    {{-- Table --}}
-    <div class="overflow-hidden rounded-xl bg-white shadow-sm">
-
-        <div class="overflow-x-auto">
-
-            <table class="w-full text-left text-sm">
-
-                <thead class="border-b border-gray-200 bg-gray-50">
-
-                    <tr>
-
-                        <th class="px-6 py-4 font-semibold text-gray-700">
-                            #
-                        </th>
-
-                        <th class="px-6 py-4 font-semibold text-gray-700">
-                            Name
-                        </th>
-
-                        <th class="px-6 py-4 font-semibold text-gray-700">
-                            Slug
-                        </th>
-
-                        <th class="px-6 py-4 font-semibold text-gray-700">
-                            News
-                        </th>
-
-                        <th class="px-6 py-4 font-semibold text-gray-700">
-                            Status
-                        </th>
-
-                        <th class="px-6 py-4 text-right font-semibold text-gray-700">
-                            Actions
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody class="divide-y divide-gray-100">
-
-                    @forelse($categories as $category)
-
-                        <tr class="hover:bg-gray-50">
-
-                            <td class="px-6 py-4 text-gray-500">
-                                {{ $categories->firstItem() + $loop->index }}
-                            </td>
-
-
-                            <td class="px-6 py-4">
-
-                                <div class="font-semibold text-gray-900">
-                                    {{ $category->name }}
-                                </div>
-
-                            </td>
-
-
-                            <td class="px-6 py-4">
-
-                                <span class="rounded bg-gray-100 px-2 py-1 text-xs text-gray-600">
-                                    {{ $category->slug }}
-                                </span>
-
-                            </td>
-
-
-                            <td class="px-6 py-4">
-
-                                <span class="font-medium text-gray-700">
-                                    {{ $category->news_count }}
-                                </span>
-
-                            </td>
-
-
-                            <td class="px-6 py-4">
-
-                                @if($category->is_active)
-
-                                    <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
-                                        Active
-                                    </span>
-
-                                @else
-
-                                    <span class="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600">
-                                        Hidden
-                                    </span>
-
-                                @endif
-
-                            </td>
-
-
-                            <td class="px-6 py-4">
-
-                                <div class="flex items-center justify-end gap-2">
-
-                                    {{-- Edit --}}
-                                    <a
-                                        href="{{ route('admin.news-categories.edit', $category) }}"
-                                        class="rounded-lg border border-gray-300 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-50"
-                                    >
-                                        Edit
-                                    </a>
-
-
-                                    {{-- Toggle --}}
-                                    <form
-                                        method="POST"
-                                        action="{{ route('admin.news-categories.toggle', $category) }}"
-                                    >
-
-                                        @csrf
-                                        @method('PATCH')
-
-                                        <button
-                                            type="submit"
-                                            class="rounded-lg bg-gray-100 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-200"
-                                        >
-                                            {{ $category->is_active ? 'Hide' : 'Activate' }}
-                                        </button>
-
-                                    </form>
-
-
-                                    {{-- Delete --}}
-                                    <form
-                                        method="POST"
-                                        action="{{ route('admin.news-categories.destroy', $category) }}"
-                                        onsubmit="return confirm('ยืนยันการลบหมวดหมู่นี้?')"
-                                    >
-
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button
-                                            type="submit"
-                                            class="rounded-lg bg-red-50 px-3 py-2 text-xs font-medium text-red-600 hover:bg-red-100"
-                                        >
-                                            Delete
-                                        </button>
-
-                                    </form>
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-                    @empty
-
-                        <tr>
-
-                            <td
-                                colspan="6"
-                                class="px-6 py-12 text-center"
-                            >
-
-                                <div class="text-gray-500">
-                                    ไม่พบหมวดหมู่ News
-                                </div>
-
-                                <a
-                                    href="{{ route('admin.news-categories.create') }}"
-                                    class="mt-3 inline-block text-sm font-medium text-gray-900 hover:underline"
-                                >
-                                    + เพิ่มหมวดหมู่แรก
-                                </a>
-
-                            </td>
-
-                        </tr>
-
-                    @endforelse
-
-                </tbody>
-
-            </table>
-
+    {{-- Pagination --}}
+    @if(method_exists($timelines, 'links'))
+
+        <div class="ldx-pagination">
+            {{ $timelines->links() }}
         </div>
 
-
-        {{-- Pagination --}}
-        @if($categories->hasPages())
-
-            <div class="border-t border-gray-200 px-6 py-4">
-                {{ $categories->links() }}
-            </div>
-
-        @endif
-
-    </div>
+    @endif
 
 </div>
 

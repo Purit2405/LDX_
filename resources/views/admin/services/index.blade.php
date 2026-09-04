@@ -1,37 +1,42 @@
+
 @extends('layouts.admin.app')
 
 @section('title', 'Services')
+
 @section('page-title', 'Services')
 
 @section('content')
 
-<div class="space-y-6">
+<div class="ldx-page">
 
     {{-- Header --}}
-    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div class="ldx-page-header ldx-page-header-row">
 
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">
+
+            <h1 class="ldx-page-title">
                 Services
             </h1>
 
-            <p class="mt-1 text-sm text-gray-500">
+            <p class="ldx-page-description">
                 จัดการบริการทั้งหมดของ LDX Elevator
             </p>
+
         </div>
 
-        <div class="flex gap-3">
+
+        <div class="ldx-form-actions">
 
             <a
                 href="{{ route('admin.service-categories.index') }}"
-                class="rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                class="ldx-button ldx-button-secondary"
             >
                 Categories
             </a>
 
             <a
                 href="{{ route('admin.services.create') }}"
-                class="rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-gray-800"
+                class="ldx-button ldx-button-primary"
             >
                 + Add Service
             </a>
@@ -44,7 +49,7 @@
     {{-- Flash Messages --}}
     @if(session('success'))
 
-        <div class="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+        <div class="ldx-alert ldx-alert-success">
             {{ session('success') }}
         </div>
 
@@ -53,7 +58,7 @@
 
     @if(session('error'))
 
-        <div class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div class="ldx-alert ldx-alert-danger">
             {{ session('error') }}
         </div>
 
@@ -61,120 +66,124 @@
 
 
     {{-- Search & Filter --}}
-    <div class="rounded-xl bg-white p-5 shadow-sm">
+    <div class="ldx-card">
 
-        <form
-            method="GET"
-            action="{{ route('admin.services.index') }}"
-            class="grid gap-4 md:grid-cols-[1fr_220px_auto]"
-        >
+        <div class="ldx-card-body">
 
-            <div>
+            <form
+                method="GET"
+                action="{{ route('admin.services.index') }}"
+                class="ldx-filter-form"
+            >
 
-                <label class="mb-2 block text-sm font-medium text-gray-700">
-                    Search
-                </label>
+                <div class="ldx-form-group">
 
-                <input
-                    type="text"
-                    name="search"
-                    value="{{ request('search') }}"
-                    placeholder="ค้นหาชื่อบริการ หรือ Slug..."
-                    class="w-full rounded-lg border-gray-300 px-4 py-2.5 text-sm focus:border-gray-900 focus:ring-gray-900"
-                >
+                    <label class="ldx-label">
+                        Search
+                    </label>
 
-            </div>
-
-
-            <div>
-
-                <label class="mb-2 block text-sm font-medium text-gray-700">
-                    Status
-                </label>
-
-                <select
-                    name="status"
-                    class="w-full rounded-lg border-gray-300 px-4 py-2.5 text-sm"
-                >
-
-                    <option value="">
-                        All Services
-                    </option>
-
-                    <option
-                        value="active"
-                        @selected(request('status') === 'active')
+                    <input
+                        type="text"
+                        name="search"
+                        value="{{ request('search') }}"
+                        placeholder="ค้นหาชื่อบริการ หรือ Slug..."
+                        class="ldx-input"
                     >
-                        Active
-                    </option>
 
-                    <option
-                        value="hidden"
-                        @selected(request('status') === 'hidden')
+                </div>
+
+
+                <div class="ldx-form-group">
+
+                    <label class="ldx-label">
+                        Status
+                    </label>
+
+                    <select
+                        name="status"
+                        class="ldx-select"
                     >
-                        Hidden
-                    </option>
 
-                </select>
+                        <option value="">
+                            All Services
+                        </option>
 
-            </div>
+                        <option
+                            value="active"
+                            @selected(request('status') === 'active')
+                        >
+                            Active
+                        </option>
+
+                        <option
+                            value="hidden"
+                            @selected(request('status') === 'hidden')
+                        >
+                            Hidden
+                        </option>
+
+                    </select>
+
+                </div>
 
 
-            <div class="flex items-end gap-2">
+                <div class="ldx-filter-actions">
 
-                <button
-                    type="submit"
-                    class="rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-gray-800"
-                >
-                    Search
-                </button>
+                    <button
+                        type="submit"
+                        class="ldx-button ldx-button-primary"
+                    >
+                        Search
+                    </button>
 
-                <a
-                    href="{{ route('admin.services.index') }}"
-                    class="rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                >
-                    Reset
-                </a>
+                    <a
+                        href="{{ route('admin.services.index') }}"
+                        class="ldx-button ldx-button-secondary"
+                    >
+                        Reset
+                    </a>
 
-            </div>
+                </div>
 
-        </form>
+            </form>
+
+        </div>
 
     </div>
 
 
     {{-- Services Table --}}
-    <div class="overflow-hidden rounded-xl bg-white shadow-sm">
+    <div class="ldx-card ldx-table-card">
 
-        <div class="overflow-x-auto">
+        <div class="ldx-table-wrapper">
 
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="ldx-table">
 
-                <thead class="bg-gray-50">
+                <thead class="ldx-table-head">
 
                     <tr>
 
-                        <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                        <th class="ldx-table-th">
                             Service
                         </th>
 
-                        <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                        <th class="ldx-table-th">
                             Category
                         </th>
 
-                        <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                        <th class="ldx-table-th">
                             Images
                         </th>
 
-                        <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                        <th class="ldx-table-th">
                             Publish Date
                         </th>
 
-                        <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                        <th class="ldx-table-th">
                             Status
                         </th>
 
-                        <th class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">
+                        <th class="ldx-table-th ldx-table-th-right">
                             Actions
                         </th>
 
@@ -183,26 +192,26 @@
                 </thead>
 
 
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="ldx-table-body">
 
                     @forelse($services as $service)
 
-                        <tr class="hover:bg-gray-50">
+                        <tr class="ldx-table-row">
 
                             {{-- Service --}}
-                            <td class="px-6 py-5">
+                            <td class="ldx-table-td">
 
-                                <div class="font-semibold text-gray-900">
+                                <div class="ldx-table-primary">
                                     {{ $service->title }}
                                 </div>
 
-                                <div class="mt-1 text-xs text-gray-400">
+                                <div class="ldx-table-secondary">
                                     /{{ $service->slug }}
                                 </div>
 
                                 @if($service->short_description)
 
-                                    <div class="mt-2 max-w-md truncate text-sm text-gray-500">
+                                    <div class="ldx-table-description">
                                         {{ $service->short_description }}
                                     </div>
 
@@ -212,17 +221,17 @@
 
 
                             {{-- Category --}}
-                            <td class="px-6 py-5">
+                            <td class="ldx-table-td">
 
                                 @if($service->category)
 
-                                    <span class="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
+                                    <span class="ldx-badge ldx-badge-muted">
                                         {{ $service->category->name }}
                                     </span>
 
                                 @else
 
-                                    <span class="text-sm text-gray-400">
+                                    <span class="ldx-table-secondary">
                                         No Category
                                     </span>
 
@@ -232,20 +241,23 @@
 
 
                             {{-- Images --}}
-                            <td class="px-6 py-5">
+                            <td class="ldx-table-td">
 
-                                <span class="text-sm text-gray-600">
+                                <span class="ldx-table-value">
+
                                     {{ $service->images->count() }}
+
                                     {{ $service->images->count() === 1 ? 'image' : 'images' }}
+
                                 </span>
 
                             </td>
 
 
                             {{-- Date --}}
-                            <td class="px-6 py-5">
+                            <td class="ldx-table-td">
 
-                                <span class="text-sm text-gray-600">
+                                <span class="ldx-table-value">
                                     {{ $service->publish_date?->format('d/m/Y') ?? '-' }}
                                 </span>
 
@@ -253,17 +265,17 @@
 
 
                             {{-- Status --}}
-                            <td class="px-6 py-5">
+                            <td class="ldx-table-td">
 
                                 @if($service->is_active)
 
-                                    <span class="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+                                    <span class="ldx-badge ldx-badge-success">
                                         Active
                                     </span>
 
                                 @else
 
-                                    <span class="inline-flex rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600">
+                                    <span class="ldx-badge ldx-badge-muted">
                                         Hidden
                                     </span>
 
@@ -273,13 +285,13 @@
 
 
                             {{-- Actions --}}
-                            <td class="px-6 py-5">
+                            <td class="ldx-table-td ldx-table-td-right">
 
-                                <div class="flex justify-end gap-2">
+                                <div class="ldx-table-actions">
 
                                     <a
                                         href="{{ route('admin.services.show', $service) }}"
-                                        class="rounded-lg border border-gray-300 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-50"
+                                        class="ldx-button ldx-button-secondary ldx-button-sm"
                                     >
                                         View
                                     </a>
@@ -287,7 +299,7 @@
 
                                     <a
                                         href="{{ route('admin.services.edit', $service) }}"
-                                        class="rounded-lg border border-gray-300 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-50"
+                                        class="ldx-button ldx-button-secondary ldx-button-sm"
                                     >
                                         Edit
                                     </a>
@@ -303,15 +315,13 @@
 
                                         <button
                                             type="submit"
-                                            class="rounded-lg border px-3 py-2 text-xs font-medium
+                                            class="ldx-button ldx-button-sm
                                             {{ $service->is_active
-                                                ? 'border-yellow-300 text-yellow-700 hover:bg-yellow-50'
-                                                : 'border-green-300 text-green-700 hover:bg-green-50'
+                                                ? 'ldx-button-warning'
+                                                : 'ldx-button-success'
                                             }}"
                                         >
-
                                             {{ $service->is_active ? 'Hide' : 'Show' }}
-
                                         </button>
 
                                     </form>
@@ -328,7 +338,7 @@
 
                                         <button
                                             type="submit"
-                                            class="rounded-lg border border-red-200 px-3 py-2 text-xs font-medium text-red-600 hover:bg-red-50"
+                                            class="ldx-button ldx-button-danger ldx-button-sm"
                                         >
                                             Delete
                                         </button>
@@ -347,20 +357,20 @@
 
                             <td
                                 colspan="6"
-                                class="px-6 py-16 text-center"
+                                class="ldx-table-empty"
                             >
 
-                                <div class="text-sm font-medium text-gray-900">
+                                <div class="ldx-table-empty-title">
                                     No Services Found
                                 </div>
 
-                                <div class="mt-1 text-sm text-gray-500">
+                                <div class="ldx-table-empty-description">
                                     ยังไม่มีบริการในระบบ
                                 </div>
 
                                 <a
                                     href="{{ route('admin.services.create') }}"
-                                    class="mt-4 inline-block rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white"
+                                    class="ldx-button ldx-button-primary"
                                 >
                                     Add Service
                                 </a>
@@ -380,7 +390,7 @@
 
         @if($services->hasPages())
 
-            <div class="border-t border-gray-100 px-6 py-4">
+            <div class="ldx-pagination">
                 {{ $services->links() }}
             </div>
 
@@ -391,3 +401,4 @@
 </div>
 
 @endsection
+

@@ -1,7 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="th">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -19,22 +21,33 @@
     ])
 
     @stack('styles')
+
 </head>
 
-<body class="bg-gray-100 text-gray-900">
 
-    <div class="flex min-h-screen">
+<body class="ldx-app-body">
 
-        {{-- Sidebar --}}
+    <div class="ldx-app-shell">
+
+        {{-- ============================================================
+            SIDEBAR
+        ============================================================= --}}
+
         @include('layouts.admin.sidebar')
 
-        <div class="flex min-w-0 flex-1 flex-col">
+
+        {{-- ============================================================
+            MAIN APPLICATION AREA
+        ============================================================= --}}
+
+        <div class="ldx-app-content">
 
             {{-- Header --}}
             @include('layouts.admin.header')
 
+
             {{-- Main Content --}}
-            <main class="flex-1 p-6">
+            <main class="ldx-app-main">
 
                 @yield('content')
 
@@ -44,8 +57,10 @@
 
     </div>
 
+
     @stack('scripts')
 
 </body>
 
 </html>
+

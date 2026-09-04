@@ -1,37 +1,40 @@
+
 @extends('layouts.admin.app')
 
 @section('title', 'คำขอใบเสนอราคา')
 
 @section('content')
 
-<div class="space-y-6">
+<div class="ldx-page ldx-page-wide">
 
     {{-- Header --}}
-    <div>
+    <div class="ldx-page-header">
 
-        <h1 class="text-2xl font-semibold text-gray-900">
-            คำขอใบเสนอราคา
-        </h1>
+        <div>
+            <h1 class="ldx-page-title">
+                คำขอใบเสนอราคา
+            </h1>
 
-        <p class="mt-1 text-sm text-gray-500">
-            รายการคำขอใบเสนอราคาที่ลูกค้าส่งเข้ามา
-        </p>
+            <p class="ldx-page-description">
+                รายการคำขอใบเสนอราคาที่ลูกค้าส่งเข้ามา
+            </p>
+        </div>
 
     </div>
 
 
     {{-- Information --}}
-    <div class="rounded-xl border border-blue-200 bg-blue-50 p-5">
+    <div class="ldx-alert ldx-alert-info">
 
-        <h3 class="font-semibold text-blue-900">
+        <div class="ldx-alert-title">
             📋 ข้อมูลคำขอใบเสนอราคา
-        </h3>
+        </div>
 
-        <p class="mt-2 text-sm leading-6 text-blue-800">
+        <div class="ldx-alert-description">
             ข้อมูลที่ลูกค้าส่งผ่านแบบฟอร์มขอใบเสนอราคา
             ใช้สำหรับติดต่อกลับ สอบถามรายละเอียดโครงการ
             และจัดเตรียมใบเสนอราคา
-        </p>
+        </div>
 
     </div>
 
@@ -39,7 +42,7 @@
     {{-- Success --}}
     @if(session('success'))
 
-        <div class="rounded-lg border border-green-200 bg-green-50 p-4 text-sm text-green-800">
+        <div class="ldx-alert ldx-alert-success">
             {{ session('success') }}
         </div>
 
@@ -47,18 +50,18 @@
 
 
     {{-- Filter --}}
-    <div class="rounded-xl border border-gray-200 bg-white p-5">
+    <div class="ldx-filter-card">
 
         <form
             action="{{ route('admin.quote-requests.index') }}"
             method="GET"
-            class="grid grid-cols-1 gap-4 md:grid-cols-3"
+            class="ldx-filter-form"
         >
 
             {{-- Search --}}
-            <div>
+            <div class="ldx-filter-search">
 
-                <label class="mb-2 block text-sm font-medium text-gray-700">
+                <label class="ldx-label">
                     ค้นหา
                 </label>
 
@@ -67,7 +70,7 @@
                     name="search"
                     value="{{ request('search') }}"
                     placeholder="ชื่อ, อีเมล, เบอร์โทรศัพท์..."
-                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                    class="ldx-input"
                 >
 
             </div>
@@ -76,13 +79,13 @@
             {{-- Status --}}
             <div>
 
-                <label class="mb-2 block text-sm font-medium text-gray-700">
+                <label class="ldx-label">
                     สถานะ
                 </label>
 
                 <select
                     name="status"
-                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                    class="ldx-select"
                 >
 
                     <option value="">
@@ -130,18 +133,18 @@
 
 
             {{-- Buttons --}}
-            <div class="flex items-end gap-2">
+            <div class="ldx-filter-actions">
 
                 <button
                     type="submit"
-                    class="rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800"
+                    class="ldx-button ldx-button-primary"
                 >
                     ค้นหา
                 </button>
 
                 <a
                     href="{{ route('admin.quote-requests.index') }}"
-                    class="rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    class="ldx-button ldx-button-secondary"
                 >
                     ล้าง
                 </a>
@@ -154,37 +157,37 @@
 
 
     {{-- Table --}}
-    <div class="overflow-hidden rounded-xl border border-gray-200 bg-white">
+    <div class="ldx-table-wrapper">
 
-        <div class="overflow-x-auto">
+        <div class="ldx-table-scroll">
 
-            <table class="w-full min-w-[1000px] text-left text-sm">
+            <table class="ldx-table">
 
-                <thead class="border-b border-gray-200 bg-gray-50">
+                <thead>
 
                     <tr>
 
-                        <th class="px-6 py-4 font-semibold text-gray-700">
+                        <th>
                             ลูกค้า
                         </th>
 
-                        <th class="px-6 py-4 font-semibold text-gray-700">
+                        <th>
                             ติดต่อ
                         </th>
 
-                        <th class="px-6 py-4 font-semibold text-gray-700">
+                        <th>
                             โครงการ
                         </th>
 
-                        <th class="px-6 py-4 font-semibold text-gray-700">
+                        <th>
                             สถานะ
                         </th>
 
-                        <th class="px-6 py-4 font-semibold text-gray-700">
+                        <th>
                             วันที่ส่ง
                         </th>
 
-                        <th class="px-6 py-4 text-right font-semibold text-gray-700">
+                        <th class="ldx-table-actions">
                             จัดการ
                         </th>
 
@@ -193,22 +196,22 @@
                 </thead>
 
 
-                <tbody class="divide-y divide-gray-100">
+                <tbody>
 
                     @forelse($quoteRequests as $quoteRequest)
 
-                        <tr class="hover:bg-gray-50">
+                        <tr>
 
                             {{-- Customer --}}
-                            <td class="px-6 py-4">
+                            <td>
 
-                                <div class="font-medium text-gray-900">
+                                <div class="ldx-table-title">
                                     {{ $quoteRequest->full_name }}
                                 </div>
 
                                 @if($quoteRequest->installation_province)
 
-                                    <div class="mt-1 text-xs text-gray-500">
+                                    <div class="ldx-table-subtitle">
                                         📍 {{ $quoteRequest->installation_province }}
                                     </div>
 
@@ -218,15 +221,15 @@
 
 
                             {{-- Contact --}}
-                            <td class="px-6 py-4">
+                            <td>
 
-                                <div class="text-gray-700">
+                                <div class="ldx-table-value">
                                     {{ $quoteRequest->phone }}
                                 </div>
 
                                 @if($quoteRequest->email)
 
-                                    <div class="mt-1 text-xs text-gray-500">
+                                    <div class="ldx-table-subtitle">
                                         {{ $quoteRequest->email }}
                                     </div>
 
@@ -236,17 +239,17 @@
 
 
                             {{-- Project --}}
-                            <td class="px-6 py-4">
+                            <td>
 
                                 @if($quoteRequest->floor_count)
 
-                                    <div>
+                                    <div class="ldx-table-value">
                                         {{ $quoteRequest->floor_count }} ชั้น
                                     </div>
 
                                 @else
 
-                                    <span class="text-gray-400">
+                                    <span class="ldx-muted">
                                         ไม่ระบุ
                                     </span>
 
@@ -254,7 +257,7 @@
 
                                 @if($quoteRequest->contact_time)
 
-                                    <div class="mt-1 text-xs text-gray-500">
+                                    <div class="ldx-table-subtitle">
                                         {{ $quoteRequest->contact_time }}
                                     </div>
 
@@ -264,9 +267,9 @@
 
 
                             {{-- Status --}}
-                            <td class="px-6 py-4">
+                            <td>
 
-                                <span class="inline-flex rounded-full px-3 py-1 text-xs font-medium {{ $quoteRequest->status_badge_class }}">
+                                <span class="ldx-badge {{ $quoteRequest->status_badge_class }}">
                                     {{ $quoteRequest->status_label }}
                                 </span>
 
@@ -274,11 +277,13 @@
 
 
                             {{-- Date --}}
-                            <td class="px-6 py-4 text-gray-500">
+                            <td>
 
-                                {{ $quoteRequest->created_at->format('d/m/Y') }}
+                                <div class="ldx-table-date">
+                                    {{ $quoteRequest->created_at->format('d/m/Y') }}
+                                </div>
 
-                                <div class="text-xs">
+                                <div class="ldx-table-subtitle">
                                     {{ $quoteRequest->created_at->format('H:i') }} น.
                                 </div>
 
@@ -286,13 +291,13 @@
 
 
                             {{-- Actions --}}
-                            <td class="px-6 py-4">
+                            <td>
 
-                                <div class="flex justify-end gap-2">
+                                <div class="ldx-actions ldx-actions-end">
 
                                     <a
                                         href="{{ route('admin.quote-requests.show', $quoteRequest) }}"
-                                        class="rounded-lg border border-gray-300 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-50"
+                                        class="ldx-button ldx-button-secondary ldx-button-sm"
                                     >
                                         ดูรายละเอียด
                                     </a>
@@ -309,7 +314,7 @@
 
                                         <button
                                             type="submit"
-                                            class="rounded-lg border border-red-200 px-3 py-2 text-xs font-medium text-red-600 hover:bg-red-50"
+                                            class="ldx-button ldx-button-danger ldx-button-sm"
                                         >
                                             ลบ
                                         </button>
@@ -328,7 +333,7 @@
 
                             <td
                                 colspan="6"
-                                class="px-6 py-12 text-center text-gray-500"
+                                class="ldx-table-empty"
                             >
                                 ยังไม่มีคำขอใบเสนอราคา
                             </td>
@@ -347,10 +352,8 @@
         {{-- Pagination --}}
         @if($quoteRequests->hasPages())
 
-            <div class="border-t border-gray-200 px-6 py-4">
-
+            <div class="ldx-pagination">
                 {{ $quoteRequests->links() }}
-
             </div>
 
         @endif
@@ -360,3 +363,4 @@
 </div>
 
 @endsection
+

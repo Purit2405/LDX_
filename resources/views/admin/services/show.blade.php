@@ -1,4 +1,4 @@
-blade
+
 @extends('layouts.admin.app')
 
 @section('title', 'Service Details')
@@ -6,47 +6,49 @@ blade
 
 @section('content')
 
-<div class="mx-auto max-w-6xl space-y-6">
+<div class="ldx-page ldx-page-extra-wide">
 
     {{-- Header --}}
-    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div class="ldx-page-header ldx-page-header-row">
 
         <div>
 
-            <div class="flex items-center gap-2 text-sm text-gray-500">
+            <div class="ldx-breadcrumb">
 
                 <a
                     href="{{ route('admin.services.index') }}"
-                    class="hover:text-gray-900"
+                    class="ldx-breadcrumb-link"
                 >
                     Services
                 </a>
 
-                <span>/</span>
+                <span class="ldx-breadcrumb-separator">/</span>
 
-                <span>Details</span>
+                <span class="ldx-breadcrumb-current">
+                    Details
+                </span>
 
             </div>
 
-            <h1 class="mt-2 text-2xl font-bold text-gray-900">
+            <h1 class="ldx-page-title">
                 {{ $service->title }}
             </h1>
 
         </div>
 
 
-        <div class="flex gap-3">
+        <div class="ldx-form-actions">
 
             <a
                 href="{{ route('admin.services.edit', $service) }}"
-                class="rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-gray-800"
+                class="ldx-button ldx-button-primary"
             >
                 Edit Service
             </a>
 
             <a
                 href="{{ route('admin.services.index') }}"
-                class="rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                class="ldx-button ldx-button-secondary"
             >
                 Back
             </a>
@@ -57,114 +59,138 @@ blade
 
 
     {{-- Overview --}}
-    <div class="grid gap-6 lg:grid-cols-3">
+    <div class="ldx-details-layout">
 
         {{-- Main --}}
-        <div class="space-y-6 lg:col-span-2">
+        <div class="ldx-details-main">
 
             {{-- Basic --}}
-            <div class="rounded-xl bg-white p-6 shadow-sm">
+            <div class="ldx-card">
 
-                <h2 class="text-lg font-semibold text-gray-900">
-                    Service Information
-                </h2>
+                <div class="ldx-card-header">
 
+                    <h2 class="ldx-card-title">
+                        Service Information
+                    </h2>
 
-                <dl class="mt-6 space-y-5">
-
-                    <div>
-
-                        <dt class="text-xs font-semibold uppercase tracking-wider text-gray-400">
-                            Service Name
-                        </dt>
-
-                        <dd class="mt-1 text-sm font-medium text-gray-900">
-                            {{ $service->title }}
-                        </dd>
-
-                    </div>
+                </div>
 
 
-                    <div>
+                <div class="ldx-card-body">
 
-                        <dt class="text-xs font-semibold uppercase tracking-wider text-gray-400">
-                            Slug
-                        </dt>
+                    <dl class="ldx-info-list">
 
-                        <dd class="mt-1 text-sm text-gray-600">
-                            {{ $service->slug }}
-                        </dd>
+                        <div class="ldx-info-item">
 
-                    </div>
+                            <dt class="ldx-info-label">
+                                Service Name
+                            </dt>
 
+                            <dd class="ldx-info-value ldx-info-value-primary">
+                                {{ $service->title }}
+                            </dd>
 
-                    <div>
-
-                        <dt class="text-xs font-semibold uppercase tracking-wider text-gray-400">
-                            Category
-                        </dt>
-
-                        <dd class="mt-1">
-
-                            @if($service->category)
-
-                                <span class="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
-                                    {{ $service->category->name }}
-                                </span>
-
-                            @else
-
-                                <span class="text-sm text-gray-400">
-                                    No Category
-                                </span>
-
-                            @endif
-
-                        </dd>
-
-                    </div>
+                        </div>
 
 
-                    <div>
+                        <div class="ldx-info-item">
 
-                        <dt class="text-xs font-semibold uppercase tracking-wider text-gray-400">
-                            Publish Date
-                        </dt>
+                            <dt class="ldx-info-label">
+                                Slug
+                            </dt>
 
-                        <dd class="mt-1 text-sm text-gray-600">
-                            {{ $service->publish_date?->format('d/m/Y') ?? '-' }}
-                        </dd>
+                            <dd class="ldx-info-value">
+                                {{ $service->slug }}
+                            </dd>
 
-                    </div>
+                        </div>
 
-                </dl>
+
+                        <div class="ldx-info-item">
+
+                            <dt class="ldx-info-label">
+                                Category
+                            </dt>
+
+                            <dd class="ldx-info-value">
+
+                                @if($service->category)
+
+                                    <span class="ldx-badge ldx-badge-muted">
+                                        {{ $service->category->name }}
+                                    </span>
+
+                                @else
+
+                                    <span class="ldx-table-secondary">
+                                        No Category
+                                    </span>
+
+                                @endif
+
+                            </dd>
+
+                        </div>
+
+
+                        <div class="ldx-info-item">
+
+                            <dt class="ldx-info-label">
+                                Publish Date
+                            </dt>
+
+                            <dd class="ldx-info-value">
+                                {{ $service->publish_date?->format('d/m/Y') ?? '-' }}
+                            </dd>
+
+                        </div>
+
+                    </dl>
+
+                </div>
 
             </div>
 
 
             {{-- Description --}}
-            <div class="rounded-xl bg-white p-6 shadow-sm">
+            <div class="ldx-card">
 
-                <h2 class="text-lg font-semibold text-gray-900">
-                    Short Description
-                </h2>
+                <div class="ldx-card-header">
 
-                <p class="mt-4 whitespace-pre-line text-sm leading-7 text-gray-600">
-                    {{ $service->short_description ?: 'ไม่มีคำอธิบายสั้น' }}
-                </p>
+                    <h2 class="ldx-card-title">
+                        Short Description
+                    </h2>
+
+                </div>
+
+                <div class="ldx-card-body">
+
+                    <p class="ldx-content-text">
+                        {{ $service->short_description ?: 'ไม่มีคำอธิบายสั้น' }}
+                    </p>
+
+                </div>
 
             </div>
 
 
             {{-- Content --}}
-            <div class="rounded-xl bg-white p-6 shadow-sm">
+            <div class="ldx-card">
 
-                <h2 class="text-lg font-semibold text-gray-900">
-                    Service Details
-                </h2>
+                <div class="ldx-card-header">
 
-                <div class="mt-4 whitespace-pre-line text-sm leading-8 text-gray-700">
-                    {{ $service->content ?: 'ไม่มีรายละเอียด' }}
+                    <h2 class="ldx-card-title">
+                        Service Details
+                    </h2>
+
+                </div>
+
+                <div class="ldx-card-body">
+
+                    <div class="ldx-content-text ldx-content-text-large">
+                        {{ $service->content ?: 'ไม่มีรายละเอียด' }}
+                    </div>
+
                 </div>
 
             </div>
@@ -173,26 +199,30 @@ blade
 
 
         {{-- Sidebar --}}
-        <div class="space-y-6">
+        <div class="ldx-details-sidebar">
 
             {{-- Status --}}
-            <div class="rounded-xl bg-white p-6 shadow-sm">
+            <div class="ldx-card">
 
-                <h2 class="text-lg font-semibold text-gray-900">
-                    Status
-                </h2>
+                <div class="ldx-card-header">
 
-                <div class="mt-4">
+                    <h2 class="ldx-card-title">
+                        Status
+                    </h2>
+
+                </div>
+
+                <div class="ldx-card-body">
 
                     @if($service->is_active)
 
-                        <span class="inline-flex rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
+                        <span class="ldx-badge ldx-badge-success ldx-badge-lg">
                             Active
                         </span>
 
                     @else
 
-                        <span class="inline-flex rounded-full bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-600">
+                        <span class="ldx-badge ldx-badge-muted ldx-badge-lg">
                             Hidden
                         </span>
 
@@ -204,58 +234,74 @@ blade
 
 
             {{-- Images Count --}}
-            <div class="rounded-xl bg-white p-6 shadow-sm">
+            <div class="ldx-card">
 
-                <h2 class="text-lg font-semibold text-gray-900">
-                    Images
-                </h2>
+                <div class="ldx-card-header">
 
-                <p class="mt-3 text-3xl font-bold text-gray-900">
-                    {{ $service->images->count() }}
-                </p>
+                    <h2 class="ldx-card-title">
+                        Images
+                    </h2>
 
-                <p class="mt-1 text-sm text-gray-500">
-                    รูปภาพทั้งหมด
-                </p>
+                </div>
+
+                <div class="ldx-card-body">
+
+                    <p class="ldx-stat-value">
+                        {{ $service->images->count() }}
+                    </p>
+
+                    <p class="ldx-stat-label">
+                        รูปภาพทั้งหมด
+                    </p>
+
+                </div>
 
             </div>
 
 
             {{-- Dates --}}
-            <div class="rounded-xl bg-white p-6 shadow-sm">
+            <div class="ldx-card">
 
-                <h2 class="text-lg font-semibold text-gray-900">
-                    System Information
-                </h2>
+                <div class="ldx-card-header">
 
-                <dl class="mt-4 space-y-4 text-sm">
+                    <h2 class="ldx-card-title">
+                        System Information
+                    </h2>
 
-                    <div>
+                </div>
 
-                        <dt class="text-gray-400">
-                            Created
-                        </dt>
+                <div class="ldx-card-body">
 
-                        <dd class="mt-1 text-gray-700">
-                            {{ $service->created_at?->format('d/m/Y H:i') }}
-                        </dd>
+                    <dl class="ldx-info-list ldx-info-list-compact">
 
-                    </div>
+                        <div class="ldx-info-item">
+
+                            <dt class="ldx-info-label">
+                                Created
+                            </dt>
+
+                            <dd class="ldx-info-value">
+                                {{ $service->created_at?->format('d/m/Y H:i') }}
+                            </dd>
+
+                        </div>
 
 
-                    <div>
+                        <div class="ldx-info-item">
 
-                        <dt class="text-gray-400">
-                            Last Updated
-                        </dt>
+                            <dt class="ldx-info-label">
+                                Last Updated
+                            </dt>
 
-                        <dd class="mt-1 text-gray-700">
-                            {{ $service->updated_at?->format('d/m/Y H:i') }}
-                        </dd>
+                            <dd class="ldx-info-value">
+                                {{ $service->updated_at?->format('d/m/Y H:i') }}
+                            </dd>
 
-                    </div>
+                        </div>
 
-                </dl>
+                    </dl>
+
+                </div>
 
             </div>
 
@@ -265,52 +311,60 @@ blade
 
 
     {{-- Gallery --}}
-    <div class="rounded-xl bg-white p-6 shadow-sm">
+    <div class="ldx-card">
 
-        <h2 class="text-lg font-semibold text-gray-900">
-            Service Gallery
-        </h2>
+        <div class="ldx-card-header">
+
+            <h2 class="ldx-card-title">
+                Service Gallery
+            </h2>
+
+        </div>
 
 
-        @if($service->images->count())
+        <div class="ldx-card-body">
 
-            <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            @if($service->images->count())
 
-                @foreach($service->images as $image)
+                <div class="ldx-service-gallery">
 
-                    <div class="overflow-hidden rounded-xl border border-gray-200">
+                    @foreach($service->images as $image)
 
-                        <img
-                            src="{{ Storage::url($image->path) }}"
-                            alt="{{ $image->alt ?: $service->title }}"
-                            class="h-48 w-full object-cover"
-                        >
+                        <div class="ldx-service-gallery-item">
 
-                        <div class="p-3">
+                            <img
+                                src="{{ Storage::url($image->path) }}"
+                                alt="{{ $image->alt ?: $service->title }}"
+                                class="ldx-service-gallery-image"
+                            >
 
-                            <p class="truncate text-xs text-gray-500">
-                                {{ $image->alt ?: 'No alt text' }}
-                            </p>
+                            <div class="ldx-service-gallery-info">
+
+                                <p class="ldx-service-gallery-alt">
+                                    {{ $image->alt ?: 'No alt text' }}
+                                </p>
+
+                            </div>
 
                         </div>
 
-                    </div>
+                    @endforeach
 
-                @endforeach
+                </div>
 
-            </div>
+            @else
 
-        @else
+                <div class="ldx-empty-state">
 
-            <div class="mt-5 rounded-lg border border-dashed border-gray-300 p-10 text-center">
+                    <p class="ldx-empty-state-description">
+                        ยังไม่มีรูปภาพ
+                    </p>
 
-                <p class="text-sm text-gray-500">
-                    ยังไม่มีรูปภาพ
-                </p>
+                </div>
 
-            </div>
+            @endif
 
-        @endif
+        </div>
 
     </div>
 

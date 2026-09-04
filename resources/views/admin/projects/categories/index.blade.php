@@ -1,3 +1,4 @@
+
 @extends('layouts.admin.app')
 
 @section('title', 'Project Categories')
@@ -6,36 +7,36 @@
 
 @section('content')
 
-<div class="space-y-6">
+<div class="ldx-page ldx-page-wide">
 
     {{-- Header --}}
-    <div class="flex items-center justify-between">
+    <div class="ldx-page-header ldx-page-header-actions">
 
         <div>
 
-            <h1 class="text-2xl font-bold text-gray-900">
+            <h1 class="ldx-page-title">
                 Project Categories
             </h1>
 
-            <p class="mt-1 text-sm text-gray-500">
+            <p class="ldx-page-description">
                 จัดการหมวดหมู่ของ Projects
             </p>
 
         </div>
 
 
-        <div class="flex gap-2">
+        <div class="ldx-actions">
 
             <a
                 href="{{ route('admin.projects.index') }}"
-                class="rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                class="ldx-button ldx-button-secondary"
             >
                 Projects
             </a>
 
             <a
                 href="{{ route('admin.project-categories.create') }}"
-                class="rounded-lg bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-gray-800"
+                class="ldx-button ldx-button-primary"
             >
                 + Add Category
             </a>
@@ -45,18 +46,20 @@
     </div>
 
 
+    {{-- Success --}}
     @if(session('success'))
 
-        <div class="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+        <div class="ldx-alert ldx-alert-success">
             {{ session('success') }}
         </div>
 
     @endif
 
 
+    {{-- Error --}}
     @if(session('error'))
 
-        <div class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div class="ldx-alert ldx-alert-danger">
             {{ session('error') }}
         </div>
 
@@ -64,33 +67,33 @@
 
 
     {{-- Table --}}
-    <div class="overflow-hidden rounded-xl bg-white shadow-sm">
+    <div class="ldx-table-wrapper">
 
-        <div class="overflow-x-auto">
+        <div class="ldx-table-scroll">
 
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="ldx-table">
 
-                <thead class="bg-gray-50">
+                <thead>
 
                     <tr>
 
-                        <th class="px-6 py-4 text-left text-xs font-semibold uppercase text-gray-500">
+                        <th>
                             Name
                         </th>
 
-                        <th class="px-6 py-4 text-left text-xs font-semibold uppercase text-gray-500">
+                        <th>
                             Slug
                         </th>
 
-                        <th class="px-6 py-4 text-left text-xs font-semibold uppercase text-gray-500">
+                        <th>
                             Projects
                         </th>
 
-                        <th class="px-6 py-4 text-left text-xs font-semibold uppercase text-gray-500">
+                        <th>
                             Status
                         </th>
 
-                        <th class="px-6 py-4 text-right text-xs font-semibold uppercase text-gray-500">
+                        <th class="ldx-table-actions">
                             Actions
                         </th>
 
@@ -99,50 +102,66 @@
                 </thead>
 
 
-                <tbody class="divide-y divide-gray-100">
+                <tbody>
 
                     @forelse($categories as $category)
 
-                        <tr class="hover:bg-gray-50">
+                        <tr>
 
-                            <td class="px-6 py-4">
+                            {{-- Name --}}
+                            <td>
 
-                                <p class="font-semibold text-gray-900">
-                                    {{ $category->name }}
-                                </p>
+                                <div class="ldx-table-content">
 
-                                @if($category->description)
-
-                                    <p class="mt-1 max-w-md truncate text-xs text-gray-500">
-                                        {{ $category->description }}
+                                    <p class="ldx-table-title">
+                                        {{ $category->name }}
                                     </p>
 
-                                @endif
+                                    @if($category->description)
+
+                                        <p class="ldx-table-description">
+                                            {{ $category->description }}
+                                        </p>
+
+                                    @endif
+
+                                </div>
 
                             </td>
 
 
-                            <td class="px-6 py-4 text-sm text-gray-600">
-                                {{ $category->slug }}
+                            {{-- Slug --}}
+                            <td>
+
+                                <span class="ldx-table-value">
+                                    {{ $category->slug }}
+                                </span>
+
                             </td>
 
 
-                            <td class="px-6 py-4 text-sm text-gray-600">
-                                {{ $category->projects()->count() }}
+                            {{-- Projects --}}
+                            <td>
+
+                                <span class="ldx-table-value">
+                                    {{ $category->projects()->count() }}
+                                </span>
+
                             </td>
 
 
-                            <td class="px-6 py-4">
+                            {{-- Status --}}
+                            <td>
 
                                 @if($category->is_active)
 
-                                    <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+                                    <span class="ldx-badge ldx-badge-success">
                                         Active
                                     </span>
 
                                 @else
 
-                                    <span class="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600">
+                                    <span class="ldx-badge ldx-badge-muted">
                                         Hidden
                                     </span>
 
@@ -151,13 +170,17 @@
                             </td>
 
 
-                            <td class="px-6 py-4">
+                            {{-- Actions --}}
+                            <td>
 
-                                <div class="flex justify-end gap-2">
+                                <div class="ldx-actions ldx-actions-end">
 
                                     <a
-                                        href="{{ route('admin.project-categories.edit', $category) }}"
-                                        class="rounded-lg border border-gray-300 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-50"
+                                        href="{{ route(
+                                            'admin.project-categories.edit',
+                                            $category
+                                        ) }}"
+                                        class="ldx-button ldx-button-secondary ldx-button-sm"
                                     >
                                         Edit
                                     </a>
@@ -165,7 +188,10 @@
 
                                     <form
                                         method="POST"
-                                        action="{{ route('admin.project-categories.destroy', $category) }}"
+                                        action="{{ route(
+                                            'admin.project-categories.destroy',
+                                            $category
+                                        ) }}"
                                         onsubmit="return confirm('ต้องการลบหมวดหมู่นี้หรือไม่?')"
                                     >
 
@@ -174,7 +200,7 @@
 
                                         <button
                                             type="submit"
-                                            class="rounded-lg bg-red-50 px-3 py-2 text-xs font-semibold text-red-600 hover:bg-red-100"
+                                            class="ldx-button ldx-button-danger ldx-button-sm"
                                         >
                                             Delete
                                         </button>
@@ -193,9 +219,21 @@
 
                             <td
                                 colspan="5"
-                                class="px-6 py-16 text-center text-sm text-gray-500"
+                                class="ldx-table-empty"
                             >
-                                ยังไม่มีหมวดหมู่
+
+                                <div class="ldx-empty">
+
+                                    <p class="ldx-empty-title">
+                                        ยังไม่มีหมวดหมู่
+                                    </p>
+
+                                    <p class="ldx-empty-description">
+                                        เพิ่ม Project Category เพื่อเริ่มจัดกลุ่ม Projects
+                                    </p>
+
+                                </div>
+
                             </td>
 
                         </tr>
@@ -209,9 +247,10 @@
         </div>
 
 
+        {{-- Pagination --}}
         @if($categories->hasPages())
 
-            <div class="border-t border-gray-100 px-6 py-4">
+            <div class="ldx-pagination">
                 {{ $categories->links() }}
             </div>
 
@@ -222,3 +261,4 @@
 </div>
 
 @endsection
+

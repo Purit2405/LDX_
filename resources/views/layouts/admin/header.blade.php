@@ -1,9 +1,10 @@
-<header class="flex h-16 shrink-0 items-center justify-between border-b border-gray-200 bg-white px-6">
+
+<header class="ldx-admin-header">
 
     {{-- Page Title --}}
-    <div>
+    <div class="ldx-admin-header-title">
 
-        <h2 class="text-lg font-semibold text-gray-900">
+        <h2>
             @yield('page-title', 'Dashboard')
         </h2>
 
@@ -11,21 +12,21 @@
 
 
     {{-- Admin --}}
-    <div class="flex items-center gap-4">
+    <div class="ldx-admin-header-user">
 
-        <div class="text-right">
+        <div class="ldx-admin-header-user-info">
 
-            <p class="text-sm font-medium text-gray-900">
+            <p class="ldx-admin-header-user-name">
                 {{ auth()->user()->name }}
             </p>
 
-            <p class="text-xs text-gray-500">
+            <p class="ldx-admin-header-user-role">
                 Administrator
             </p>
 
         </div>
 
-        <div class="flex h-9 w-9 items-center justify-center rounded-full bg-gray-900 text-sm font-semibold text-white">
+        <div class="ldx-admin-header-avatar">
 
             {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
 

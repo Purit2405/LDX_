@@ -1,130 +1,144 @@
+
 @extends('layouts.admin.app')
 
 @section('title', 'Add Timeline')
 
 @section('content')
 
-<div class="mx-auto max-w-3xl space-y-6">
+<div class="ldx-page ldx-page-narrow">
 
-    <div>
+    <div class="ldx-page-header">
 
         <a
             href="{{ route('admin.about.timeline.index') }}"
-            class="text-sm text-gray-500 hover:text-indigo-400"
+            class="ldx-back-link"
         >
             ← Back to Timeline
         </a>
 
-        <h1 class="mt-3 text-2xl font-bold text-white">
+        <h1 class="ldx-page-title">
             Add Timeline
         </h1>
 
-        <p class="mt-1 text-sm text-gray-400">
+        <p class="ldx-page-description">
             เพิ่มเหตุการณ์สำคัญของบริษัท
         </p>
 
     </div>
 
+
     <form
         method="POST"
         action="{{ route('admin.about.timeline.store') }}"
+        class="ldx-form"
     >
 
         @csrf
 
-        <div class="space-y-6 rounded-2xl border border-gray-800 bg-gray-950 p-6">
+        <div class="ldx-card">
 
-            <div>
+            <div class="ldx-card-body ldx-form-stack">
 
-                <label class="mb-2 block text-sm text-gray-300">
-                    Year *
+                <div class="ldx-form-group">
+
+                    <label class="ldx-label">
+                        Year <span class="ldx-required">*</span>
+                    </label>
+
+                    <input
+                        type="number"
+                        name="year"
+                        value="{{ old('year') }}"
+                        required
+                        placeholder="2026"
+                        class="ldx-input"
+                    >
+
+                </div>
+
+
+                <div class="ldx-form-group">
+
+                    <label class="ldx-label">
+                        Title <span class="ldx-required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="title"
+                        value="{{ old('title') }}"
+                        required
+                        placeholder="Company Founded"
+                        class="ldx-input"
+                    >
+
+                </div>
+
+
+                <div class="ldx-form-group">
+
+                    <label class="ldx-label">
+                        Description
+                    </label>
+
+                    <textarea
+                        name="description"
+                        rows="6"
+                        placeholder="รายละเอียดเหตุการณ์..."
+                        class="ldx-textarea"
+                    >{{ old('description') }}</textarea>
+
+                </div>
+
+
+                <div class="ldx-form-group">
+
+                    <label class="ldx-label">
+                        Sort Order
+                    </label>
+
+                    <input
+                        type="number"
+                        name="sort_order"
+                        value="{{ old('sort_order', 0) }}"
+                        class="ldx-input"
+                    >
+
+                </div>
+
+
+                <label class="ldx-checkbox">
+
+                    <input
+                        type="checkbox"
+                        name="is_active"
+                        value="1"
+                        checked
+                    >
+
+                    <span>
+                        แสดง Timeline บนเว็บไซต์
+                    </span>
+
                 </label>
 
-                <input
-                    type="number"
-                    name="year"
-                    value="{{ old('year') }}"
-                    required
-                    placeholder="2026"
-                    class="w-full rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 text-white outline-none focus:border-indigo-500"
-                >
-
             </div>
-
-            <div>
-
-                <label class="mb-2 block text-sm text-gray-300">
-                    Title *
-                </label>
-
-                <input
-                    type="text"
-                    name="title"
-                    value="{{ old('title') }}"
-                    required
-                    placeholder="Company Founded"
-                    class="w-full rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 text-white outline-none focus:border-indigo-500"
-                >
-
-            </div>
-
-            <div>
-
-                <label class="mb-2 block text-sm text-gray-300">
-                    Description
-                </label>
-
-                <textarea
-                    name="description"
-                    rows="6"
-                    placeholder="รายละเอียดเหตุการณ์..."
-                    class="w-full rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 text-white outline-none focus:border-indigo-500"
-                >{{ old('description') }}</textarea>
-
-            </div>
-
-            <div>
-
-                <label class="mb-2 block text-sm text-gray-300">
-                    Sort Order
-                </label>
-
-                <input
-                    type="number"
-                    name="sort_order"
-                    value="{{ old('sort_order', 0) }}"
-                    class="w-full rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 text-white outline-none focus:border-indigo-500"
-                >
-
-            </div>
-
-            <label class="flex items-center gap-3 text-sm text-gray-300">
-
-                <input
-                    type="checkbox"
-                    name="is_active"
-                    value="1"
-                    checked
-                    class="h-4 w-4 rounded border-gray-700 bg-gray-900 text-indigo-600"
-                >
-
-                แสดง Timeline บนเว็บไซต์
-
-            </label>
 
         </div>
 
-        <div class="mt-6 flex justify-end gap-3">
+
+        <div class="ldx-form-actions ldx-form-actions-end">
 
             <a
                 href="{{ route('admin.about.timeline.index') }}"
-                class="rounded-xl bg-gray-800 px-5 py-3 text-sm text-gray-300"
+                class="ldx-button ldx-button-secondary"
             >
                 Cancel
             </a>
 
             <button
-                class="rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white hover:bg-indigo-500"
+                type="submit"
+                class="ldx-button ldx-button-primary"
             >
                 Save Timeline
             </button>
@@ -136,3 +150,4 @@
 </div>
 
 @endsection
+

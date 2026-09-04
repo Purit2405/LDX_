@@ -1,0 +1,1457 @@
+
+/* =========================================================
+   LDX ELEVATOR - PUBLIC WEBSITE
+   Based on Industrial / Industro Style
+   File: resources/css/public.css
+   ========================================================= */
+
+
+/* =========================================================
+   01. ROOT
+   ========================================================= */
+
+:root {
+    --primary: #f7b500;
+    --primary-dark: #d99a00;
+    --dark: #191919;
+    --dark-2: #222222;
+    --text: #555555;
+    --muted: #777777;
+    --light: #f5f5f5;
+    --white: #ffffff;
+    --border: #e5e5e5;
+
+    --transition: all 0.35s ease;
+    --shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 12px 35px rgba(0, 0, 0, 0.14);
+}
+
+
+/* =========================================================
+   02. GLOBAL
+   ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family:
+        "Roboto",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+}
+
+::selection {
+    background: var(--primary);
+    color: var(--dark);
+}
+
+
+/* =========================================================
+   03. PUBLIC WRAPPER
+   ========================================================= */
+
+.public-site {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--white);
+    overflow: hidden;
+}
+
+.public-site section {
+    position: relative;
+}
+
+.container {
+    position: relative;
+}
+
+
+/* =========================================================
+   04. TOP BAR
+   ========================================================= */
+
+.public-site .topbar {
+    min-height: 40px;
+    background: var(--dark) !important;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 13px;
+}
+
+.public-site .topbar .container,
+.public-site .topbar .container-fluid {
+    min-height: 40px;
+}
+
+.public-site .topbar i {
+    color: var(--primary);
+    margin-right: 5px;
+}
+
+.public-site .topbar a {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.public-site .topbar a:hover {
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   05. NAVBAR
+   ========================================================= */
+
+.public-site .navbar {
+    min-height: 82px;
+    padding-top: 0;
+    padding-bottom: 0;
+    background: var(--white) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    z-index: 1030;
+    transition: var(--transition);
+}
+
+.public-site .navbar.sticky-top {
+    top: 0;
+}
+
+.public-site .navbar.navbar-scrolled {
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+}
+
+
+/* =========================================================
+   06. LDX LOGO
+   ========================================================= */
+
+.ldx-logo {
+    display: block;
+    color: var(--primary);
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: -1.5px;
+}
+
+.ldx-logo:hover {
+    color: var(--primary-dark);
+}
+
+.ldx-logo-sub {
+    display: block;
+    margin-top: 8px;
+    color: var(--dark);
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   07. NAVIGATION
+   ========================================================= */
+
+.public-site .navbar-nav {
+    align-items: center;
+}
+
+.public-site .navbar .nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 82px;
+    padding: 0 18px !important;
+    color: #333333;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.public-site .navbar .nav-link::before {
+    content: "";
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 0;
+    height: 3px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: var(--transition);
+}
+
+.public-site .navbar .nav-link:hover,
+.public-site .navbar .nav-link.active {
+    color: var(--primary-dark);
+}
+
+.public-site .navbar .nav-link:hover::before,
+.public-site .navbar .nav-link.active::before {
+    transform: scaleX(1);
+}
+
+
+/* =========================================================
+   08. NAVBAR BUTTON
+   ========================================================= */
+
+.public-site .navbar .btn {
+    margin-left: 15px;
+    padding: 12px 22px;
+    border-radius: 0;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   09. MOBILE NAVBAR
+   ========================================================= */
+
+.public-site .navbar-toggler {
+    padding: 8px 10px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none !important;
+}
+
+.public-site .navbar-toggler:focus {
+    box-shadow: none !important;
+}
+
+.public-site .navbar-toggler-icon {
+    width: 25px;
+    height: 25px;
+}
+
+
+/* =========================================================
+   10. BUTTONS
+   ========================================================= */
+
+.public-site .btn {
+    position: relative;
+    border-radius: 0;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    transition: var(--transition);
+}
+
+.public-site .btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--dark);
+}
+
+.public-site .btn-primary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(247, 181, 0, 0.25);
+}
+
+.public-site .btn-dark {
+    background: var(--dark);
+    border-color: var(--dark);
+    color: var(--white);
+}
+
+.public-site .btn-dark:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--dark);
+}
+
+.public-site .btn-light {
+    background: var(--white);
+    border-color: var(--white);
+    color: var(--dark);
+}
+
+.public-site .btn-light:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--dark);
+}
+
+
+/* =========================================================
+   11. HERO CAROUSEL
+   ========================================================= */
+
+#header-carousel {
+    position: relative;
+    width: 100%;
+    background: var(--dark);
+}
+
+#header-carousel .carousel-item {
+    position: relative;
+    height: 680px;
+    min-height: 680px;
+    background: var(--dark);
+    overflow: hidden;
+}
+
+#header-carousel .carousel-item img {
+    width: 100%;
+    height: 680px;
+    min-height: 680px;
+    object-fit: cover;
+    object-position: center;
+}
+
+#header-carousel .carousel-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.78) 0%,
+            rgba(0, 0, 0, 0.58) 38%,
+            rgba(0, 0, 0, 0.2) 100%
+        );
+    z-index: 1;
+}
+
+#header-carousel .carousel-caption {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    text-align: left;
+}
+
+#header-carousel .carousel-caption .container {
+    width: 100%;
+}
+
+#header-carousel .carousel-caption p.text-primary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    color: var(--primary) !important;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+#header-carousel .carousel-caption p.text-primary::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: var(--primary);
+}
+
+#header-carousel h1,
+#header-carousel h2 {
+    max-width: 850px;
+    margin-bottom: 20px;
+    color: var(--white);
+    font-size: 58px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+#header-carousel .carousel-caption .fs-5 {
+    max-width: 680px;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 17px !important;
+    line-height: 1.8;
+}
+
+#header-carousel .carousel-caption .btn {
+    padding: 14px 28px;
+    margin-right: 8px;
+}
+
+
+/* =========================================================
+   12. HERO CONTROLS
+   ========================================================= */
+
+#header-carousel .carousel-control-prev,
+#header-carousel .carousel-control-next {
+    width: 75px;
+    z-index: 5;
+}
+
+#header-carousel .carousel-control-prev-icon,
+#header-carousel .carousel-control-next-icon {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-size: 40%;
+    border-radius: 0;
+    transition: var(--transition);
+}
+
+#header-carousel .carousel-control-prev:hover .carousel-control-prev-icon,
+#header-carousel .carousel-control-next:hover .carousel-control-next-icon {
+    background-color: var(--primary);
+}
+
+#header-carousel .carousel-indicators {
+    z-index: 5;
+    margin-bottom: 25px;
+}
+
+#header-carousel .carousel-indicators button {
+    width: 30px;
+    height: 3px;
+    margin: 0 4px;
+    border: 0;
+    background: rgba(255, 255, 255, 0.45);
+}
+
+#header-carousel .carousel-indicators .active {
+    background: var(--primary);
+}
+
+
+/* =========================================================
+   13. SECTION HEADING
+   ========================================================= */
+
+.section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    color: var(--primary-dark);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    line-height: 1.3;
+    text-transform: uppercase;
+}
+
+.section-label::before {
+    content: "";
+    width: 38px;
+    height: 3px;
+    flex: 0 0 38px;
+    background: var(--primary);
+}
+
+.public-site h1,
+.public-site h2,
+.public-site h3,
+.public-site h4,
+.public-site h5,
+.public-site h6 {
+    color: var(--dark);
+    font-weight: 800;
+}
+
+.public-site .display-5 {
+    margin-bottom: 20px;
+    font-size: 42px;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+}
+
+
+/* =========================================================
+   14. ABOUT
+   ========================================================= */
+
+#about {
+    background: var(--white);
+}
+
+#about .position-relative {
+    padding-right: 25px;
+}
+
+#about .position-relative::before {
+    content: "";
+    position: absolute;
+    left: -15px;
+    bottom: -15px;
+    width: 110px;
+    height: 110px;
+    border-left: 5px solid var(--primary);
+    border-bottom: 5px solid var(--primary);
+    z-index: 0;
+}
+
+#about .position-relative img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 450px;
+    object-fit: cover;
+}
+
+.about-badge {
+    position: absolute;
+    right: 5px;
+    bottom: 25px;
+    z-index: 3;
+    min-width: 190px;
+    padding: 20px 24px;
+    background: var(--primary);
+    color: var(--dark);
+    border-radius: 0;
+}
+
+.about-badge strong {
+    display: block;
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.about-badge span {
+    display: block;
+    margin-top: 7px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#about .lead {
+    margin-bottom: 20px;
+    color: #333333;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.8;
+}
+
+#about p {
+    color: var(--text);
+}
+
+
+/* =========================================================
+   15. STATISTICS
+   ========================================================= */
+
+.stats-section {
+    position: relative;
+    padding-top: 65px !important;
+    padding-bottom: 65px !important;
+    background: var(--dark) !important;
+}
+
+.stats-section .row > div {
+    position: relative;
+}
+
+.stats-section .row > div:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 10%;
+    right: 0;
+    width: 1px;
+    height: 80%;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.stat-number {
+    margin-bottom: 8px;
+    color: var(--primary);
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.stats-section .text-white,
+.stats-section p {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+
+/* =========================================================
+   16. SERVICES
+   ========================================================= */
+
+#services {
+    background: var(--light) !important;
+}
+
+.service-card {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid transparent;
+    border-radius: 0 !important;
+    box-shadow: var(--shadow) !important;
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover) !important;
+}
+
+.service-card > img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.service-card:hover > img {
+    transform: scale(1.06);
+}
+
+.service-card .p-4 {
+    position: relative;
+    padding: 30px !important;
+}
+
+.service-card .p-4::before {
+    content: "";
+    position: absolute;
+    left: 30px;
+    top: 0;
+    width: 50px;
+    height: 4px;
+    background: var(--primary);
+}
+
+.service-card h3 {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    font-size: 22px;
+}
+
+.service-card p.text-primary {
+    margin-bottom: 8px;
+    color: var(--primary-dark) !important;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.service-card p.text-muted {
+    color: var(--muted) !important;
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   17. PROJECTS
+   ========================================================= */
+
+.project-card {
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+    background: var(--dark);
+    border-radius: 0 !important;
+}
+
+.project-card > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+
+.project-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0.5) 40%,
+            rgba(0, 0, 0, 0.05) 100%
+        );
+}
+
+.project-card:hover > img {
+    transform: scale(1.08);
+}
+
+.project-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: 30px;
+}
+
+.project-overlay small {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+}
+
+.project-overlay h3 {
+    margin-bottom: 5px;
+    color: var(--white);
+    font-size: 22px;
+}
+
+.project-overlay span {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   18. FEATURE / WHY LDX
+   ========================================================= */
+
+.feature-box {
+    position: relative;
+    height: 100%;
+    padding: 30px !important;
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 0 !important;
+    transition: var(--transition);
+}
+
+.feature-box:hover {
+    border-color: var(--primary);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+}
+
+.feature-number {
+    margin-bottom: 18px;
+    color: var(--primary);
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.feature-box h3 {
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.feature-box p {
+    margin-bottom: 0;
+    color: var(--muted);
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   19. CERTIFICATES
+   ========================================================= */
+
+.certificate-card {
+    height: 100%;
+    min-height: 190px;
+    padding: 25px !important;
+    background: var(--white);
+    border: 1px solid var(--border) !important;
+    border-radius: 0 !important;
+    transition: var(--transition);
+}
+
+.certificate-card:hover {
+    border-color: var(--primary) !important;
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.certificate-card img {
+    width: 100%;
+    height: 90px;
+    object-fit: contain;
+}
+
+.certificate-card h4 {
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+.certificate-card small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   20. NEWS
+   ========================================================= */
+
+#news {
+    background: var(--light) !important;
+}
+
+.news-card {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid transparent;
+    border-radius: 0 !important;
+    transition: var(--transition);
+}
+
+.news-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: var(--transition);
+}
+
+.news-card:hover {
+    border-color: var(--border);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+}
+
+.news-card:hover::before {
+    transform: scaleY(1);
+}
+
+.news-card .text-primary {
+    color: var(--primary-dark) !important;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.news-card h3 {
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.news-card p.text-muted {
+    color: var(--muted) !important;
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   21. CLIENT LOGOS
+   ========================================================= */
+
+.client-logo {
+    display: block;
+    width: auto;
+    max-width: 150px;
+    height: auto;
+    max-height: 65px;
+    margin: 0 auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.65;
+    transition: var(--transition);
+}
+
+.client-logo:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   22. CTA / QUOTE
+   ========================================================= */
+
+.quote-cta {
+    position: relative;
+    overflow: hidden;
+    background: var(--dark) !important;
+}
+
+.quote-cta::before {
+    content: "";
+    position: absolute;
+    right: -130px;
+    top: -160px;
+    width: 420px;
+    height: 420px;
+    border: 80px solid rgba(247, 181, 0, 0.08);
+    border-radius: 50%;
+}
+
+.quote-cta::after {
+    content: "";
+    position: absolute;
+    left: -100px;
+    bottom: -160px;
+    width: 350px;
+    height: 350px;
+    border: 60px solid rgba(247, 181, 0, 0.05);
+    border-radius: 50%;
+}
+
+.quote-cta .container {
+    position: relative;
+    z-index: 2;
+}
+
+.quote-cta h2 {
+    color: var(--white);
+    font-size: 40px;
+    line-height: 1.2;
+}
+
+.quote-cta p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* =========================================================
+   23. FOOTER
+   ========================================================= */
+
+.public-site footer {
+    position: relative;
+    background: #111111 !important;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.public-site footer h4 {
+    margin-bottom: 20px;
+    color: var(--white);
+    font-size: 18px;
+}
+
+.ldx-footer-logo {
+    display: flex;
+    flex-direction: column;
+    color: var(--primary);
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: -1px;
+}
+
+.ldx-footer-logo span {
+    margin-top: 9px;
+    color: var(--white);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.public-site footer p {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-link {
+    display: block;
+    width: fit-content;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+}
+
+.footer-link:hover {
+    padding-left: 6px;
+    color: var(--primary);
+}
+
+.public-site footer hr {
+    margin-top: 35px;
+    margin-bottom: 25px;
+    border-color: rgba(255, 255, 255, 0.15);
+    opacity: 1;
+}
+
+
+/* =========================================================
+   24. TEXT / BACKGROUND HELPERS
+   ========================================================= */
+
+.public-site .text-primary {
+    color: var(--primary) !important;
+}
+
+.public-site .bg-primary {
+    background-color: var(--primary) !important;
+}
+
+.public-site .text-dark {
+    color: var(--dark) !important;
+}
+
+.public-site .bg-dark {
+    background-color: var(--dark) !important;
+}
+
+
+/* =========================================================
+   25. FORM
+   ========================================================= */
+
+.public-site .form-control,
+.public-site .form-select {
+    min-height: 52px;
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    border-radius: 0;
+    color: var(--dark);
+    background: var(--white);
+    transition: var(--transition);
+}
+
+.public-site textarea.form-control {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.public-site .form-control:focus,
+.public-site .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(247, 181, 0, 0.12);
+}
+
+
+/* =========================================================
+   26. BACK TO TOP
+   ========================================================= */
+
+.ldx-back-to-top {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: var(--primary);
+    color: var(--dark);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: var(--transition);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+.ldx-back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.ldx-back-to-top:hover {
+    background: var(--primary-dark);
+    color: var(--white);
+    transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   27. SCROLL REVEAL
+   ========================================================= */
+
+.ldx-scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+}
+
+.ldx-scroll-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   28. ANIMATION
+   ========================================================= */
+
+@keyframes ldxFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ldx-fade-up {
+    animation: ldxFadeUp 0.7s ease both;
+}
+
+
+/* =========================================================
+   29. TABLET
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .public-site .navbar {
+        min-height: 72px;
+    }
+
+    .public-site .navbar .nav-link {
+        height: auto;
+        padding: 12px 0 !important;
+    }
+
+    .public-site .navbar .nav-link::before {
+        display: none;
+    }
+
+    .public-site .navbar-nav {
+        align-items: flex-start;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .public-site .navbar .btn {
+        margin-left: 0;
+        margin-bottom: 15px;
+    }
+
+    #header-carousel .carousel-item,
+    #header-carousel .carousel-item img {
+        height: 580px;
+        min-height: 580px;
+    }
+
+    #header-carousel h1,
+    #header-carousel h2 {
+        font-size: 46px;
+    }
+
+    #about .position-relative {
+        padding-right: 15px;
+        margin-bottom: 30px;
+    }
+
+    .stats-section .row > div:nth-child(2)::after {
+        display: none;
+    }
+
+    .project-card {
+        height: 320px;
+    }
+
+    .public-site .display-5 {
+        font-size: 38px;
+    }
+}
+
+
+/* =========================================================
+   30. MOBILE
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    .public-site .topbar {
+        display: none !important;
+    }
+
+    .public-site .navbar {
+        min-height: 68px;
+    }
+
+    .ldx-logo {
+        font-size: 29px;
+    }
+
+    .ldx-logo-sub {
+        font-size: 8px;
+        letter-spacing: 3px;
+    }
+
+    #header-carousel .carousel-item,
+    #header-carousel .carousel-item img {
+        height: 600px;
+        min-height: 600px;
+    }
+
+    #header-carousel .carousel-caption {
+        padding: 0 20px;
+    }
+
+    #header-carousel .carousel-caption p.text-primary {
+        font-size: 11px;
+    }
+
+    #header-carousel h1,
+    #header-carousel h2 {
+        font-size: 36px;
+        line-height: 1.12;
+    }
+
+    #header-carousel .carousel-caption .fs-5 {
+        font-size: 15px !important;
+    }
+
+    #header-carousel .carousel-caption .btn {
+        margin-bottom: 10px;
+        padding: 12px 20px;
+    }
+
+    #header-carousel .carousel-control-prev,
+    #header-carousel .carousel-control-next {
+        display: none;
+    }
+
+    #header-carousel .carousel-indicators {
+        margin-bottom: 15px;
+    }
+
+    .public-site .display-5 {
+        font-size: 32px;
+    }
+
+    .section-label {
+        font-size: 11px;
+        letter-spacing: 1.5px;
+    }
+
+    #about .position-relative::before {
+        left: -8px;
+        bottom: -8px;
+        width: 75px;
+        height: 75px;
+        border-width: 3px;
+    }
+
+    #about .position-relative img {
+        min-height: 320px;
+    }
+
+    .about-badge {
+        right: 5px;
+        bottom: 15px;
+        min-width: 155px;
+        padding: 15px 18px;
+    }
+
+    .about-badge strong {
+        font-size: 28px;
+    }
+
+    .about-badge span {
+        font-size: 9px;
+        letter-spacing: 0.8px;
+    }
+
+    .stats-section {
+        padding-top: 50px !important;
+        padding-bottom: 50px !important;
+    }
+
+    .stats-section .row > div::after {
+        display: none !important;
+    }
+
+    .stat-number {
+        font-size: 36px;
+    }
+
+    .service-card > img {
+        height: 220px;
+    }
+
+    .project-card {
+        height: 290px;
+    }
+
+    .project-overlay {
+        padding: 22px;
+    }
+
+    .project-overlay h3 {
+        font-size: 20px;
+    }
+
+    .feature-box {
+        padding: 25px !important;
+    }
+
+    .certificate-card {
+        min-height: 170px;
+    }
+
+    .certificate-card img {
+        height: 75px;
+    }
+
+    .quote-cta {
+        text-align: center;
+    }
+
+    .quote-cta h2 {
+        font-size: 31px;
+    }
+
+    .ldx-footer-logo {
+        font-size: 36px;
+    }
+
+}
+
+
+/* =========================================================
+   31. SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 575.98px) {
+
+    .container {
+        --bs-gutter-x: 1.5rem;
+    }
+
+    #header-carousel .carousel-item,
+    #header-carousel .carousel-item img {
+        height: 650px;
+        min-height: 650px;
+    }
+
+    #header-carousel h1,
+    #header-carousel h2 {
+        font-size: 31px;
+    }
+
+    #header-carousel .carousel-caption .btn {
+        display: block;
+        width: 100%;
+        margin-right: 0 !important;
+    }
+
+    .public-site .display-5 {
+        font-size: 29px;
+    }
+
+    .service-card > img {
+        height: 210px;
+    }
+
+    .project-card {
+        height: 270px;
+    }
+
+    .quote-cta h2 {
+        font-size: 28px;
+    }
+
+    .ldx-back-to-top {
+        right: 15px;
+        bottom: 15px;
+        width: 44px;
+        height: 44px;
+    }
+
+}
+
+
+/* =========================================================
+   32. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .ldx-scroll-reveal {
+        opacity: 1;
+        transform: none;
+    }
+
+}

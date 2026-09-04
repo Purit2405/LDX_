@@ -1,54 +1,54 @@
-blade
+
 @extends('layouts.admin.app')
 
 @section('title', 'Edit Service Category')
+
 @section('page-title', 'Edit Service Category')
 
 @section('content')
 
-<div class="mx-auto max-w-3xl space-y-6">
+<div class="ldx-page ldx-page-narrow">
 
-    <div>
+    {{-- Header --}}
+    <div class="ldx-page-header">
 
         <a
             href="{{ route('admin.service-categories.index') }}"
-            class="text-sm text-gray-500 hover:text-gray-900"
+            class="ldx-back-link"
         >
             ← Back to Categories
         </a>
 
-        <h1 class="mt-3 text-2xl font-bold text-gray-900">
+        <h1 class="ldx-page-title">
             Edit Service Category
         </h1>
 
-        <p class="mt-1 text-sm text-gray-500">
+        <p class="ldx-page-description">
             แก้ไขข้อมูลหมวดหมู่บริการ
         </p>
 
     </div>
 
 
+    {{-- Success --}}
     @if(session('success'))
 
-        <div class="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+        <div class="ldx-alert ldx-alert-success">
             {{ session('success') }}
         </div>
 
     @endif
 
 
+    {{-- Validation Error --}}
     @if($errors->any())
 
-        <div class="rounded-xl border border-red-200 bg-red-50 p-5">
+        <div class="ldx-alert ldx-alert-danger">
 
-            <ul class="list-inside list-disc text-sm text-red-600">
-
+            <ul class="ldx-alert-list">
                 @foreach($errors->all() as $error)
-
                     <li>{{ $error }}</li>
-
                 @endforeach
-
             </ul>
 
         </div>
@@ -59,27 +59,33 @@ blade
     <form
         method="POST"
         action="{{ route('admin.service-categories.update', $serviceCategory) }}"
-        class="space-y-6"
+        class="ldx-form"
     >
 
         @csrf
         @method('PUT')
 
 
-        <div class="rounded-xl bg-white p-6 shadow-sm">
+        {{-- Category Information --}}
+        <div class="ldx-card">
 
-            <h2 class="text-lg font-semibold">
-                Category Information
-            </h2>
+            <div class="ldx-card-header">
+
+                <h2 class="ldx-card-title">
+                    Category Information
+                </h2>
+
+            </div>
 
 
-            <div class="mt-6 space-y-5">
+            <div class="ldx-card-body ldx-form-stack">
 
                 {{-- Name --}}
-                <div>
+                <div class="ldx-form-group">
 
-                    <label class="mb-2 block text-sm font-medium text-gray-700">
-                        Category Name <span class="text-red-500">*</span>
+                    <label class="ldx-label">
+                        Category Name
+                        <span class="ldx-required">*</span>
                     </label>
 
                     <input
@@ -87,16 +93,16 @@ blade
                         name="name"
                         value="{{ old('name', $serviceCategory->name) }}"
                         required
-                        class="w-full rounded-lg border-gray-300 px-4 py-3 text-sm"
+                        class="ldx-input"
                     >
 
                 </div>
 
 
                 {{-- Slug --}}
-                <div>
+                <div class="ldx-form-group">
 
-                    <label class="mb-2 block text-sm font-medium text-gray-700">
+                    <label class="ldx-label">
                         Slug
                     </label>
 
@@ -104,38 +110,38 @@ blade
                         type="text"
                         name="slug"
                         value="{{ old('slug', $serviceCategory->slug) }}"
-                        class="w-full rounded-lg border-gray-300 px-4 py-3 text-sm"
+                        class="ldx-input"
                     >
 
                 </div>
 
 
                 {{-- Description --}}
-                <div>
+                <div class="ldx-form-group">
 
-                    <label class="mb-2 block text-sm font-medium text-gray-700">
+                    <label class="ldx-label">
                         Description
                     </label>
 
                     <textarea
                         name="description"
                         rows="5"
-                        class="w-full rounded-lg border-gray-300 px-4 py-3 text-sm"
+                        class="ldx-textarea"
                     >{{ old('description', $serviceCategory->description) }}</textarea>
 
                 </div>
 
 
                 {{-- Status --}}
-                <div>
+                <div class="ldx-form-group">
 
-                    <label class="mb-2 block text-sm font-medium text-gray-700">
+                    <label class="ldx-label">
                         Status
                     </label>
 
                     <select
                         name="is_active"
-                        class="w-full rounded-lg border-gray-300 px-4 py-3 text-sm"
+                        class="ldx-select"
                     >
 
                         <option
@@ -162,36 +168,40 @@ blade
 
 
         {{-- Service Usage --}}
-        <div class="rounded-xl bg-gray-50 p-5">
+        <div class="ldx-info-box">
 
-            <div class="text-sm font-semibold text-gray-700">
+            <div class="ldx-info-box-title">
                 Services in this category
             </div>
 
-            <div class="mt-1 text-sm text-gray-500">
+            <div class="ldx-info-box-description">
+
                 หมวดหมู่นี้มี
-                <strong>
+
+                <strong class="ldx-info-box-value">
                     {{ $serviceCategory->services()->count() }}
                 </strong>
+
                 บริการ
+
             </div>
 
         </div>
 
 
         {{-- Buttons --}}
-        <div class="flex items-center justify-between">
+        <div class="ldx-form-actions ldx-form-actions-between">
 
             <a
                 href="{{ route('admin.service-categories.index') }}"
-                class="rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium"
+                class="ldx-button ldx-button-secondary"
             >
                 Cancel
             </a>
 
             <button
                 type="submit"
-                class="rounded-lg bg-gray-900 px-7 py-2.5 text-sm font-semibold text-white"
+                class="ldx-button ldx-button-primary"
             >
                 Save Changes
             </button>

@@ -1,41 +1,39 @@
-blade
+
 @extends('layouts.admin.app')
 
 @section('title', 'Service Categories')
+
 @section('page-title', 'Service Categories')
 
 @section('content')
 
-<div class="space-y-6">
+<div class="ldx-page">
 
     {{-- Header --}}
-    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div class="ldx-page-header">
 
         <div>
-
-            <h1 class="text-2xl font-bold text-gray-900">
+            <h1 class="ldx-page-title">
                 Service Categories
             </h1>
 
-            <p class="mt-1 text-sm text-gray-500">
+            <p class="ldx-page-description">
                 จัดการหมวดหมู่ของบริการ
             </p>
-
         </div>
 
-
-        <div class="flex gap-3">
+        <div class="ldx-form-actions">
 
             <a
                 href="{{ route('admin.services.index') }}"
-                class="rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                class="ldx-button ldx-button-secondary"
             >
                 Services
             </a>
 
             <a
                 href="{{ route('admin.service-categories.create') }}"
-                class="rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-gray-800"
+                class="ldx-button ldx-button-primary"
             >
                 + Add Category
             </a>
@@ -48,7 +46,7 @@ blade
     {{-- Messages --}}
     @if(session('success'))
 
-        <div class="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+        <div class="ldx-alert ldx-alert-success">
             {{ session('success') }}
         </div>
 
@@ -57,7 +55,7 @@ blade
 
     @if(session('error'))
 
-        <div class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div class="ldx-alert ldx-alert-danger">
             {{ session('error') }}
         </div>
 
@@ -65,96 +63,108 @@ blade
 
 
     {{-- Search --}}
-    <div class="rounded-xl bg-white p-5 shadow-sm">
+    <div class="ldx-card">
 
-        <form
-            method="GET"
-            action="{{ route('admin.service-categories.index') }}"
-            class="grid gap-4 md:grid-cols-[1fr_200px_auto]"
-        >
+        <div class="ldx-card-body">
 
-            <input
-                type="text"
-                name="search"
-                value="{{ request('search') }}"
-                placeholder="ค้นหาหมวดหมู่..."
-                class="rounded-lg border-gray-300 px-4 py-2.5 text-sm"
+            <form
+                method="GET"
+                action="{{ route('admin.service-categories.index') }}"
+                class="ldx-filter-form"
             >
 
+                <div class="ldx-form-group">
 
-            <select
-                name="status"
-                class="rounded-lg border-gray-300 px-4 py-2.5 text-sm"
-            >
+                    <input
+                        type="text"
+                        name="search"
+                        value="{{ request('search') }}"
+                        placeholder="ค้นหาหมวดหมู่..."
+                        class="ldx-input"
+                    >
 
-                <option value="">
-                    All
-                </option>
-
-                <option
-                    value="active"
-                    @selected(request('status') === 'active')
-                >
-                    Active
-                </option>
-
-                <option
-                    value="hidden"
-                    @selected(request('status') === 'hidden')
-                >
-                    Hidden
-                </option>
-
-            </select>
+                </div>
 
 
-            <div class="flex gap-2">
+                <div class="ldx-form-group">
 
-                <button
-                    type="submit"
-                    class="rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white"
-                >
-                    Search
-                </button>
+                    <select
+                        name="status"
+                        class="ldx-select"
+                    >
 
-                <a
-                    href="{{ route('admin.service-categories.index') }}"
-                    class="rounded-lg border border-gray-300 px-5 py-2.5 text-sm"
-                >
-                    Reset
-                </a>
+                        <option value="">
+                            All
+                        </option>
 
-            </div>
+                        <option
+                            value="active"
+                            @selected(request('status') === 'active')
+                        >
+                            Active
+                        </option>
 
-        </form>
+                        <option
+                            value="hidden"
+                            @selected(request('status') === 'hidden')
+                        >
+                            Hidden
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="ldx-filter-actions">
+
+                    <button
+                        type="submit"
+                        class="ldx-button ldx-button-primary"
+                    >
+                        Search
+                    </button>
+
+                    <a
+                        href="{{ route('admin.service-categories.index') }}"
+                        class="ldx-button ldx-button-secondary"
+                    >
+                        Reset
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
 
     </div>
 
 
     {{-- Table --}}
-    <div class="overflow-hidden rounded-xl bg-white shadow-sm">
+    <div class="ldx-card ldx-table-card">
 
-        <div class="overflow-x-auto">
+        <div class="ldx-table-wrapper">
 
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="ldx-table">
 
-                <thead class="bg-gray-50">
+                <thead class="ldx-table-head">
 
                     <tr>
 
-                        <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                        <th class="ldx-table-th">
                             Category
                         </th>
 
-                        <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                        <th class="ldx-table-th">
                             Services
                         </th>
 
-                        <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                        <th class="ldx-table-th">
                             Status
                         </th>
 
-                        <th class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">
+                        <th class="ldx-table-th ldx-table-th-right">
                             Actions
                         </th>
 
@@ -163,25 +173,26 @@ blade
                 </thead>
 
 
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="ldx-table-body">
 
                     @forelse($categories as $category)
 
-                        <tr class="hover:bg-gray-50">
+                        <tr class="ldx-table-row">
 
-                            <td class="px-6 py-5">
+                            {{-- Category --}}
+                            <td class="ldx-table-td">
 
-                                <div class="font-semibold text-gray-900">
+                                <div class="ldx-table-primary">
                                     {{ $category->name }}
                                 </div>
 
-                                <div class="mt-1 text-xs text-gray-400">
+                                <div class="ldx-table-secondary">
                                     {{ $category->slug }}
                                 </div>
 
                                 @if($category->description)
 
-                                    <div class="mt-2 max-w-lg truncate text-sm text-gray-500">
+                                    <div class="ldx-table-description">
                                         {{ $category->description }}
                                     </div>
 
@@ -190,26 +201,28 @@ blade
                             </td>
 
 
-                            <td class="px-6 py-5">
+                            {{-- Services --}}
+                            <td class="ldx-table-td">
 
-                                <span class="text-sm text-gray-600">
+                                <span class="ldx-table-value">
                                     {{ $category->services_count }}
                                 </span>
 
                             </td>
 
 
-                            <td class="px-6 py-5">
+                            {{-- Status --}}
+                            <td class="ldx-table-td">
 
                                 @if($category->is_active)
 
-                                    <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+                                    <span class="ldx-badge ldx-badge-success">
                                         Active
                                     </span>
 
                                 @else
 
-                                    <span class="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600">
+                                    <span class="ldx-badge ldx-badge-muted">
                                         Hidden
                                     </span>
 
@@ -218,13 +231,14 @@ blade
                             </td>
 
 
-                            <td class="px-6 py-5">
+                            {{-- Actions --}}
+                            <td class="ldx-table-td ldx-table-td-right">
 
-                                <div class="flex justify-end gap-2">
+                                <div class="ldx-table-actions">
 
                                     <a
                                         href="{{ route('admin.service-categories.edit', $category) }}"
-                                        class="rounded-lg border border-gray-300 px-3 py-2 text-xs font-medium hover:bg-gray-50"
+                                        class="ldx-button ldx-button-secondary ldx-button-sm"
                                     >
                                         Edit
                                     </a>
@@ -241,7 +255,7 @@ blade
 
                                         <button
                                             type="submit"
-                                            class="rounded-lg border border-red-200 px-3 py-2 text-xs font-medium text-red-600 hover:bg-red-50"
+                                            class="ldx-button ldx-button-danger ldx-button-sm"
                                         >
                                             Delete
                                         </button>
@@ -260,7 +274,7 @@ blade
 
                             <td
                                 colspan="4"
-                                class="px-6 py-16 text-center text-sm text-gray-500"
+                                class="ldx-table-empty"
                             >
                                 ยังไม่มีหมวดหมู่
                             </td>
@@ -276,10 +290,13 @@ blade
         </div>
 
 
+        {{-- Pagination --}}
         @if($categories->hasPages())
 
-            <div class="border-t border-gray-100 px-6 py-4">
+            <div class="ldx-pagination">
+
                 {{ $categories->links() }}
+
             </div>
 
         @endif

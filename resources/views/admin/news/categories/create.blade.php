@@ -1,153 +1,183 @@
+
 @extends('layouts.admin.app')
 
-@section('title', 'Create News Category')
-@section('page-title', 'Create News Category')
+@section('title', 'Add Timeline')
 
 @section('content')
 
-<div class="mx-auto max-w-3xl space-y-6">
+<div class="ldx-page ldx-page-form">
 
-    {{-- Header --}}
-    <div>
+    <div class="ldx-page-header">
 
-        <div class="flex items-center gap-2 text-sm text-gray-500">
+        <a
+            href="{{ route('admin.about.timeline.index') }}"
+            class="ldx-page-back"
+        >
+            ← Back to Timeline
+        </a>
 
-            <a
-                href="{{ route('admin.news-categories.index') }}"
-                class="hover:text-gray-900"
-            >
-                News Categories
-            </a>
-
-            <span>/</span>
-
-            <span>Create</span>
-
-        </div>
-
-
-        <h1 class="mt-2 text-2xl font-bold text-gray-900">
-            Create News Category
+        <h1 class="ldx-page-title">
+            Add Timeline
         </h1>
 
-        <p class="mt-1 text-sm text-gray-500">
-            สร้างหมวดหมู่ข่าวใหม่
+        <p class="ldx-page-description">
+            เพิ่มเหตุการณ์สำคัญของบริษัท
         </p>
 
     </div>
 
 
-    {{-- Validation Errors --}}
-    @if($errors->any())
-
-        <div class="rounded-xl border border-red-200 bg-red-50 p-5">
-
-            <div class="font-semibold text-red-700">
-                กรุณาตรวจสอบข้อมูล
-            </div>
-
-            <ul class="mt-2 list-inside list-disc text-sm text-red-600">
-
-                @foreach($errors->all() as $error)
-
-                    <li>
-                        {{ $error }}
-                    </li>
-
-                @endforeach
-
-            </ul>
-
-        </div>
-
-    @endif
-
-
-    {{-- Form --}}
     <form
         method="POST"
-        action="{{ route('admin.news-categories.store') }}"
-        class="space-y-6"
+        action="{{ route('admin.about.timeline.store') }}"
+        class="ldx-form"
     >
 
         @csrf
 
+        <div class="ldx-card">
 
-        {{-- Information --}}
-        <div class="rounded-xl bg-white p-6 shadow-sm">
+            <div class="ldx-card-body">
 
-            <h2 class="text-lg font-semibold text-gray-900">
-                Category Information
-            </h2>
+                {{-- Year --}}
+                <div class="ldx-form-group">
 
-
-            <div class="mt-6 space-y-5">
-
-                {{-- Name --}}
-                <div>
-
-                    <label class="mb-2 block text-sm font-medium text-gray-700">
-                        Category Name
-                        <span class="text-red-500">*</span>
+                    <label
+                        for="year"
+                        class="ldx-label"
+                    >
+                        Year
+                        <span class="ldx-required">*</span>
                     </label>
 
                     <input
-                        type="text"
-                        name="name"
-                        value="{{ old('name') }}"
+                        id="year"
+                        type="number"
+                        name="year"
+                        value="{{ old('year') }}"
                         required
-                        maxlength="255"
-                        placeholder="เช่น Company News"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-gray-500 focus:outline-none"
+                        placeholder="2026"
+                        class="ldx-input"
                     >
+
+                    @error('year')
+                        <p class="ldx-error">
+                            {{ $message }}
+                        </p>
+                    @enderror
 
                 </div>
 
 
-                {{-- Slug --}}
-                <div>
+                {{-- Title --}}
+                <div class="ldx-form-group">
 
-                    <label class="mb-2 block text-sm font-medium text-gray-700">
-                        Slug
+                    <label
+                        for="title"
+                        class="ldx-label"
+                    >
+                        Title
+                        <span class="ldx-required">*</span>
                     </label>
 
                     <input
+                        id="title"
                         type="text"
-                        name="slug"
-                        value="{{ old('slug') }}"
-                        maxlength="255"
-                        placeholder="company-news"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-gray-500 focus:outline-none"
+                        name="title"
+                        value="{{ old('title') }}"
+                        required
+                        placeholder="Company Founded"
+                        class="ldx-input"
                     >
 
-                    <p class="mt-2 text-xs text-gray-500">
-                        หากไม่กรอก ระบบจะสร้าง Slug จากชื่อหมวดหมู่อัตโนมัติ
-                    </p>
+                    @error('title')
+                        <p class="ldx-error">
+                            {{ $message }}
+                        </p>
+                    @enderror
 
                 </div>
 
 
-                {{-- Status --}}
-                <div>
+                {{-- Description --}}
+                <div class="ldx-form-group">
 
-                    <label class="mb-2 block text-sm font-medium text-gray-700">
-                        Status
+                    <label
+                        for="description"
+                        class="ldx-label"
+                    >
+                        Description
                     </label>
 
-                    <select
-                        name="is_active"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm"
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="6"
+                        placeholder="รายละเอียดเหตุการณ์..."
+                        class="ldx-textarea"
+                    >{{ old('description') }}</textarea>
+
+                    @error('description')
+                        <p class="ldx-error">
+                            {{ $message }}
+                        </p>
+                    @enderror
+
+                </div>
+
+
+                {{-- Sort Order --}}
+                <div class="ldx-form-group">
+
+                    <label
+                        for="sort_order"
+                        class="ldx-label"
+                    >
+                        Sort Order
+                    </label>
+
+                    <input
+                        id="sort_order"
+                        type="number"
+                        name="sort_order"
+                        value="{{ old('sort_order', 0) }}"
+                        class="ldx-input"
                     >
 
-                        <option value="1" @selected(old('is_active', '1') === '1')>
-                            Active — แสดงบนเว็บไซต์
-                        </option>
+                    @error('sort_order')
+                        <p class="ldx-error">
+                            {{ $message }}
+                        </p>
+                    @enderror
 
-                        <option value="0" @selected(old('is_active') === '0')>
-                            Hidden — ซ่อนจากเว็บไซต์
-                        </option>
+                </div>
 
-                    </select>
+
+                {{-- Active --}}
+                <div class="ldx-status-box">
+
+                    <label class="ldx-checkbox">
+
+                        <input
+                            type="checkbox"
+                            name="is_active"
+                            value="1"
+                            checked
+                        >
+
+                        <span>
+
+                            <span class="ldx-checkbox-title">
+                                Active Timeline
+                            </span>
+
+                            <span class="ldx-checkbox-description">
+                                แสดง Timeline นี้บนเว็บไซต์
+                            </span>
+
+                        </span>
+
+                    </label>
 
                 </div>
 
@@ -156,22 +186,21 @@
         </div>
 
 
-        {{-- Buttons --}}
-        <div class="flex items-center justify-between">
+        {{-- Actions --}}
+        <div class="ldx-form-actions">
 
             <a
-                href="{{ route('admin.news-categories.index') }}"
-                class="rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                href="{{ route('admin.about.timeline.index') }}"
+                class="ldx-button ldx-button-secondary"
             >
                 Cancel
             </a>
 
-
             <button
                 type="submit"
-                class="rounded-lg bg-gray-900 px-7 py-2.5 text-sm font-semibold text-white hover:bg-gray-800"
+                class="ldx-button ldx-button-primary"
             >
-                Create Category
+                Save Timeline
             </button>
 
         </div>

@@ -1,33 +1,38 @@
+
 @extends('layouts.admin.app')
 
 @section('title', 'รายละเอียดคำขอใบเสนอราคา')
 
 @section('content')
 
-<div class="mx-auto max-w-5xl space-y-6">
+<div class="ldx-page ldx-page-form">
 
     {{-- Header --}}
-    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <div class="ldx-page-header">
 
         <div>
 
-            <h1 class="text-2xl font-semibold text-gray-900">
+            <h1 class="ldx-page-title">
                 รายละเอียดคำขอใบเสนอราคา
             </h1>
 
-            <p class="mt-1 text-sm text-gray-500">
+            <p class="ldx-page-description">
                 ข้อมูลที่ลูกค้าส่งเข้ามา
             </p>
 
         </div>
 
 
-        <a
-            href="{{ route('admin.quote-requests.index') }}"
-            class="inline-flex w-fit rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-        >
-            ← กลับ
-        </a>
+        <div class="ldx-page-header-actions">
+
+            <a
+                href="{{ route('admin.quote-requests.index') }}"
+                class="ldx-page-back"
+            >
+                ← กลับ
+            </a>
+
+        </div>
 
     </div>
 
@@ -35,7 +40,7 @@
     {{-- Success --}}
     @if(session('success'))
 
-        <div class="rounded-lg border border-green-200 bg-green-50 p-4 text-sm text-green-800">
+        <div class="ldx-alert ldx-alert-success">
             {{ session('success') }}
         </div>
 
@@ -43,23 +48,15 @@
 
 
     {{-- Status --}}
-    <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+    <div class="ldx-card">
 
-        <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div class="ldx-card-header">
 
             <div>
 
-                <h2 class="font-semibold text-gray-900">
+                <h2 class="ldx-card-title">
                     สถานะคำขอ
                 </h2>
-
-                <div class="mt-2">
-
-                    <span class="inline-flex rounded-full px-3 py-1 text-sm font-medium {{ $quoteRequest->status_badge_class }}">
-                        {{ $quoteRequest->status_label }}
-                    </span>
-
-                </div>
 
             </div>
 
@@ -68,7 +65,7 @@
             <form
                 action="{{ route('admin.quote-requests.status', $quoteRequest) }}"
                 method="POST"
-                class="flex gap-2"
+                class="ldx-actions"
             >
 
                 @csrf
@@ -76,7 +73,7 @@
 
                 <select
                     name="status"
-                    class="rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-red-500 focus:outline-none"
+                    class="ldx-select"
                 >
 
                     <option
@@ -119,7 +116,7 @@
 
                 <button
                     type="submit"
-                    class="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+                    class="ldx-button ldx-button-primary"
                 >
                     บันทึก
                 </button>
@@ -128,89 +125,107 @@
 
         </div>
 
+
+        <div class="ldx-card-body">
+
+            <span class="ldx-badge {{ $quoteRequest->status_badge_class }}">
+                {{ $quoteRequest->status_label }}
+            </span>
+
+        </div>
+
     </div>
 
 
     {{-- Customer Information --}}
-    <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+    <div class="ldx-card">
 
-        <h2 class="mb-6 text-lg font-semibold text-gray-900">
-            ข้อมูลลูกค้า
-        </h2>
+        <div class="ldx-card-header">
 
-
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-
-
-            {{-- Name --}}
             <div>
 
-                <div class="text-sm text-gray-500">
-                    ชื่อ - นามสกุล
-                </div>
-
-                <div class="mt-1 font-medium text-gray-900">
-                    {{ $quoteRequest->full_name }}
-                </div>
+                <h2 class="ldx-card-title">
+                    ข้อมูลลูกค้า
+                </h2>
 
             </div>
 
-
-            {{-- Phone --}}
-            <div>
-
-                <div class="text-sm text-gray-500">
-                    เบอร์โทรศัพท์
-                </div>
-
-                <div class="mt-1 font-medium text-gray-900">
-                    {{ $quoteRequest->phone }}
-                </div>
-
-            </div>
+        </div>
 
 
-            {{-- Email --}}
-            <div>
+        <div class="ldx-card-body">
 
-                <div class="text-sm text-gray-500">
-                    อีเมล
-                </div>
+            <div class="ldx-info-grid">
 
-                <div class="mt-1 font-medium text-gray-900">
+                {{-- Name --}}
+                <div class="ldx-info-item">
 
-                    @if($quoteRequest->email)
+                    <div class="ldx-info-label">
+                        ชื่อ - นามสกุล
+                    </div>
 
-                        <a
-                            href="mailto:{{ $quoteRequest->email }}"
-                            class="text-red-600 hover:underline"
-                        >
-                            {{ $quoteRequest->email }}
-                        </a>
-
-                    @else
-
-                        <span class="text-gray-400">
-                            ไม่ระบุ
-                        </span>
-
-                    @endif
+                    <div class="ldx-info-value">
+                        {{ $quoteRequest->full_name }}
+                    </div>
 
                 </div>
 
-            </div>
 
+                {{-- Phone --}}
+                <div class="ldx-info-item">
 
-            {{-- Province --}}
-            <div>
+                    <div class="ldx-info-label">
+                        เบอร์โทรศัพท์
+                    </div>
 
-                <div class="text-sm text-gray-500">
-                    จังหวัดสถานที่ติดตั้ง
+                    <div class="ldx-info-value">
+                        {{ $quoteRequest->phone }}
+                    </div>
+
                 </div>
 
-                <div class="mt-1 font-medium text-gray-900">
 
-                    {{ $quoteRequest->installation_province ?: 'ไม่ระบุ' }}
+                {{-- Email --}}
+                <div class="ldx-info-item">
+
+                    <div class="ldx-info-label">
+                        อีเมล
+                    </div>
+
+                    <div class="ldx-info-value">
+
+                        @if($quoteRequest->email)
+
+                            <a
+                                href="mailto:{{ $quoteRequest->email }}"
+                                class="ldx-link"
+                            >
+                                {{ $quoteRequest->email }}
+                            </a>
+
+                        @else
+
+                            <span class="ldx-muted">
+                                ไม่ระบุ
+                            </span>
+
+                        @endif
+
+                    </div>
+
+                </div>
+
+
+                {{-- Province --}}
+                <div class="ldx-info-item">
+
+                    <div class="ldx-info-label">
+                        จังหวัดสถานที่ติดตั้ง
+                    </div>
+
+                    <div class="ldx-info-value">
+                        {{ $quoteRequest->installation_province ?: 'ไม่ระบุ' }}
+                    </div>
 
                 </div>
 
@@ -222,69 +237,78 @@
 
 
     {{-- Project Information --}}
-    <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+    <div class="ldx-card">
 
-        <h2 class="mb-6 text-lg font-semibold text-gray-900">
-            รายละเอียดโครงการ
-        </h2>
+        <div class="ldx-card-header">
 
-
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-
-
-            {{-- Floor --}}
             <div>
 
-                <div class="text-sm text-gray-500">
-                    จำนวนชั้นที่ต้องการติดตั้ง
-                </div>
-
-                <div class="mt-1 font-medium text-gray-900">
-
-                    @if($quoteRequest->floor_count)
-
-                        {{ $quoteRequest->floor_count }} ชั้น
-
-                    @else
-
-                        <span class="text-gray-400">
-                            ไม่ระบุ
-                        </span>
-
-                    @endif
-
-                </div>
-
-            </div>
-
-
-            {{-- Contact Time --}}
-            <div>
-
-                <div class="text-sm text-gray-500">
-                    ช่วงเวลาที่สะดวกให้ติดต่อกลับ
-                </div>
-
-                <div class="mt-1 font-medium text-gray-900">
-
-                    {{ $quoteRequest->contact_time ?: 'ไม่ระบุ' }}
-
-                </div>
+                <h2 class="ldx-card-title">
+                    รายละเอียดโครงการ
+                </h2>
 
             </div>
 
         </div>
 
 
-        {{-- Details --}}
-        <div class="mt-6">
+        <div class="ldx-card-body">
 
-            <div class="text-sm text-gray-500">
-                รายละเอียดเพิ่มเติม
+            <div class="ldx-info-grid">
+
+                {{-- Floor --}}
+                <div class="ldx-info-item">
+
+                    <div class="ldx-info-label">
+                        จำนวนชั้นที่ต้องการติดตั้ง
+                    </div>
+
+                    <div class="ldx-info-value">
+
+                        @if($quoteRequest->floor_count)
+
+                            {{ $quoteRequest->floor_count }} ชั้น
+
+                        @else
+
+                            <span class="ldx-muted">
+                                ไม่ระบุ
+                            </span>
+
+                        @endif
+
+                    </div>
+
+                </div>
+
+
+                {{-- Contact Time --}}
+                <div class="ldx-info-item">
+
+                    <div class="ldx-info-label">
+                        ช่วงเวลาที่สะดวกให้ติดต่อกลับ
+                    </div>
+
+                    <div class="ldx-info-value">
+                        {{ $quoteRequest->contact_time ?: 'ไม่ระบุ' }}
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="mt-2 whitespace-pre-line rounded-lg bg-gray-50 p-5 leading-7 text-gray-800">
-                {{ $quoteRequest->details }}
+
+            {{-- Details --}}
+            <div class="ldx-info-break">
+
+                <div class="ldx-info-label">
+                    รายละเอียดเพิ่มเติม
+                </div>
+
+                <div class="ldx-content-text">
+                    {{ $quoteRequest->details }}
+                </div>
+
             </div>
 
         </div>
@@ -293,35 +317,50 @@
 
 
     {{-- Metadata --}}
-    <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+    <div class="ldx-card">
 
-        <h2 class="mb-5 text-lg font-semibold text-gray-900">
-            ข้อมูลระบบ
-        </h2>
-
-        <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+        <div class="ldx-card-header">
 
             <div>
 
-                <div class="text-sm text-gray-500">
-                    วันที่ส่งคำขอ
-                </div>
-
-                <div class="mt-1 text-gray-900">
-                    {{ $quoteRequest->created_at->format('d/m/Y H:i') }} น.
-                </div>
+                <h2 class="ldx-card-title">
+                    ข้อมูลระบบ
+                </h2>
 
             </div>
 
+        </div>
 
-            <div>
 
-                <div class="text-sm text-gray-500">
-                    อัปเดตล่าสุด
+        <div class="ldx-card-body">
+
+            <div class="ldx-info-grid">
+
+                {{-- Created --}}
+                <div class="ldx-info-item">
+
+                    <div class="ldx-info-label">
+                        วันที่ส่งคำขอ
+                    </div>
+
+                    <div class="ldx-info-value">
+                        {{ $quoteRequest->created_at->format('d/m/Y H:i') }} น.
+                    </div>
+
                 </div>
 
-                <div class="mt-1 text-gray-900">
-                    {{ $quoteRequest->updated_at->format('d/m/Y H:i') }} น.
+
+                {{-- Updated --}}
+                <div class="ldx-info-item">
+
+                    <div class="ldx-info-label">
+                        อัปเดตล่าสุด
+                    </div>
+
+                    <div class="ldx-info-value">
+                        {{ $quoteRequest->updated_at->format('d/m/Y H:i') }} น.
+                    </div>
+
                 </div>
 
             </div>
@@ -332,7 +371,20 @@
 
 
     {{-- Delete --}}
-    <div class="flex justify-end">
+    <div class="ldx-danger-zone">
+
+        <div>
+
+            <h3 class="ldx-danger-title">
+                ลบคำขอใบเสนอราคา
+            </h3>
+
+            <p class="ldx-danger-description">
+                การลบคำขอนี้จะไม่สามารถกู้คืนข้อมูลได้
+            </p>
+
+        </div>
+
 
         <form
             action="{{ route('admin.quote-requests.destroy', $quoteRequest) }}"
@@ -345,7 +397,7 @@
 
             <button
                 type="submit"
-                class="rounded-lg bg-red-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-red-700"
+                class="ldx-button ldx-button-danger"
             >
                 ลบคำขอ
             </button>
@@ -357,3 +409,4 @@
 </div>
 
 @endsection
+

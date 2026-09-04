@@ -1,3 +1,4 @@
+
 @extends('layouts.admin.app')
 
 @section('title', 'Project Details')
@@ -6,29 +7,31 @@
 
 @section('content')
 
-<div class="mx-auto max-w-5xl space-y-6">
+<div class="ldx-page ldx-page-wide">
 
     {{-- Header --}}
-    <div class="flex items-start justify-between gap-4">
+    <div class="ldx-page-header ldx-page-header-actions">
 
         <div>
 
-            <div class="flex items-center gap-2 text-sm text-gray-500">
+            <div class="ldx-breadcrumb">
 
                 <a
                     href="{{ route('admin.projects.index') }}"
-                    class="hover:text-gray-900"
+                    class="ldx-breadcrumb-link"
                 >
                     Projects
                 </a>
 
-                <span>/</span>
+                <span class="ldx-breadcrumb-separator">/</span>
 
-                <span>View</span>
+                <span class="ldx-breadcrumb-current">
+                    View
+                </span>
 
             </div>
 
-            <h1 class="mt-2 text-2xl font-bold text-gray-900">
+            <h1 class="ldx-page-title">
                 {{ $project->title }}
             </h1>
 
@@ -37,7 +40,7 @@
 
         <a
             href="{{ route('admin.projects.edit', $project) }}"
-            class="rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-gray-800"
+            class="ldx-button ldx-button-primary"
         >
             Edit Project
         </a>
@@ -46,98 +49,117 @@
 
 
     {{-- Information --}}
-    <div class="rounded-xl bg-white p-6 shadow-sm">
+    <div class="ldx-card">
 
-        <div class="grid gap-6 md:grid-cols-2">
+        <div class="ldx-card-header">
 
-            <div>
+            <h2 class="ldx-card-title">
+                Project Information
+            </h2>
 
-                <p class="text-xs font-medium uppercase text-gray-400">
-                    Category
-                </p>
-
-                <p class="mt-1 text-sm font-semibold text-gray-900">
-                    {{ $project->category?->name ?? '-' }}
-                </p>
-
-            </div>
+        </div>
 
 
-            <div>
+        <div class="ldx-card-body">
 
-                <p class="text-xs font-medium uppercase text-gray-400">
-                    Status
-                </p>
+            <div class="ldx-info-grid">
 
-                <div class="mt-1">
+                {{-- Category --}}
+                <div class="ldx-info-item">
 
-                    @if($project->is_active)
+                    <p class="ldx-info-label">
+                        Category
+                    </p>
 
-                        <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
-                            Active
-                        </span>
-
-                    @else
-
-                        <span class="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600">
-                            Hidden
-                        </span>
-
-                    @endif
+                    <p class="ldx-info-value">
+                        {{ $project->category?->name ?? '-' }}
+                    </p>
 
                 </div>
 
-            </div>
+
+                {{-- Status --}}
+                <div class="ldx-info-item">
+
+                    <p class="ldx-info-label">
+                        Status
+                    </p>
+
+                    <div>
+
+                        @if($project->is_active)
+
+                            <span class="ldx-badge ldx-badge-success">
+                                Active
+                            </span>
+
+                        @else
+
+                            <span class="ldx-badge ldx-badge-muted">
+                                Hidden
+                            </span>
+
+                        @endif
+
+                    </div>
+
+                </div>
 
 
-            <div>
+                {{-- Client --}}
+                <div class="ldx-info-item">
 
-                <p class="text-xs font-medium uppercase text-gray-400">
-                    Client
-                </p>
+                    <p class="ldx-info-label">
+                        Client
+                    </p>
 
-                <p class="mt-1 text-sm text-gray-700">
-                    {{ $project->client ?: '-' }}
-                </p>
+                    <p class="ldx-info-value">
+                        {{ $project->client ?: '-' }}
+                    </p>
 
-            </div>
-
-
-            <div>
-
-                <p class="text-xs font-medium uppercase text-gray-400">
-                    Location
-                </p>
-
-                <p class="mt-1 text-sm text-gray-700">
-                    {{ $project->location ?: '-' }}
-                </p>
-
-            </div>
+                </div>
 
 
-            <div>
+                {{-- Location --}}
+                <div class="ldx-info-item">
 
-                <p class="text-xs font-medium uppercase text-gray-400">
-                    Project Date
-                </p>
+                    <p class="ldx-info-label">
+                        Location
+                    </p>
 
-                <p class="mt-1 text-sm text-gray-700">
-                    {{ $project->project_date?->format('d/m/Y') ?? '-' }}
-                </p>
+                    <p class="ldx-info-value">
+                        {{ $project->location ?: '-' }}
+                    </p>
 
-            </div>
+                </div>
 
 
-            <div>
+                {{-- Project Date --}}
+                <div class="ldx-info-item">
 
-                <p class="text-xs font-medium uppercase text-gray-400">
-                    Slug
-                </p>
+                    <p class="ldx-info-label">
+                        Project Date
+                    </p>
 
-                <p class="mt-1 text-sm text-gray-700">
-                    {{ $project->slug }}
-                </p>
+                    <p class="ldx-info-value">
+                        {{ $project->project_date?->format('d/m/Y') ?? '-' }}
+                    </p>
+
+                </div>
+
+
+                {{-- Slug --}}
+                <div class="ldx-info-item">
+
+                    <p class="ldx-info-label">
+                        Slug
+                    </p>
+
+                    <p class="ldx-info-value">
+                        {{ $project->slug }}
+                    </p>
+
+                </div>
 
             </div>
 
@@ -149,15 +171,23 @@
     {{-- Short Description --}}
     @if($project->short_description)
 
-        <div class="rounded-xl bg-white p-6 shadow-sm">
+        <div class="ldx-card">
 
-            <h2 class="text-lg font-semibold text-gray-900">
-                Short Description
-            </h2>
+            <div class="ldx-card-header">
 
-            <p class="mt-4 whitespace-pre-line text-sm leading-7 text-gray-600">
-                {{ $project->short_description }}
-            </p>
+                <h2 class="ldx-card-title">
+                    Short Description
+                </h2>
+
+            </div>
+
+            <div class="ldx-card-body">
+
+                <div class="ldx-content-text">
+                    {{ $project->short_description }}
+                </div>
+
+            </div>
 
         </div>
 
@@ -167,14 +197,22 @@
     {{-- Content --}}
     @if($project->content)
 
-        <div class="rounded-xl bg-white p-6 shadow-sm">
+        <div class="ldx-card">
 
-            <h2 class="text-lg font-semibold text-gray-900">
-                Project Details
-            </h2>
+            <div class="ldx-card-header">
 
-            <div class="mt-4 whitespace-pre-line text-sm leading-7 text-gray-600">
-                {{ $project->content }}
+                <h2 class="ldx-card-title">
+                    Project Details
+                </h2>
+
+            </div>
+
+            <div class="ldx-card-body">
+
+                <div class="ldx-content-long">
+                    {{ $project->content }}
+                </div>
+
             </div>
 
         </div>
@@ -183,69 +221,83 @@
 
 
     {{-- Images --}}
-    <div class="rounded-xl bg-white p-6 shadow-sm">
+    <div class="ldx-card">
 
-        <h2 class="text-lg font-semibold text-gray-900">
-            Project Images
-        </h2>
+        <div class="ldx-card-header">
 
-        <p class="mt-1 text-sm text-gray-500">
-            {{ $project->images->count() }} Images
-        </p>
+            <h2 class="ldx-card-title">
+                Project Images
+            </h2>
+
+            <p class="ldx-card-description">
+                {{ $project->images->count() }} Images
+            </p>
+
+        </div>
 
 
-        @if($project->images->count())
+        <div class="ldx-card-body">
 
-            <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            @if($project->images->count())
 
-                @foreach($project->images as $image)
+                <div class="ldx-project-image-grid">
 
-                    <div class="overflow-hidden rounded-xl border border-gray-200">
+                    @foreach($project->images as $image)
 
-                        <img
-                            src="{{ Storage::url($image->path) }}"
-                            alt="{{ $image->alt ?: $project->title }}"
-                            class="h-56 w-full object-cover"
-                        >
+                        <div class="ldx-project-image-card">
 
-                        @if($image->alt)
+                            <div class="ldx-project-image-preview">
 
-                            <div class="p-3">
-
-                                <p class="text-xs text-gray-500">
-                                    {{ $image->alt }}
-                                </p>
+                                <img
+                                    src="{{ Storage::url($image->path) }}"
+                                    alt="{{ $image->alt ?: $project->title }}"
+                                    class="ldx-project-image"
+                                >
 
                             </div>
 
-                        @endif
 
-                    </div>
+                            @if($image->alt)
 
-                @endforeach
+                                <div class="ldx-project-image-info">
 
-            </div>
+                                    <p class="ldx-project-image-alt">
+                                        {{ $image->alt }}
+                                    </p>
 
-        @else
+                                </div>
 
-            <div class="mt-5 rounded-lg border border-dashed border-gray-300 p-10 text-center">
+                            @endif
 
-                <p class="text-sm text-gray-500">
-                    ยังไม่มีรูปภาพ
-                </p>
+                        </div>
 
-            </div>
+                    @endforeach
 
-        @endif
+                </div>
+
+            @else
+
+                <div class="ldx-empty ldx-empty-small">
+
+                    <p class="ldx-empty-description">
+                        ยังไม่มีรูปภาพ
+                    </p>
+
+                </div>
+
+            @endif
+
+        </div>
 
     </div>
 
 
+    {{-- Back --}}
     <div>
 
         <a
             href="{{ route('admin.projects.index') }}"
-            class="text-sm font-medium text-gray-600 hover:text-gray-900"
+            class="ldx-page-back"
         >
             ← Back to Projects
         </a>
@@ -255,3 +307,4 @@
 </div>
 
 @endsection
+
