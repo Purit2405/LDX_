@@ -2,11 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 // ============================================================
 // PUBLIC CONTROLLERS
 // ============================================================
 
-use App\Http\Controllers\QuoteRequestController;
+use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\AboutController;
+use App\Http\Controllers\Public\ServiceController as PublicServiceController;
+use App\Http\Controllers\Public\ProjectController as PublicProjectController;
+use App\Http\Controllers\Public\NewsController as PublicNewsController;
+use App\Http\Controllers\Public\ContactController;
+use App\Http\Controllers\Public\QuoteRequestController;
+
 
 // ============================================================
 // ADMIN CONTROLLERS
@@ -32,31 +40,73 @@ use App\Http\Controllers\Admin\AboutTimelineController;
 
 use App\Http\Controllers\Admin\QuoteRequestController as AdminQuoteRequestController;
 
-use App\Http\Controllers\Public\HomeController;
-
 
 // ============================================================
 // PUBLIC ROUTES
 // ============================================================
-
 
 Route::get('/', [HomeController::class, 'index'])
     ->name('home');
 
 
 // ============================================================
-// PUBLIC - QUOTE REQUEST
+// ABOUT
 // ============================================================
 
-Route::get('/quote', [
-    QuoteRequestController::class,
-    'create'
-])->name('quote.create');
+Route::get('/about', [AboutController::class, 'index'])
+    ->name('public.about');
 
-Route::post('/quote', [
-    QuoteRequestController::class,
-    'store'
-])->name('quote.store');
+
+// ============================================================
+// SERVICES
+// ============================================================
+
+Route::get('/services', [PublicServiceController::class, 'index'])
+    ->name('public.services');
+
+Route::get('/services/{slug}', [PublicServiceController::class, 'show'])
+    ->name('public.services.show');
+
+
+// ============================================================
+// PROJECTS
+// ============================================================
+
+Route::get('/projects', [PublicProjectController::class, 'index'])
+    ->name('public.projects');
+
+Route::get('/projects/{slug}', [PublicProjectController::class, 'show'])
+    ->name('public.projects.show');
+
+
+// ============================================================
+// NEWS
+// ============================================================
+
+Route::get('/news', [PublicNewsController::class, 'index'])
+    ->name('public.news');
+
+Route::get('/news/{slug}', [PublicNewsController::class, 'show'])
+    ->name('public.news.show');
+
+
+// ============================================================
+// CONTACT
+// ============================================================
+
+Route::get('/contact', [ContactController::class, 'index'])
+    ->name('public.contact');
+
+
+// ============================================================
+// QUOTATION
+// ============================================================
+
+Route::get('/quote', [QuoteRequestController::class, 'create'])
+    ->name('public.quote');
+
+Route::post('/quote', [QuoteRequestController::class, 'store'])
+    ->name('public.quote.store');
 
 
 // ============================================================
@@ -117,13 +167,11 @@ Route::middleware('auth')
         // SEO
         // ========================================================
 
-        // SEO Settings
         Route::get('/seo', [
             SeoController::class,
             'index'
         ])->name('seo.index');
 
-        // Save SEO Settings
         Route::put('/seo', [
             SeoController::class,
             'update'
@@ -134,39 +182,20 @@ Route::middleware('auth')
         // QUOTE REQUESTS
         // ========================================================
 
-        // --------------------------------------------------------
-        // รายการคำขอใบเสนอราคา
-        // --------------------------------------------------------
-
         Route::get(
             '/quote-requests',
             [AdminQuoteRequestController::class, 'index']
         )->name('quote-requests.index');
-
-
-        // --------------------------------------------------------
-        // รายละเอียดคำขอ
-        // --------------------------------------------------------
 
         Route::get(
             '/quote-requests/{quoteRequest}',
             [AdminQuoteRequestController::class, 'show']
         )->name('quote-requests.show');
 
-
-        // --------------------------------------------------------
-        // เปลี่ยนสถานะ
-        // --------------------------------------------------------
-
         Route::patch(
             '/quote-requests/{quoteRequest}/status',
             [AdminQuoteRequestController::class, 'updateStatus']
         )->name('quote-requests.status');
-
-
-        // --------------------------------------------------------
-        // ลบคำขอ
-        // --------------------------------------------------------
 
         Route::delete(
             '/quote-requests/{quoteRequest}',
@@ -178,10 +207,6 @@ Route::middleware('auth')
         // SERVICES
         // ========================================================
 
-        // --------------------------------------------------------
-        // Service Categories
-        // --------------------------------------------------------
-
         Route::resource(
             'service-categories',
             ServiceCategoryController::class
@@ -189,30 +214,15 @@ Route::middleware('auth')
             'show',
         ]);
 
-
-        // --------------------------------------------------------
-        // Services
-        // --------------------------------------------------------
-
         Route::resource(
             'services',
             ServiceController::class
         );
 
-
-        // --------------------------------------------------------
-        // Toggle Service
-        // --------------------------------------------------------
-
         Route::patch(
             '/services/{service}/toggle',
             [ServiceController::class, 'toggle']
         )->name('services.toggle');
-
-
-        // --------------------------------------------------------
-        // Delete Service Image
-        // --------------------------------------------------------
 
         Route::delete(
             '/service-images/{serviceImage}',
@@ -224,10 +234,6 @@ Route::middleware('auth')
         // PROJECTS
         // ========================================================
 
-        // --------------------------------------------------------
-        // Project Categories
-        // --------------------------------------------------------
-
         Route::resource(
             'project-categories',
             ProjectCategoryController::class
@@ -235,30 +241,15 @@ Route::middleware('auth')
             'show',
         ]);
 
-
-        // --------------------------------------------------------
-        // Projects
-        // --------------------------------------------------------
-
         Route::resource(
             'projects',
             ProjectController::class
         );
 
-
-        // --------------------------------------------------------
-        // Toggle Project
-        // --------------------------------------------------------
-
         Route::patch(
             '/projects/{project}/toggle',
             [ProjectController::class, 'toggle']
         )->name('projects.toggle');
-
-
-        // --------------------------------------------------------
-        // Delete Project Image
-        // --------------------------------------------------------
 
         Route::delete(
             '/project-images/{projectImage}',
@@ -270,10 +261,6 @@ Route::middleware('auth')
         // NEWS
         // ========================================================
 
-        // --------------------------------------------------------
-        // News Categories
-        // --------------------------------------------------------
-
         Route::resource(
             'news-categories',
             NewsCategoryController::class
@@ -281,20 +268,10 @@ Route::middleware('auth')
             'show',
         ]);
 
-
-        // --------------------------------------------------------
-        // Toggle News Category
-        // --------------------------------------------------------
-
         Route::patch(
             '/news-categories/{news_category}/toggle',
             [NewsCategoryController::class, 'toggle']
         )->name('news-categories.toggle');
-
-
-        // --------------------------------------------------------
-        // News
-        // --------------------------------------------------------
 
         Route::resource(
             'news',
@@ -303,20 +280,10 @@ Route::middleware('auth')
             'show',
         ]);
 
-
-        // --------------------------------------------------------
-        // Toggle News
-        // --------------------------------------------------------
-
         Route::patch(
             '/news/{news}/toggle',
             [NewsController::class, 'toggle']
         )->name('news.toggle');
-
-
-        // --------------------------------------------------------
-        // Delete News Image
-        // --------------------------------------------------------
 
         Route::delete(
             '/news-images/{newsImage}',
@@ -342,7 +309,6 @@ Route::middleware('auth')
                     [AboutUsController::class, 'index']
                 )->name('index');
 
-
                 Route::put(
                     '/',
                     [AboutUsController::class, 'update']
@@ -358,36 +324,30 @@ Route::middleware('auth')
                     [AboutTimelineController::class, 'index']
                 )->name('timeline.index');
 
-
                 Route::get(
                     '/timeline/create',
                     [AboutTimelineController::class, 'create']
                 )->name('timeline.create');
-
 
                 Route::post(
                     '/timeline',
                     [AboutTimelineController::class, 'store']
                 )->name('timeline.store');
 
-
                 Route::get(
                     '/timeline/{about_timeline}/edit',
                     [AboutTimelineController::class, 'edit']
                 )->name('timeline.edit');
-
 
                 Route::put(
                     '/timeline/{about_timeline}',
                     [AboutTimelineController::class, 'update']
                 )->name('timeline.update');
 
-
                 Route::delete(
                     '/timeline/{about_timeline}',
                     [AboutTimelineController::class, 'destroy']
                 )->name('timeline.destroy');
-
 
                 Route::patch(
                     '/timeline/{about_timeline}/toggle',
@@ -404,36 +364,30 @@ Route::middleware('auth')
                     [CertificateController::class, 'index']
                 )->name('certificates.index');
 
-
                 Route::get(
                     '/certificates/create',
                     [CertificateController::class, 'create']
                 )->name('certificates.create');
-
 
                 Route::post(
                     '/certificates',
                     [CertificateController::class, 'store']
                 )->name('certificates.store');
 
-
                 Route::get(
                     '/certificates/{certificate}/edit',
                     [CertificateController::class, 'edit']
                 )->name('certificates.edit');
-
 
                 Route::put(
                     '/certificates/{certificate}',
                     [CertificateController::class, 'update']
                 )->name('certificates.update');
 
-
                 Route::delete(
                     '/certificates/{certificate}',
                     [CertificateController::class, 'destroy']
                 )->name('certificates.destroy');
-
 
                 Route::patch(
                     '/certificates/{certificate}/toggle',
@@ -450,36 +404,30 @@ Route::middleware('auth')
                     [ClientController::class, 'index']
                 )->name('clients.index');
 
-
                 Route::get(
                     '/clients/create',
                     [ClientController::class, 'create']
                 )->name('clients.create');
-
 
                 Route::post(
                     '/clients',
                     [ClientController::class, 'store']
                 )->name('clients.store');
 
-
                 Route::get(
                     '/clients/{client}/edit',
                     [ClientController::class, 'edit']
                 )->name('clients.edit');
-
 
                 Route::put(
                     '/clients/{client}',
                     [ClientController::class, 'update']
                 )->name('clients.update');
 
-
                 Route::delete(
                     '/clients/{client}',
                     [ClientController::class, 'destroy']
                 )->name('clients.destroy');
-
 
                 Route::patch(
                     '/clients/{client}/toggle',

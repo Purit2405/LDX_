@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Public;
 
+use App\Http\Controllers\Controller;
 use App\Models\QuoteRequest;
 use Illuminate\Http\Request;
 
 class QuoteRequestController extends Controller
 {
     /**
-     * แสดงแบบฟอร์มขอใบเสนอราคา
+     * แสดงหน้า Contact + ขอใบเสนอราคา
      */
     public function create()
     {
-        return view('quote.create');
+        return view('public.quote');
     }
 
     /**
@@ -73,9 +74,13 @@ class QuoteRequestController extends Controller
                 'phone.required' => 'กรุณากรอกเบอร์โทรศัพท์',
 
                 'floor_count.integer' => 'จำนวนชั้นต้องเป็นตัวเลข',
+
                 'floor_count.min' => 'จำนวนชั้นต้องมากกว่า 0',
 
+                'floor_count.max' => 'จำนวนชั้นต้องไม่เกิน 200 ชั้น',
+
                 'details.required' => 'กรุณาระบุรายละเอียดเพิ่มเติม',
+
                 'details.max' => 'รายละเอียดเพิ่มเติมยาวเกินไป',
             ]
         );
@@ -92,7 +97,7 @@ class QuoteRequestController extends Controller
         ]);
 
         return redirect()
-            ->route('quote.create')
+            ->route('public.contact')
             ->with(
                 'success',
                 'ส่งคำขอใบเสนอราคาสำเร็จ ทางบริษัทจะติดต่อกลับโดยเร็วที่สุด'
