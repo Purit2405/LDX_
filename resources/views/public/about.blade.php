@@ -1,6 +1,6 @@
 @extends('layouts.public.app')
 
-@section('title', 'About Us | LDX Elevator')
+@section('title', 'เกี่ยวกับเรา | LDX Elevator')
 
 @section('content')
 
@@ -18,13 +18,13 @@
         <div class="ldx-about-hero-content">
 
             <span class="ldx-section-eyebrow">
-                ABOUT LDX ELEVATOR
+                เกี่ยวกับ LDX ELEVATOR
             </span>
 
             <h1 class="ldx-about-hero-title">
-                Moving People.
+                ขับเคลื่อนผู้คน
                 <br>
-                <span>Moving Business Forward.</span>
+                <span>ขับเคลื่อนธุรกิจให้ก้าวไกล</span>
             </h1>
 
             <p class="ldx-about-hero-description">
@@ -41,7 +41,7 @@
 
 
 {{-- =========================================================
-    COMPANY INTRODUCTION
+    ข้อมูลบริษัท
 ========================================================= --}}
 
 <section class="ldx-about-intro">
@@ -53,7 +53,7 @@
             <div class="ldx-about-intro-label">
 
                 <span class="ldx-section-eyebrow">
-                    WHO WE ARE
+                    เราเป็นใคร
                 </span>
 
                 <span class="ldx-about-intro-number">
@@ -66,8 +66,8 @@
             <div class="ldx-about-intro-content">
 
                 <h2 class="ldx-about-section-title">
-                    Building Better Vertical
-                    <span>Mobility.</span>
+                    การเดินทางแนวดิ่ง
+                    <span>ที่ดีกว่า</span>
                 </h2>
 
                 <p>
@@ -113,7 +113,7 @@
                 <strong>10+</strong>
 
                 <span>
-                    Years of Experience
+                    ปีแห่งประสบการณ์
                 </span>
 
             </div>
@@ -124,7 +124,7 @@
                 <strong>100+</strong>
 
                 <span>
-                    Completed Projects
+                    โครงการที่แล้วเสร็จ
                 </span>
 
             </div>
@@ -135,7 +135,7 @@
                 <strong>{{ $clients->count() }}+</strong>
 
                 <span>
-                    Trusted Clients
+                    ลูกค้าที่ไว้วางใจ
                 </span>
 
             </div>
@@ -146,7 +146,9 @@
                 <strong>24/7</strong>
 
                 <span>
-                    Service Support
+                    บริการและ
+                    <br>
+                    การดูแล
                 </span>
 
             </div>
@@ -159,7 +161,7 @@
 
 
 {{-- =========================================================
-    VISION & MISSION
+    วิสัยทัศน์และพันธกิจ
 ========================================================= --}}
 
 <section class="ldx-about-vision">
@@ -169,12 +171,12 @@
         <div class="ldx-about-vision-header">
 
             <span class="ldx-section-eyebrow">
-                OUR DIRECTION
+                ทิศทางของเรา
             </span>
 
             <h2 class="ldx-about-section-title">
-                Driven by
-                <span>Purpose.</span>
+                ขับเคลื่อนด้วย
+                <span>เป้าหมาย</span>
             </h2>
 
         </div>
@@ -189,7 +191,7 @@
                 </span>
 
                 <h3>
-                    Vision
+                    วิสัยทัศน์
                 </h3>
 
                 <p>
@@ -208,7 +210,7 @@
                 </span>
 
                 <h3>
-                    Mission
+                    พันธกิจ
                 </h3>
 
                 <p>
@@ -227,7 +229,7 @@
 
 
 {{-- =========================================================
-    CORE VALUES
+    ค่านิยมหลัก
 ========================================================= --}}
 
 <section class="ldx-about-values">
@@ -239,12 +241,12 @@
             <div>
 
                 <span class="ldx-section-eyebrow">
-                    CORE VALUES
+                    ค่านิยมหลัก
                 </span>
 
                 <h2 class="ldx-about-section-title">
-                    What We
-                    <span>Stand For.</span>
+                    สิ่งที่เรา
+                    <span>ยึดถือ</span>
                 </h2>
 
             </div>
@@ -265,7 +267,7 @@
                 </div>
 
                 <h3>
-                    Quality
+                    คุณภาพ
                 </h3>
 
                 <p>
@@ -287,7 +289,7 @@
                 </div>
 
                 <h3>
-                    Safety
+                    ความปลอดภัย
                 </h3>
 
                 <p>
@@ -309,7 +311,7 @@
                 </div>
 
                 <h3>
-                    Innovation
+                    นวัตกรรม
                 </h3>
 
                 <p>
@@ -331,7 +333,7 @@
                 </div>
 
                 <h3>
-                    Customer Focus
+                    ใส่ใจลูกค้า
                 </h3>
 
                 <p>
@@ -361,12 +363,12 @@
         <div class="ldx-about-timeline-header">
 
             <span class="ldx-section-eyebrow">
-                OUR JOURNEY
+                เส้นทางของเรา
             </span>
 
             <h2 class="ldx-about-section-title">
-                Company
-                <span>Timeline.</span>
+                เส้นทาง
+                <span>ของบริษัท</span>
             </h2>
 
             <p>
@@ -397,9 +399,11 @@
                         </h3>
 
                         @if($timeline->description)
+
                             <p>
                                 {{ $timeline->description }}
                             </p>
+
                         @endif
 
                     </div>
@@ -430,12 +434,12 @@
         <div class="ldx-about-clients-header">
 
             <span class="ldx-section-eyebrow">
-                TRUSTED BY
+                ลูกค้าที่ไว้วางใจ
             </span>
 
             <h2 class="ldx-about-section-title">
-                Our
-                <span>Clients.</span>
+                ลูกค้า
+                <span>ของเรา</span>
             </h2>
 
             <p>
@@ -493,7 +497,7 @@
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Visit Website →
+                                เยี่ยมชมเว็บไซต์ →
                             </a>
 
                         @endif
@@ -514,7 +518,7 @@
 
 
 {{-- =========================================================
-    CERTIFICATES
+    ใบรับรองมาตรฐาน
 ========================================================= --}}
 
 @if($certificates->count())
@@ -528,12 +532,12 @@
             <div class="ldx-about-certificates-intro">
 
                 <span class="ldx-section-eyebrow">
-                    QUALITY & STANDARDS
+                    คุณภาพและมาตรฐาน
                 </span>
 
                 <h2 class="ldx-about-section-title">
-                    Certified for
-                    <span>Confidence.</span>
+                    รับรองมาตรฐาน
+                    <span>เพื่อความมั่นใจ</span>
                 </h2>
 
                 <p>
@@ -582,7 +586,7 @@
                             @if($certificate->issuer)
 
                                 <small>
-                                    Issued by {{ $certificate->issuer }}
+                                    ออกโดย {{ $certificate->issuer }}
                                 </small>
 
                             @endif
@@ -590,7 +594,7 @@
                             @if($certificate->issued_date)
 
                                 <small>
-                                    Issued
+                                    ออกเมื่อ
                                     {{ \Carbon\Carbon::parse($certificate->issued_date)->format('F Y') }}
                                 </small>
 
@@ -626,12 +630,12 @@
             <div>
 
                 <span class="ldx-section-eyebrow">
-                    LET'S WORK TOGETHER
+                    ร่วมงานกับเรา
                 </span>
 
                 <h2>
-                    Looking for the right
-                    <span>elevator solution?</span>
+                    กำลังมองหา
+                    <span>โซลูชันระบบลิฟต์ที่เหมาะสม?</span>
                 </h2>
 
                 <p>
@@ -648,14 +652,14 @@
                     href="{{ url('/contact') }}"
                     class="ldx-public-button ldx-public-button-primary"
                 >
-                    Contact Us
+                    ติดต่อเรา
                 </a>
 
                 <a
                     href="{{ url('/services') }}"
                     class="ldx-public-button ldx-public-button-outline"
                 >
-                    Explore Services
+                    ดูบริการ
                 </a>
 
             </div>

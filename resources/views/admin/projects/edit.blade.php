@@ -1,15 +1,18 @@
 
 @extends('layouts.admin.app')
 
-@section('title', 'Edit Project')
+@section('title', 'แก้ไขโครงการ')
 
-@section('page-title', 'Edit Project')
+@section('page-title', 'แก้ไขโครงการ')
 
 @section('content')
 
 <div class="ldx-page ldx-page-wide">
 
-    {{-- Header --}}
+    {{-- =========================================================
+        HEADER
+    ========================================================== --}}
+
     <div class="ldx-page-header ldx-page-header-actions">
 
         <div>
@@ -20,22 +23,27 @@
                     href="{{ route('admin.projects.index') }}"
                     class="ldx-breadcrumb-link"
                 >
-                    Projects
+                    โครงการ
                 </a>
 
-                <span class="ldx-breadcrumb-separator">/</span>
+                <span class="ldx-breadcrumb-separator">
+                    /
+                </span>
 
                 <span class="ldx-breadcrumb-current">
-                    Edit Project
+                    แก้ไขโครงการ
                 </span>
 
             </div>
 
             <h1 class="ldx-page-title">
-                Edit Project:
+
+                แก้ไขโครงการ:
+
                 <span class="ldx-page-title-accent">
                     {{ $project->title }}
                 </span>
+
             </h1>
 
             <p class="ldx-page-description">
@@ -51,7 +59,7 @@
                 href="{{ route('admin.projects.index') }}"
                 class="ldx-button ldx-button-secondary"
             >
-                Back to List
+                กลับไปหน้ารายการ
             </a>
 
         </div>
@@ -59,7 +67,10 @@
     </div>
 
 
-    {{-- Success --}}
+    {{-- =========================================================
+        SUCCESS MESSAGE
+    ========================================================== --}}
+
     @if(session('success'))
 
         <div class="ldx-alert ldx-alert-success">
@@ -73,7 +84,10 @@
     @endif
 
 
-    {{-- Error --}}
+    {{-- =========================================================
+        ERROR MESSAGE
+    ========================================================== --}}
+
     @if(session('error'))
 
         <div class="ldx-alert ldx-alert-danger">
@@ -87,7 +101,10 @@
     @endif
 
 
-    {{-- Validation Errors --}}
+    {{-- =========================================================
+        VALIDATION ERRORS
+    ========================================================== --}}
+
     @if($errors->any())
 
         <div class="ldx-alert ldx-alert-danger">
@@ -113,36 +130,55 @@
     @endif
 
 
-    {{-- Update Form --}}
+    {{-- =========================================================
+        EDIT PROJECT FORM
+    ========================================================== --}}
+
     <form
         method="POST"
-        action="{{ route('admin.projects.update', $project) }}"
+        action="{{ route('admin.projects.update', $project->id) }}"
         enctype="multipart/form-data"
         class="ldx-form"
     >
 
         @csrf
+
         @method('PUT')
 
 
         <div class="ldx-project-edit-layout">
 
-            {{-- Left Column --}}
+
+            {{-- =================================================
+                LEFT COLUMN
+            ================================================== --}}
+
             <div class="ldx-project-main">
 
-                {{-- Project Details --}}
+
+                {{-- =================================================
+                    PROJECT DETAILS
+                ================================================== --}}
+
                 <div class="ldx-card">
 
                     <div class="ldx-card-header">
 
                         <h2 class="ldx-card-title">
-                            Project Details
+                            รายละเอียดโครงการ
                         </h2>
+
+                        <p class="ldx-card-description">
+                            ข้อมูลรายละเอียดของโครงการ
+                        </p>
 
                     </div>
 
 
                     <div class="ldx-card-body">
+
+
+                        {{-- Project Name --}}
 
                         <div class="ldx-form-group">
 
@@ -150,18 +186,18 @@
                                 for="title"
                                 class="ldx-label"
                             >
-                                Project Name
-                                <span class="ldx-required">*</span>
+                                ชื่อโครงการ
+
+                                <span class="ldx-required">
+                                    *
+                                </span>
                             </label>
 
                             <input
                                 id="title"
                                 type="text"
                                 name="title"
-                                value="{{ old(
-                                    'title',
-                                    $project->title
-                                ) }}"
+                                value="{{ old('title', $project->title) }}"
                                 required
                                 class="ldx-input"
                                 placeholder="ระบุชื่อโครงการ..."
@@ -178,6 +214,8 @@
                         </div>
 
 
+                        {{-- Slug --}}
+
                         <div class="ldx-form-group">
 
                             <label
@@ -191,16 +229,14 @@
                                 id="slug"
                                 type="text"
                                 name="slug"
-                                value="{{ old(
-                                    'slug',
-                                    $project->slug
-                                ) }}"
+                                value="{{ old('slug', $project->slug) }}"
                                 class="ldx-input"
                                 placeholder="project-url-slug"
                             >
 
                             <p class="ldx-help">
-                                หากเว้นว่าง ระบบจะสร้าง URL ให้อัตโนมัติจากชื่อโปรเจกต์
+                                หากเว้นว่าง ระบบจะสร้าง URL
+                                อัตโนมัติจากชื่อโครงการ
                             </p>
 
                             @error('slug')
@@ -214,26 +250,29 @@
                         </div>
 
 
+                        {{-- Short Description --}}
+
                         <div class="ldx-form-group">
 
                             <label
                                 for="short_description"
                                 class="ldx-label"
                             >
-                                Short Description
+                                คำอธิบายโดยย่อ
                             </label>
 
                             <textarea
                                 id="short_description"
                                 name="short_description"
-                                rows="3"
+                                rows="4"
                                 maxlength="500"
                                 class="ldx-textarea"
-                                placeholder="สรุปเนื้อหาย่อสั้นๆ (สูงสุด 500 ตัวอักษร)..."
-                            >{{ old(
-                                'short_description',
-                                $project->short_description
-                            ) }}</textarea>
+                                placeholder="สรุปเนื้อหาโครงการโดยย่อ..."
+                            >{{ old('short_description', $project->short_description) }}</textarea>
+
+                            <p class="ldx-help">
+                                สูงสุด 500 ตัวอักษร
+                            </p>
 
                             @error('short_description')
 
@@ -246,25 +285,24 @@
                         </div>
 
 
+                        {{-- Detailed Content --}}
+
                         <div class="ldx-form-group">
 
                             <label
                                 for="content"
                                 class="ldx-label"
                             >
-                                Detailed Content
+                                รายละเอียดโครงการ
                             </label>
 
                             <textarea
                                 id="content"
                                 name="content"
-                                rows="10"
+                                rows="12"
                                 class="ldx-textarea ldx-textarea-large"
-                                placeholder="รายละเอียดแบบเต็มของโครงการ..."
-                            >{{ old(
-                                'content',
-                                $project->content
-                            ) }}</textarea>
+                                placeholder="ระบุรายละเอียดแบบเต็มของโครงการ..."
+                            >{{ old('content', $project->content) }}</textarea>
 
                             @error('content')
 
@@ -276,6 +314,7 @@
 
                         </div>
 
+
                     </div>
 
                 </div>
@@ -283,21 +322,36 @@
             </div>
 
 
-            {{-- Right Column --}}
+            {{-- =================================================
+                RIGHT COLUMN
+            ================================================== --}}
+
             <div class="ldx-project-sidebar">
+
+
+                {{-- =================================================
+                    PROJECT SETTINGS
+                ================================================== --}}
 
                 <div class="ldx-card">
 
                     <div class="ldx-card-header">
 
                         <h2 class="ldx-card-title">
-                            Project Settings
+                            ตั้งค่าโครงการ
                         </h2>
+
+                        <p class="ldx-card-description">
+                            ตั้งค่าพื้นฐานของโครงการ
+                        </p>
 
                     </div>
 
 
                     <div class="ldx-card-body">
+
+
+                        {{-- Category --}}
 
                         <div class="ldx-form-group">
 
@@ -305,8 +359,11 @@
                                 for="category_id"
                                 class="ldx-label"
                             >
-                                Category
-                                <span class="ldx-required">*</span>
+                                หมวดหมู่
+
+                                <span class="ldx-required">
+                                    *
+                                </span>
                             </label>
 
                             <select
@@ -315,6 +372,10 @@
                                 required
                                 class="ldx-select"
                             >
+
+                                <option value="">
+                                    เลือกหมวดหมู่
+                                </option>
 
                                 @foreach($categories as $category)
 
@@ -345,14 +406,25 @@
                         </div>
 
 
+                        {{-- Status --}}
+
                         <div class="ldx-form-group">
 
                             <label
                                 for="is_active"
                                 class="ldx-label"
                             >
-                                Status
+                                สถานะ
                             </label>
+
+                            @php
+
+                                $currentStatus = (string) old(
+                                    'is_active',
+                                    $project->is_active ? '1' : '0'
+                                );
+
+                            @endphp
 
                             <select
                                 id="is_active"
@@ -362,30 +434,16 @@
 
                                 <option
                                     value="1"
-                                    @selected(
-                                        old(
-                                            'is_active',
-                                            $project->is_active
-                                                ? '1'
-                                                : '0'
-                                        ) === '1'
-                                    )
+                                    @selected($currentStatus === '1')
                                 >
-                                    Active — แสดงบนเว็บ
+                                    Active — แสดงบนเว็บไซต์
                                 </option>
 
                                 <option
                                     value="0"
-                                    @selected(
-                                        old(
-                                            'is_active',
-                                            $project->is_active
-                                                ? '1'
-                                                : '0'
-                                        ) === '0'
-                                    )
+                                    @selected($currentStatus === '0')
                                 >
-                                    Hidden — ซ่อนจากเว็บ
+                                    Hidden — ซ่อนจากเว็บไซต์
                                 </option>
 
                             </select>
@@ -401,13 +459,15 @@
                         </div>
 
 
+                        {{-- Project Date --}}
+
                         <div class="ldx-form-group">
 
                             <label
                                 for="project_date"
                                 class="ldx-label"
                             >
-                                Project Date
+                                วันที่ดำเนินโครงการ
                             </label>
 
                             <input
@@ -417,7 +477,9 @@
                                 value="{{ old(
                                     'project_date',
                                     $project->project_date
-                                        ? $project->project_date->format('Y-m-d')
+                                        ? \Illuminate\Support\Carbon::parse(
+                                            $project->project_date
+                                        )->format('Y-m-d')
                                         : ''
                                 ) }}"
                                 class="ldx-input"
@@ -434,13 +496,15 @@
                         </div>
 
 
+                        {{-- Client --}}
+
                         <div class="ldx-form-group">
 
                             <label
                                 for="client"
                                 class="ldx-label"
                             >
-                                Client
+                                ลูกค้า
                             </label>
 
                             <input
@@ -452,7 +516,7 @@
                                     $project->client
                                 ) }}"
                                 class="ldx-input"
-                                placeholder="ชื่อลูกค้าผู้ว่าจ้าง..."
+                                placeholder="ระบุชื่อลูกค้า..."
                             >
 
                             @error('client')
@@ -466,13 +530,15 @@
                         </div>
 
 
+                        {{-- Location --}}
+
                         <div class="ldx-form-group">
 
                             <label
                                 for="location"
                                 class="ldx-label"
                             >
-                                Location
+                                สถานที่
                             </label>
 
                             <input
@@ -484,7 +550,7 @@
                                     $project->location
                                 ) }}"
                                 class="ldx-input"
-                                placeholder="สถานที่ติดตั้ง..."
+                                placeholder="ระบุสถานที่โครงการ..."
                             >
 
                             @error('location')
@@ -497,29 +563,34 @@
 
                         </div>
 
+
                     </div>
 
                 </div>
 
 
-                {{-- Submit --}}
+                {{-- =================================================
+                    SAVE BUTTONS
+                ================================================== --}}
+
                 <div class="ldx-form-actions ldx-form-actions-stack">
 
                     <button
                         type="submit"
                         class="ldx-button ldx-button-primary ldx-button-full"
                     >
-                        Save Changes
+                        บันทึกการแก้ไข
                     </button>
 
                     <a
                         href="{{ route('admin.projects.index') }}"
                         class="ldx-button ldx-button-secondary ldx-button-full"
                     >
-                        Cancel
+                        ยกเลิก
                     </a>
 
                 </div>
+
 
             </div>
 
@@ -528,25 +599,39 @@
     </form>
 
 
-    {{-- Media Management --}}
+    {{-- =========================================================
+        MEDIA MANAGEMENT
+    ========================================================== --}}
+
     <div class="ldx-card ldx-project-media">
+
+
+        {{-- =====================================================
+            MEDIA HEADER
+        ====================================================== --}}
 
         <div class="ldx-card-header ldx-card-header-actions">
 
             <div>
 
                 <h2 class="ldx-card-title">
-                    Project Images Management
+                    จัดการรูปภาพโครงการ
                 </h2>
 
                 <p class="ldx-card-description">
-                    จัดการรูปภาพที่มีอยู่ หรืออัปโหลดภาพเพิ่มเติมเข้าสู่โปรเจกต์
+                    จัดการรูปภาพที่มีอยู่
+                    หรืออัปโหลดรูปภาพเพิ่มเติมเข้าสู่โครงการ
                 </p>
 
             </div>
 
+
             <span class="ldx-badge">
-                {{ $project->images->count() }} Images
+
+                {{ $project->images->count() }}
+
+                รูป
+
             </span>
 
         </div>
@@ -554,53 +639,85 @@
 
         <div class="ldx-card-body">
 
-            {{-- Current Gallery --}}
-            @if($project->images->count())
+
+            {{-- =================================================
+                CURRENT GALLERY
+            ================================================== --}}
+
+            @if($project->images->count() > 0)
+
 
                 <div class="ldx-project-image-grid">
 
+
                     @foreach($project->images as $image)
+
 
                         <div class="ldx-project-image-card">
 
+
+                            {{-- Image Preview --}}
+
                             <div class="ldx-project-image-preview">
 
-                                <img
-                                    src="{{ Storage::url($image->path) }}"
-                                    alt="{{ $image->alt ?: $project->title }}"
-                                    class="ldx-project-image"
-                                >
+                                @if($image->path)
+
+                                    <img
+                                        src="{{ asset('storage/' . $image->path) }}"
+                                        alt="{{ $image->alt ?: $project->title }}"
+                                        class="ldx-project-image"
+                                        loading="lazy"
+                                    >
+
+                                @else
+
+                                    <div class="ldx-empty">
+
+                                        <p class="ldx-empty-title">
+                                            ไม่มีไฟล์รูปภาพ
+                                        </p>
+
+                                    </div>
+
+                                @endif
 
                             </div>
 
+
+                            {{-- Image Information --}}
 
                             <div class="ldx-project-image-info">
 
                                 <p
                                     class="ldx-project-image-alt"
-                                    title="{{ $image->alt ?: 'No alt text' }}"
+                                    title="{{ $image->alt ?: 'ไม่มีคำอธิบายรูปภาพ' }}"
                                 >
-                                    {{ $image->alt ?: 'No alt text' }}
+                                    {{ $image->alt ?: 'ไม่มีคำอธิบายรูปภาพ' }}
                                 </p>
 
+
+                                {{-- Delete Image --}}
 
                                 <form
                                     method="POST"
                                     action="{{ route(
                                         'admin.project-images.destroy',
-                                        $image
+                                        $image->id
                                     ) }}"
-                                    onsubmit="return confirm('ยืนยันลบรูปภาพนี้? (ข้อมูล Project จะยังคงอยู่)')"
+                                    onsubmit="return confirm(
+                                        'ยืนยันลบรูปภาพนี้? ข้อมูลโครงการจะยังคงอยู่'
+                                    )"
                                 >
 
                                     @csrf
+
                                     @method('DELETE')
 
                                     <button
                                         type="submit"
                                         class="ldx-button ldx-button-danger ldx-button-sm ldx-button-full"
                                     >
-                                        Delete Image
+                                        ลบรูปภาพ
                                     </button>
 
                                 </form>
@@ -609,11 +726,17 @@
 
                         </div>
 
+
                     @endforeach
+
 
                 </div>
 
+
             @else
+
+
+                {{-- No Images --}}
 
                 <div class="ldx-empty">
 
@@ -621,30 +744,46 @@
                         ยังไม่มีรูปภาพประกอบในโครงการนี้
                     </p>
 
+                    <p class="ldx-empty-description">
+                        สามารถอัปโหลดรูปภาพได้จากด้านล่าง
+                    </p>
+
                 </div>
+
 
             @endif
 
 
-            {{-- Upload More --}}
+            {{-- =================================================
+                UPLOAD MORE IMAGES
+            ================================================== --}}
+
             <div class="ldx-project-upload">
 
                 <h3 class="ldx-project-upload-title">
-                    Upload More Images
+                    เพิ่มรูปภาพ
                 </h3>
+
+                <p class="ldx-help">
+                    เพิ่มรูปภาพใหม่เข้าสู่โครงการ
+                    โดยรูปภาพเดิมจะไม่ถูกลบ
+                </p>
+
+
+                {{-- Separate Upload Form --}}
 
                 <form
                     method="POST"
                     action="{{ route(
-                        'admin.projects.update',
-                        $project
+                        'admin.projects.images.upload',
+                        $project->id
                     ) }}"
                     enctype="multipart/form-data"
                     id="upload-more-form"
                 >
 
                     @csrf
-                    @method('PUT')
+
 
                     <div class="ldx-form-group">
 
@@ -652,37 +791,65 @@
                             type="file"
                             name="images[]"
                             multiple
-                            accept="image/jpeg,image/png,image/webp,image/avif"
+                            accept=".jpg,.jpeg,.png,.webp,.avif,image/jpeg,image/png,image/webp,image/avif"
                             class="ldx-file-input"
+                            required
                         >
 
                     </div>
 
+
                     <p class="ldx-help">
-                        รองรับไฟล์: JPG, PNG, WEBP หรือ AVIF
-                        (ขนาดไม่เกิน 5MB ต่อรูป สามารถเลือกหลายรูปพร้อมกันได้)
+                        รองรับ JPG, JPEG, PNG, WEBP และ AVIF
+                        ขนาดไม่เกิน 5MB ต่อรูป
+                        และสามารถเลือกหลายรูปพร้อมกันได้
+                        รวมทั้งหมดไม่เกิน 20 รูปต่อโครงการ
                     </p>
+
+
+                    @error('images')
+
+                        <p class="ldx-error">
+                            {{ $message }}
+                        </p>
+
+                    @enderror
+
+
+                    @error('images.*')
+
+                        <p class="ldx-error">
+                            {{ $message }}
+                        </p>
+
+                    @enderror
+
 
                     <button
                         type="submit"
                         class="ldx-button ldx-button-primary ldx-button-sm"
                     >
-                        Upload Images
+                        อัปโหลดรูปภาพ
                     </button>
 
                 </form>
 
             </div>
 
+
         </div>
 
     </div>
 
 
-    {{-- Danger Zone --}}
+    {{-- =========================================================
+        DANGER ZONE
+    ========================================================== --}}
+
     <div class="ldx-danger-zone">
 
         <div class="ldx-danger-content">
+
 
             <div>
 
@@ -691,37 +858,45 @@
                 </h2>
 
                 <p class="ldx-danger-description">
-                    การลบโครงการจะทำการลบข้อมูลทั้งหมดและลบไฟล์ภาพที่เกี่ยวข้องออกจากระบบอย่างถาวร
+                    การลบโครงการจะทำการลบข้อมูลทั้งหมด
+                    และลบไฟล์ภาพที่เกี่ยวข้องออกจากระบบอย่างถาวร
                     ไม่สามารถกู้คืนได้
                 </p>
 
             </div>
 
 
+            {{-- Delete Project --}}
+
             <form
                 method="POST"
                 action="{{ route(
                     'admin.projects.destroy',
-                    $project
+                    $project->id
                 ) }}"
-                onsubmit="return confirm('⚠️ ยืนยันลบ Project นี้อย่างถาวร? ข้อมูลและรูปภาพทั้งหมดจะหายไป')"
+                onsubmit="return confirm(
+                    '⚠️ ยืนยันลบ Project นี้อย่างถาวร? ข้อมูลและรูปภาพทั้งหมดจะหายไป'
+                )"
             >
 
                 @csrf
+
                 @method('DELETE')
 
                 <button
                     type="submit"
                     class="ldx-button ldx-button-danger"
                 >
-                    Delete Project
+                    ลบโครงการ
                 </button>
 
             </form>
 
+
         </div>
 
     </div>
+
 
 </div>
 

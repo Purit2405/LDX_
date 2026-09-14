@@ -36,9 +36,22 @@ class ProjectController extends Controller
 
             $query->where(function ($q) use ($search) {
 
-                $q->where('title', 'like', "%{$search}%")
-                    ->orWhere('client', 'like', "%{$search}%")
-                    ->orWhere('location', 'like', "%{$search}%");
+                $q->where(
+                    'title',
+                    'like',
+                    "%{$search}%"
+                )
+                ->orWhere(
+                    'client',
+                    'like',
+                    "%{$search}%"
+                )
+                ->orWhere(
+                    'location',
+                    'like',
+                    "%{$search}%"
+                );
+
             });
         }
 
@@ -69,6 +82,12 @@ class ProjectController extends Controller
                 $request->status
             );
         }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Pagination
+        |--------------------------------------------------------------------------
+        */
 
         $projects = $query
             ->paginate(10)
@@ -175,6 +194,7 @@ class ProjectController extends Controller
             'images' => [
                 'nullable',
                 'array',
+                'max:20',
             ],
 
             'images.*' => [
@@ -187,7 +207,7 @@ class ProjectController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Slug
+        | Generate Slug
         |--------------------------------------------------------------------------
         */
 
@@ -202,7 +222,7 @@ class ProjectController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Prevent Empty / Duplicate Slug
+        | Prevent Empty Slug
         |--------------------------------------------------------------------------
         */
 
@@ -211,18 +231,31 @@ class ProjectController extends Controller
             return back()
                 ->withInput()
                 ->withErrors([
-                    'slug' => 'ไม่สามารถสร้าง Slug จากชื่อ Project ได้',
+                    'slug' =>
+                        'ไม่สามารถสร้าง Slug จากชื่อ Project ได้',
                 ]);
         }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Prevent Duplicate Slug
+        |--------------------------------------------------------------------------
+        */
 
         $originalSlug = $slug;
         $counter = 1;
 
         while (
-            Project::where('slug', $slug)->exists()
+            Project::where(
+                'slug',
+                $slug
+            )->exists()
         ) {
 
-            $slug = $originalSlug . '-' . $counter;
+            $slug =
+                $originalSlug .
+                '-' .
+                $counter;
 
             $counter++;
         }
@@ -235,15 +268,20 @@ class ProjectController extends Controller
 
         $project = Project::create([
 
-            'category_id' => $validated['category_id'],
+            'category_id' =>
+                $validated['category_id'],
 
-            'title' => $validated['title'],
+            'title' =>
+                $validated['title'],
 
-            'slug' => $slug,
+            'slug' =>
+                $slug,
 
-            'client' => $validated['client'] ?? null,
+            'client' =>
+                $validated['client'] ?? null,
 
-            'location' => $validated['location'] ?? null,
+            'location' =>
+                $validated['location'] ?? null,
 
             'short_description' =>
                 $validated['short_description'] ?? null,
@@ -256,6 +294,7 @@ class ProjectController extends Controller
 
             'is_active' =>
                 $validated['is_active'] ?? true,
+
         ]);
 
         /*
@@ -266,7 +305,10 @@ class ProjectController extends Controller
 
         if ($request->hasFile('images')) {
 
-            foreach ($request->file('images') as $image) {
+            foreach (
+                $request->file('images')
+                as $image
+            ) {
 
                 $path = $image->store(
                     'projects',
@@ -275,17 +317,29 @@ class ProjectController extends Controller
 
                 ProjectImage::create([
 
-                    'project_id' => $project->id,
+                    'project_id' =>
+                        $project->id,
 
-                    'path' => $path,
+                    'path' =>
+                        $path,
 
-                    'alt' => $project->title,
+                    'alt' =>
+                        $project->title,
+
                 ]);
             }
         }
 
+        /*
+        |--------------------------------------------------------------------------
+        | Redirect
+        |--------------------------------------------------------------------------
+        */
+
         return redirect()
-            ->route('admin.projects.index')
+            ->route(
+                'admin.projects.index'
+            )
             ->with(
                 'success',
                 'เพิ่ม Project เรียบร้อยแล้ว'
@@ -383,6 +437,7 @@ class ProjectController extends Controller
             'images' => [
                 'nullable',
                 'array',
+                'max:20',
             ],
 
             'images.*' => [
@@ -395,7 +450,7 @@ class ProjectController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Slug
+        | Generate Slug
         |--------------------------------------------------------------------------
         */
 
@@ -408,25 +463,48 @@ class ProjectController extends Controller
             );
         }
 
+        /*
+        |--------------------------------------------------------------------------
+        | Prevent Empty Slug
+        |--------------------------------------------------------------------------
+        */
+
         if (empty($slug)) {
 
             return back()
                 ->withInput()
                 ->withErrors([
-                    'slug' => 'ไม่สามารถสร้าง Slug จากชื่อ Project ได้',
+                    'slug' =>
+                        'ไม่สามารถสร้าง Slug จากชื่อ Project ได้',
                 ]);
         }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Prevent Duplicate Slug
+        |--------------------------------------------------------------------------
+        */
 
         $originalSlug = $slug;
         $counter = 1;
 
         while (
-            Project::where('slug', $slug)
-                ->where('id', '!=', $project->id)
-                ->exists()
+            Project::where(
+                'slug',
+                $slug
+            )
+            ->where(
+                'id',
+                '!=',
+                $project->id
+            )
+            ->exists()
         ) {
 
-            $slug = $originalSlug . '-' . $counter;
+            $slug =
+                $originalSlug .
+                '-' .
+                $counter;
 
             $counter++;
         }
@@ -465,17 +543,56 @@ class ProjectController extends Controller
 
             'is_active' =>
                 $validated['is_active'] ?? true,
+
         ]);
 
         /*
         |--------------------------------------------------------------------------
-        | Add New Images
+        | Add New Images From Update Form
         |--------------------------------------------------------------------------
         */
 
         if ($request->hasFile('images')) {
 
-            foreach ($request->file('images') as $image) {
+            $currentImages =
+                $project->images()->count();
+
+            $newImages =
+                count(
+                    $request->file('images')
+                );
+
+            /*
+            |--------------------------------------------------------------------------
+            | Check Maximum 20 Images
+            |--------------------------------------------------------------------------
+            */
+
+            if (
+                ($currentImages + $newImages) > 20
+            ) {
+
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'images' =>
+                            'Project หนึ่งสามารถมีรูปภาพได้สูงสุด 20 รูป ' .
+                            '(ปัจจุบันมี ' .
+                            $currentImages .
+                            ' รูป)',
+                    ]);
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | Upload
+            |--------------------------------------------------------------------------
+            */
+
+            foreach (
+                $request->file('images')
+                as $image
+            ) {
 
                 $path = $image->store(
                     'projects',
@@ -492,9 +609,16 @@ class ProjectController extends Controller
 
                     'alt' =>
                         $project->title,
+
                 ]);
             }
         }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Redirect
+        |--------------------------------------------------------------------------
+        */
 
         return redirect()
             ->route(
@@ -504,6 +628,120 @@ class ProjectController extends Controller
             ->with(
                 'success',
                 'แก้ไข Project เรียบร้อยแล้ว'
+            );
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Upload Images
+    |--------------------------------------------------------------------------
+    |
+    | ใช้สำหรับ Form แยกที่:
+    | POST /admin/projects/{project}/images
+    |
+    */
+
+    public function uploadImages(
+        Request $request,
+        Project $project
+    ) {
+
+        $validated = $request->validate([
+
+            'images' => [
+                'required',
+                'array',
+                'max:20',
+            ],
+
+            'images.*' => [
+                'image',
+                'mimes:jpeg,jpg,png,webp,avif',
+                'max:5120',
+            ],
+
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Current Images
+        |--------------------------------------------------------------------------
+        */
+
+        $currentImages =
+            $project->images()->count();
+
+        $newImages =
+            count(
+                $validated['images']
+            );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Maximum 20 Images
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            ($currentImages + $newImages) > 20
+        ) {
+
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'images' =>
+                        'Project หนึ่งสามารถมีรูปภาพได้สูงสุด 20 รูป ' .
+                        '(ปัจจุบันมี ' .
+                        $currentImages .
+                        ' รูป)',
+                ]);
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Upload Images
+        |--------------------------------------------------------------------------
+        */
+
+        foreach (
+            $request->file('images')
+            as $image
+        ) {
+
+            $path = $image->store(
+                'projects',
+                'public'
+            );
+
+            ProjectImage::create([
+
+                'project_id' =>
+                    $project->id,
+
+                'path' =>
+                    $path,
+
+                'alt' =>
+                    $project->title,
+
+            ]);
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Redirect
+        |--------------------------------------------------------------------------
+        */
+
+        return redirect()
+            ->route(
+                'admin.projects.edit',
+                $project
+            )
+            ->with(
+                'success',
+                'เพิ่มรูปภาพเรียบร้อยแล้ว'
             );
     }
 
@@ -524,7 +762,9 @@ class ProjectController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        foreach ($project->images as $image) {
+        foreach (
+            $project->images as $image
+        ) {
 
             if (
                 $image->path &&
@@ -556,7 +796,9 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()
-            ->route('admin.projects.index')
+            ->route(
+                'admin.projects.index'
+            )
             ->with(
                 'success',
                 'ลบ Project เรียบร้อยแล้ว'
@@ -576,6 +818,7 @@ class ProjectController extends Controller
 
             'is_active' =>
                 !$project->is_active,
+
         ]);
 
         return back()
@@ -600,7 +843,16 @@ class ProjectController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Delete File
+        | Get Project
+        |--------------------------------------------------------------------------
+        */
+
+        $project =
+            $projectImage->project;
+
+        /*
+        |--------------------------------------------------------------------------
+        | Delete File From Storage
         |--------------------------------------------------------------------------
         */
 
@@ -618,13 +870,19 @@ class ProjectController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Delete Image Record ONLY
+        | Delete Image Record
         |--------------------------------------------------------------------------
         */
 
         $project = $projectImage->project;
 
         $projectImage->delete();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Redirect
+        |--------------------------------------------------------------------------
+        */
 
         return redirect()
             ->route(

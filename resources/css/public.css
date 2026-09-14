@@ -5683,6 +5683,7 @@ p {
 
 /* =========================================================
    PUBLIC PROJECTS
+   Style matched with Services
 ========================================================= */
 
 .ldx-projects-page {
@@ -5690,102 +5691,202 @@ p {
     color: var(--ldx-public-text);
 }
 
-/* ---------------------------------------------------------
-   Hero
---------------------------------------------------------- */
+
+/* =========================================================
+   HERO
+========================================================= */
 
 .ldx-projects-hero {
     position: relative;
+
+    min-height: 480px;
+
+    display: flex;
+    align-items: center;
+
     overflow: hidden;
-    padding: 150px 0 100px;
+
     border-bottom: 1px solid var(--ldx-public-line);
+
     background:
         radial-gradient(
-            circle at 85% 30%,
+            circle at 82% 45%,
             rgba(240, 173, 69, 0.08),
-            transparent 32%
+            transparent 34%
         ),
         var(--ldx-public-bg);
 }
 
+.ldx-projects-hero::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    opacity: 0.35;
+
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 80px 80px;
+}
+
 .ldx-projects-hero::after {
     content: "";
+
     position: absolute;
-    right: -120px;
-    bottom: -180px;
-    width: 500px;
-    height: 500px;
-    border: 1px solid rgba(240, 173, 69, 0.08);
+
+    width: 520px;
+    height: 520px;
+
+    right: -220px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
     border-radius: 50%;
+
+    background: rgba(240, 173, 69, 0.055);
+
+    filter: blur(80px);
+
     pointer-events: none;
 }
 
 .ldx-projects-hero-inner {
     position: relative;
-    z-index: 1;
+    z-index: 2;
+
+    width: 100%;
+
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 220px;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto;
+
+    align-items: center;
+
     gap: 60px;
-    align-items: end;
+}
+
+.ldx-projects-hero-content {
+    max-width: 820px;
+
+    padding: 100px 0;
 }
 
 .ldx-projects-eyebrow {
-    display: flex;
+    display: inline-flex;
+
     align-items: center;
+
     gap: 12px;
+
     margin-bottom: 22px;
 
     color: var(--ldx-public-accent);
-    font-size: 12px;
+
+    font-size: 11px;
+
     font-weight: 700;
+
     letter-spacing: 0.18em;
+
+    line-height: 1.4;
+
     text-transform: uppercase;
 }
 
 .ldx-projects-eyebrow::before {
     content: "";
+
     width: 34px;
     height: 1px;
+
+    flex-shrink: 0;
+
     background: var(--ldx-public-accent);
 }
 
 .ldx-projects-hero-title {
-    max-width: 780px;
+    max-width: 820px;
+
     margin: 0;
 
-    font-size: clamp(48px, 7vw, 92px);
-    line-height: 0.95;
-    letter-spacing: -0.055em;
+    color: var(--ldx-public-text);
+
+    font-size: clamp(44px, 6vw, 76px);
+
+    line-height: 0.98;
+
+    letter-spacing: -0.045em;
+
     font-weight: 700;
 }
 
 .ldx-projects-hero-title span {
     display: block;
+
     color: var(--ldx-public-text-3);
+
+    font-weight: 400;
 }
 
 .ldx-projects-hero-description {
-    max-width: 620px;
-    margin: 28px 0 0;
+    max-width: 650px;
+
+    margin: 30px 0 0;
 
     color: var(--ldx-public-text-3);
+
     font-size: 16px;
+
     line-height: 1.8;
 }
 
+
+/* =========================================================
+   HERO STAT
+========================================================= */
+
 .ldx-projects-hero-stat {
-    padding-left: 28px;
+    position: relative;
+    z-index: 2;
+
+    min-width: 150px;
+
+    padding-left: 30px;
+
     border-left: 1px solid var(--ldx-public-line);
 }
 
 .ldx-projects-hero-stat-label {
     display: block;
-    margin-bottom: 8px;
+
+    margin-bottom: 10px;
 
     color: var(--ldx-public-text-4);
-    font-size: 11px;
+
+    font-size: 10px;
+
     font-weight: 700;
-    letter-spacing: 0.16em;
+
+    letter-spacing: 0.15em;
+
+    line-height: 1.5;
+
     text-transform: uppercase;
 }
 
@@ -5793,95 +5894,161 @@ p {
     display: block;
 
     color: var(--ldx-public-text);
-    font-size: 64px;
+
+    font-size: clamp(52px, 6vw, 78px);
+
     line-height: 1;
-    font-weight: 700;
+
+    font-weight: 600;
+
     letter-spacing: -0.05em;
 }
 
 .ldx-projects-hero-stat-number::after {
     content: "+";
+
     color: var(--ldx-public-accent);
+
+    margin-left: 3px;
 }
 
 
-/* ---------------------------------------------------------
-   Category Filter
---------------------------------------------------------- */
+/* =========================================================
+   CATEGORY FILTER
+========================================================= */
 
 .ldx-projects-filter-section {
-    padding: 28px 0;
+    position: relative;
+    z-index: 5;
+
     border-bottom: 1px solid var(--ldx-public-line);
+
+    background: var(--ldx-public-bg-soft);
 }
 
 .ldx-projects-filter {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+
+    align-items: stretch;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+}
+
+.ldx-projects-filter::-webkit-scrollbar {
+    display: none;
 }
 
 .ldx-projects-filter-link {
+    position: relative;
+
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
 
-    min-height: 42px;
-    padding: 0 18px;
+    min-height: 72px;
 
-    border: 1px solid var(--ldx-public-line);
-    border-radius: var(--ldx-public-radius-sm);
+    padding: 0 24px;
+
+    flex-shrink: 0;
+
+    border-right: 1px solid var(--ldx-public-line);
 
     color: var(--ldx-public-text-3);
+
     background: transparent;
 
     font-size: 13px;
+
     font-weight: 600;
+
     text-decoration: none;
+
+    white-space: nowrap;
 
     transition:
         color var(--ldx-public-speed) var(--ldx-public-ease),
-        background var(--ldx-public-speed) var(--ldx-public-ease),
-        border-color var(--ldx-public-speed) var(--ldx-public-ease),
-        transform var(--ldx-public-speed) var(--ldx-public-ease);
+        background var(--ldx-public-speed) var(--ldx-public-ease);
+}
+
+.ldx-projects-filter-link:first-child {
+    border-left: 1px solid var(--ldx-public-line);
 }
 
 .ldx-projects-filter-link:hover {
     color: var(--ldx-public-text);
-    border-color: var(--ldx-public-line-strong);
+
     background: var(--ldx-public-surface);
     transform: translateY(-1px);
 }
 
 .ldx-projects-filter-link.is-active {
-    color: #111;
-    border-color: var(--ldx-public-accent);
+    color: var(--ldx-public-accent);
+
+    background: var(--ldx-public-accent-soft);
+}
+
+.ldx-projects-filter-link.is-active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 2px;
+
     background: var(--ldx-public-accent);
 }
 
+.ldx-projects-filter-link:focus-visible {
+    outline: 2px solid var(--ldx-public-accent);
 
-/* ---------------------------------------------------------
-   Projects Section
---------------------------------------------------------- */
+    outline-offset: -2px;
+}
+
+
+/* =========================================================
+   PROJECTS SECTION
+========================================================= */
 
 .ldx-projects-section {
-    padding: 100px 0;
+    padding: 100px 0 120px;
+
+    background: var(--ldx-public-bg);
 }
 
 .ldx-projects-section-header {
     display: flex;
+
+    align-items: flex-end;
+
     justify-content: space-between;
-    align-items: end;
+
     gap: 30px;
-    margin-bottom: 42px;
+
+    margin-bottom: 48px;
 }
 
 .ldx-projects-section-eyebrow {
-    margin: 0 0 10px;
+    display: block;
+
+    margin: 0 0 12px;
 
     color: var(--ldx-public-accent);
+
     font-size: 11px;
+
     font-weight: 700;
+
     letter-spacing: 0.18em;
+
+    line-height: 1.4;
+
     text-transform: uppercase;
 }
 
@@ -5889,56 +6056,102 @@ p {
     margin: 0;
 
     color: var(--ldx-public-text);
-    font-size: clamp(30px, 4vw, 48px);
-    line-height: 1.05;
-    letter-spacing: -0.04em;
+
+    font-size: clamp(30px, 4vw, 46px);
+
+    line-height: 1.1;
+
+    letter-spacing: -0.035em;
+
+    font-weight: 700;
 }
 
 .ldx-projects-section-count {
+    flex-shrink: 0;
+
     color: var(--ldx-public-text-4);
-    font-size: 13px;
+
+    font-size: 12px;
+
+    letter-spacing: 0.08em;
+
+    line-height: 1.5;
+
+    text-transform: uppercase;
+
     white-space: nowrap;
 }
 
 
-/* ---------------------------------------------------------
-   Project Grid
---------------------------------------------------------- */
+/* =========================================================
+   PROJECT GRID
+========================================================= */
 
 .ldx-projects-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 42px 24px;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
 }
 
 
-/* ---------------------------------------------------------
-   Project Card
---------------------------------------------------------- */
+/* =========================================================
+   PROJECT CARD
+========================================================= */
 
 .ldx-project-card {
     min-width: 0;
+
+    overflow: hidden;
+
+    border: 1px solid var(--ldx-public-line);
+
+    border-radius: var(--ldx-public-radius-lg);
+
+    background: var(--ldx-public-surface);
+
+    transition:
+        transform var(--ldx-public-speed) var(--ldx-public-ease),
+        border-color var(--ldx-public-speed) var(--ldx-public-ease),
+        box-shadow var(--ldx-public-speed) var(--ldx-public-ease);
+}
+
+.ldx-project-card:hover {
+    transform: translateY(-5px);
+
+    border-color: var(--ldx-public-line-strong);
+
+    box-shadow: var(--ldx-public-shadow);
 }
 
 .ldx-project-card-link {
     display: block;
+
     color: inherit;
+
     text-decoration: none;
 }
 
+
+/* =========================================================
+   PROJECT IMAGE
+========================================================= */
+
 .ldx-project-card-image {
     position: relative;
+
     aspect-ratio: 16 / 10;
+
     overflow: hidden;
 
-    border: 1px solid var(--ldx-public-line);
-    border-radius: var(--ldx-public-radius);
-
-    background: var(--ldx-public-surface);
+    background: var(--ldx-public-bg-soft);
 }
 
 .ldx-project-card-image img {
     display: block;
+
     width: 100%;
     height: 100%;
 
@@ -5950,27 +6163,33 @@ p {
 }
 
 .ldx-project-card-link:hover .ldx-project-card-image img {
-    transform: scale(1.045);
+    transform: scale(1.05);
+
     filter: brightness(0.82);
 }
 
 
-/* Image Overlay */
+/* =========================================================
+   IMAGE OVERLAY
+========================================================= */
 
 .ldx-project-card-overlay {
     position: absolute;
+
     inset: 0;
 
     display: flex;
+
     align-items: flex-end;
+
     justify-content: space-between;
 
-    padding: 22px;
+    padding: 18px;
 
     background:
         linear-gradient(
             to top,
-            rgba(0, 0, 0, 0.68),
+            rgba(0, 0, 0, 0.62),
             transparent 55%
         );
 
@@ -5980,38 +6199,49 @@ p {
 .ldx-project-card-number {
     color: rgba(255, 255, 255, 0.78);
 
-    font-size: 12px;
+    font-size: 11px;
+
     font-weight: 700;
+
     letter-spacing: 0.12em;
 }
 
 .ldx-project-card-arrow {
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     width: 42px;
     height: 42px;
 
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
     border-radius: 50%;
 
     color: #fff;
-    background: rgba(0, 0, 0, 0.22);
+
+    background: rgba(0, 0, 0, 0.25);
 
     font-size: 18px;
 
     transform: translateY(8px);
     opacity: 0;
 
+    transform: translateY(8px);
+
     transition:
         opacity var(--ldx-public-speed) var(--ldx-public-ease),
         transform var(--ldx-public-speed) var(--ldx-public-ease),
-        background var(--ldx-public-speed) var(--ldx-public-ease);
+        background var(--ldx-public-speed) var(--ldx-public-ease),
+        border-color var(--ldx-public-speed) var(--ldx-public-ease),
+        color var(--ldx-public-speed) var(--ldx-public-ease);
 }
 
 .ldx-project-card-link:hover .ldx-project-card-arrow {
     opacity: 1;
+
     transform: translateY(0);
 }
 
@@ -6019,50 +6249,82 @@ p {
     background: var(--ldx-public-accent);
     border-color: var(--ldx-public-accent);
     color: #111;
+
+    border-color: var(--ldx-public-accent);
+
+    background: var(--ldx-public-accent);
 }
 
 
-/* Placeholder */
+/* =========================================================
+   PLACEHOLDER
+========================================================= */
 
 .ldx-project-card-placeholder {
     width: 100%;
     height: 100%;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     background:
         linear-gradient(
             135deg,
-            var(--ldx-public-surface),
-            var(--ldx-public-bg-soft)
+            var(--ldx-public-bg-soft),
+            var(--ldx-public-surface)
         );
 }
 
 .ldx-project-card-placeholder span {
-    color: var(--ldx-public-text-5);
+    display: flex;
 
-    font-size: 32px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
+    align-items: center;
+
+    justify-content: center;
+
+    width: 64px;
+    height: 64px;
+
+    border: 1px solid var(--ldx-public-line-strong);
+
+    border-radius: 50%;
+
+    color: var(--ldx-public-accent);
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
 }
 
 
-/* Card Content */
+/* =========================================================
+   CARD CONTENT
+========================================================= */
 
 .ldx-project-card-content {
-    padding: 22px 2px 0;
+    padding: 28px;
 }
 
 .ldx-project-card-category {
-    display: block;
-    margin-bottom: 9px;
+    display: inline-block;
+
+    margin-bottom: 12px;
 
     color: var(--ldx-public-accent);
+
     font-size: 10px;
+
     font-weight: 700;
-    letter-spacing: 0.15em;
+
+    letter-spacing: 0.14em;
+
+    line-height: 1.4;
+
     text-transform: uppercase;
 }
 
@@ -6072,11 +6334,15 @@ p {
     color: var(--ldx-public-text);
 
     font-size: 23px;
+
     line-height: 1.2;
+
     letter-spacing: -0.025em;
+
     font-weight: 650;
 
-    transition: color var(--ldx-public-speed) var(--ldx-public-ease);
+    transition:
+        color var(--ldx-public-speed) var(--ldx-public-ease);
 }
 
 .ldx-project-card-link:hover .ldx-project-card-title {
@@ -6084,52 +6350,87 @@ p {
 }
 
 .ldx-project-card-description {
+    display: -webkit-box;
+
     max-width: 680px;
-    margin: 11px 0 0;
+
+    margin: 15px 0 0;
+
+    overflow: hidden;
 
     color: var(--ldx-public-text-3);
+
     font-size: 14px;
-    line-height: 1.7;
+
+    line-height: 1.75;
+
+    -webkit-box-orient: vertical;
+
+    -webkit-line-clamp: 3;
+
+    line-clamp: 3;
 }
+
+
+/* =========================================================
+   CARD META
+========================================================= */
 
 .ldx-project-card-meta {
     display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
 
-    margin-top: 17px;
-    padding-top: 15px;
+    align-items: center;
 
-    border-top: 1px solid var(--ldx-public-line-soft);
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-top: 24px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid var(--ldx-public-line);
 
     color: var(--ldx-public-text-4);
-    font-size: 12px;
+
+    font-size: 11px;
+
+    line-height: 1.5;
 }
 
 .ldx-project-card-meta-item {
     display: inline-flex;
+
     align-items: center;
+
     gap: 7px;
 }
 
 .ldx-project-card-meta-item::before {
     content: "";
+
     width: 4px;
     height: 4px;
 
+    flex-shrink: 0;
+
     border-radius: 50%;
+
     background: var(--ldx-public-accent);
 }
 
 
-/* ---------------------------------------------------------
-   Empty State
---------------------------------------------------------- */
+/* =========================================================
+   EMPTY STATE
+========================================================= */
 
 .ldx-projects-empty {
     padding: 90px 30px;
 
+    text-align: center;
+
     border: 1px solid var(--ldx-public-line);
+
     border-radius: var(--ldx-public-radius-lg);
 
     text-align: center;
@@ -6140,43 +6441,66 @@ p {
     margin: 0;
 
     color: var(--ldx-public-text);
+
     font-size: 24px;
+
+    line-height: 1.3;
 }
 
 .ldx-projects-empty-description {
     max-width: 500px;
-    margin: 12px auto 0;
+
+    margin: 12px auto 25px;
 
     color: var(--ldx-public-text-3);
+
+    font-size: 14px;
+
     line-height: 1.7;
 }
 
 
-/* ---------------------------------------------------------
-   Project Detail
---------------------------------------------------------- */
+/* =========================================================
+   PROJECT DETAIL
+========================================================= */
 
 .ldx-project-detail-hero {
     padding: 135px 0 70px;
 
     border-bottom: 1px solid var(--ldx-public-line);
+
+    background:
+        radial-gradient(
+            circle at 85% 35%,
+            rgba(240, 173, 69, 0.06),
+            transparent 30%
+        ),
+        var(--ldx-public-bg);
 }
 
 .ldx-project-detail-breadcrumb {
     display: flex;
+
     align-items: center;
+
     flex-wrap: wrap;
+
     gap: 9px;
 
     margin-bottom: 34px;
 
     color: var(--ldx-public-text-4);
+
     font-size: 12px;
 }
 
 .ldx-project-detail-breadcrumb a {
     color: var(--ldx-public-text-3);
+
     text-decoration: none;
+
+    transition:
+        color var(--ldx-public-speed) var(--ldx-public-ease);
 }
 
 .ldx-project-detail-breadcrumb a:hover {
@@ -6191,29 +6515,39 @@ p {
     margin-bottom: 14px;
 
     color: var(--ldx-public-accent);
+
     font-size: 11px;
+
     font-weight: 700;
+
     letter-spacing: 0.17em;
+
     text-transform: uppercase;
 }
 
 .ldx-project-detail-title {
     max-width: 950px;
+
     margin: 0;
 
     color: var(--ldx-public-text);
 
     font-size: clamp(42px, 6vw, 76px);
+
     line-height: 1;
+
     letter-spacing: -0.055em;
 }
 
 .ldx-project-detail-description {
     max-width: 700px;
+
     margin: 25px 0 0;
 
     color: var(--ldx-public-text-3);
+
     font-size: 17px;
+
     line-height: 1.8;
 }
 
@@ -6221,11 +6555,14 @@ p {
     margin-top: 22px;
 
     color: var(--ldx-public-text-4);
+
     font-size: 12px;
 }
 
 
-/* Main */
+/* =========================================================
+   DETAIL MAIN
+========================================================= */
 
 .ldx-project-detail-main {
     padding: 80px 0 110px;
@@ -6233,8 +6570,13 @@ p {
 
 .ldx-project-detail-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 300px;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        300px;
+
     gap: 70px;
+
     align-items: start;
 }
 
@@ -6242,6 +6584,7 @@ p {
     overflow: hidden;
 
     border: 1px solid var(--ldx-public-line);
+
     border-radius: var(--ldx-public-radius-lg);
 
     background: var(--ldx-public-surface);
@@ -6251,13 +6594,16 @@ p {
     display: block;
 
     width: 100%;
+
     max-height: 680px;
 
     object-fit: cover;
 }
 
 
-/* Content */
+/* =========================================================
+   DETAIL CONTENT
+========================================================= */
 
 .ldx-project-detail-content {
     margin-top: 60px;
@@ -6267,9 +6613,13 @@ p {
     margin-bottom: 15px;
 
     color: var(--ldx-public-accent);
+
     font-size: 11px;
+
     font-weight: 700;
+
     letter-spacing: 0.17em;
+
     text-transform: uppercase;
 }
 
@@ -6279,7 +6629,9 @@ p {
     color: var(--ldx-public-text);
 
     font-size: 34px;
+
     line-height: 1.15;
+
     letter-spacing: -0.035em;
 }
 
@@ -6287,20 +6639,25 @@ p {
     color: var(--ldx-public-text-2);
 
     font-size: 15px;
+
     line-height: 1.95;
 }
 
 
-/* Information */
+/* =========================================================
+   DETAIL INFORMATION
+========================================================= */
 
 .ldx-project-detail-info {
     position: sticky;
+
     top: 105px;
 
     padding: 25px;
 
     border: 1px solid var(--ldx-public-line);
-    border-radius: var(--ldx-public-radius);
+
+    border-radius: var(--ldx-public-radius-lg);
 
     background: var(--ldx-public-surface);
 }
@@ -6311,7 +6668,9 @@ p {
     color: var(--ldx-public-text);
 
     font-size: 14px;
+
     font-weight: 700;
+
     letter-spacing: 0.04em;
 }
 
@@ -6323,13 +6682,17 @@ p {
 
 .ldx-project-detail-info-label {
     display: block;
+
     margin-bottom: 6px;
 
     color: var(--ldx-public-text-4);
 
     font-size: 10px;
+
     font-weight: 700;
+
     letter-spacing: 0.14em;
+
     text-transform: uppercase;
 }
 
@@ -6339,11 +6702,14 @@ p {
     color: var(--ldx-public-text-2);
 
     font-size: 13px;
+
     line-height: 1.5;
 }
 
 
-/* Gallery */
+/* =========================================================
+   DETAIL GALLERY
+========================================================= */
 
 .ldx-project-detail-gallery {
     margin-top: 75px;
@@ -6355,12 +6721,18 @@ p {
     color: var(--ldx-public-text);
 
     font-size: 28px;
+
+    line-height: 1.2;
+
     letter-spacing: -0.03em;
 }
 
 .ldx-project-detail-gallery-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
     gap: 16px;
 }
 
@@ -6371,7 +6743,10 @@ p {
 
     aspect-ratio: 4 / 3;
 
+    overflow: hidden;
+
     border: 1px solid var(--ldx-public-line);
+
     border-radius: var(--ldx-public-radius-sm);
 
     background: var(--ldx-public-surface);
@@ -6385,7 +6760,8 @@ p {
 
     object-fit: cover;
 
-    transition: transform 450ms var(--ldx-public-ease);
+    transition:
+        transform 450ms var(--ldx-public-ease);
 }
 
 .ldx-project-detail-gallery-item:hover img {
@@ -6402,23 +6778,42 @@ p {
 ========================================================= */
 
 .ldx-projects-cta {
-    padding: 120px 0 140px;
+    padding: 100px 0;
+
     border-top: 1px solid var(--ldx-public-line);
+
+    background:
+        radial-gradient(
+            circle at 15% 50%,
+            rgba(240, 173, 69, 0.06),
+            transparent 32%
+        ),
+        var(--ldx-public-bg-soft);
 }
 
 .ldx-projects-cta-inner {
     position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 60px;
+
     overflow: hidden;
 
-    padding: 80px 90px;
+    padding: 70px;
 
     border: 1px solid var(--ldx-public-line);
-    border-radius: var(--ldx-public-radius-lg);
+
+    border-radius: var(--ldx-public-radius-xl);
 
     background:
         radial-gradient(
             circle at 88% 50%,
-            rgba(240, 173, 69, 0.10),
+            rgba(240, 173, 69, 0.09),
             transparent 32%
         ),
         radial-gradient(
@@ -6447,7 +6842,7 @@ p {
 
     transform: translateY(-50%);
 
-    border: 1px solid rgba(240, 173, 69, 0.10);
+    border: 1px solid rgba(240, 173, 69, 0.09);
 
     border-radius: 50%;
 
@@ -6467,7 +6862,7 @@ p {
 
     transform: translateY(-50%);
 
-    border: 1px solid rgba(240, 173, 69, 0.08);
+    border: 1px solid rgba(240, 173, 69, 0.07);
 
     border-radius: 50%;
 
@@ -6480,11 +6875,17 @@ p {
 ========================================================= */
 
 .ldx-projects-cta-eyebrow {
+    position: relative;
+    z-index: 2;
+
+    display: block;
+
     margin-bottom: 20px;
 
     color: var(--ldx-public-accent);
 
     font-size: 10px;
+
     font-weight: 700;
 
     letter-spacing: 0.2em;
@@ -6493,29 +6894,35 @@ p {
 }
 
 .ldx-projects-cta-title {
+    position: relative;
+    z-index: 2;
+
     max-width: 760px;
 
     margin: 0;
 
     color: var(--ldx-public-text);
 
-    font-size: clamp(38px, 5vw, 64px);
+    font-size: clamp(38px, 5vw, 58px);
 
-    line-height: 1.02;
+    line-height: 1.05;
 
     letter-spacing: -0.045em;
 }
 
 .ldx-projects-cta-description {
-    max-width: 570px;
+    position: relative;
+    z-index: 2;
 
-    margin: 26px 0 38px;
+    max-width: 580px;
+
+    margin: 22px 0 0;
 
     color: var(--ldx-public-text-3);
 
     font-size: 15px;
 
-    line-height: 1.85;
+    line-height: 1.8;
 }
 
 
@@ -6526,49 +6933,54 @@ p {
 .ldx-projects-cta-button {
     margin-top: 30px;
     position: relative;
-    z-index: 2;
+    z-index: 3;
 
     display: inline-flex;
 
     align-items: center;
+
     justify-content: center;
 
-    gap: 18px;
+    gap: 14px;
 
-    min-height: 54px;
+    flex-shrink: 0;
 
-    padding: 0 26px;
+    min-height: 52px;
+
+    padding: 0 25px;
 
     border: 1px solid var(--ldx-public-accent);
 
-    border-radius: var(--ldx-public-radius-sm);
+    border-radius: var(--ldx-public-radius-md);
 
     color: #111;
 
     background: var(--ldx-public-accent);
 
     font-size: 12px;
+
     font-weight: 700;
 
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
 
     text-decoration: none;
 
     transition:
         background var(--ldx-public-speed) var(--ldx-public-ease),
         color var(--ldx-public-speed) var(--ldx-public-ease),
-        border-color var(--ldx-public-speed) var(--ldx-public-ease),
-        transform var(--ldx-public-speed) var(--ldx-public-ease);
+        background var(--ldx-public-speed) var(--ldx-public-ease),
+        transform var(--ldx-public-speed) var(--ldx-public-ease),
+        box-shadow var(--ldx-public-speed) var(--ldx-public-ease);
 }
 
 .ldx-projects-cta-button:hover {
-    color: var(--ldx-public-accent);
+    color: #111;
 
-    background: transparent;
+    background: var(--ldx-public-accent);
 
-    border-color: var(--ldx-public-accent);
+    transform: translateY(-2px);
 
-    transform: translateY(-3px);
+    box-shadow: var(--ldx-public-shadow);
 }
 
 
@@ -6584,7 +6996,11 @@ p {
 
     stroke: currentColor;
 
-    stroke-width: 1.7;
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
 
     transition:
         transform var(--ldx-public-speed) var(--ldx-public-ease);
@@ -6596,55 +7012,264 @@ p {
 
 
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE — TABLET
 ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
 
-    .ldx-projects-cta {
-        padding: 90px 0 110px;
+    .ldx-projects-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .ldx-projects-hero-inner {
+        gap: 40px;
     }
 
     .ldx-projects-cta-inner {
-        padding: 65px 55px;
+        padding: 55px;
     }
-
 }
 
 
-@media (max-width: 600px) {
+/* =========================================================
+   RESPONSIVE — SMALL TABLET
+========================================================= */
 
-    .ldx-projects-cta {
-        padding: 70px 0 90px;
+@media (max-width: 820px) {
+
+    .ldx-projects-hero {
+        min-height: 420px;
+    }
+
+    .ldx-projects-hero-inner {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+    .ldx-projects-hero-content {
+        padding: 80px 0;
+    }
+
+    .ldx-projects-hero-stat {
+        display: none;
+    }
+
+    .ldx-projects-section {
+        padding: 80px 0 90px;
+    }
+
+    .ldx-projects-section-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+
+        margin-bottom: 38px;
     }
 
     .ldx-projects-cta-inner {
-        padding: 45px 28px;
-        border-radius: var(--ldx-public-radius);
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 35px;
+
+        padding: 50px 45px;
     }
 
-    .ldx-projects-cta-eyebrow {
-        margin-bottom: 16px;
+    .ldx-project-detail-layout {
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+    }
+
+    .ldx-project-detail-info {
+        position: static;
+    }
+
+    .ldx-project-detail-content {
+        margin-top: 40px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+    .ldx-projects-hero {
+        min-height: 390px;
+    }
+
+    .ldx-projects-hero-content {
+        padding: 70px 0;
+    }
+
+    .ldx-projects-hero-title {
+        font-size: 42px;
+
+        line-height: 1;
+    }
+
+    .ldx-projects-hero-description {
+        margin-top: 22px;
+
+        font-size: 14px;
+
+        line-height: 1.75;
+    }
+
+    .ldx-projects-filter-link {
+        min-height: 62px;
+
+        padding: 0 18px;
+
+        font-size: 12px;
+    }
+
+    .ldx-projects-section {
+        padding: 65px 0 75px;
+    }
+
+    .ldx-projects-grid {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .ldx-project-card-content {
+        padding: 24px;
+    }
+
+    .ldx-project-card-title {
+        font-size: 22px;
+    }
+
+    .ldx-project-card-meta {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+    .ldx-projects-empty {
+        padding: 70px 22px;
+    }
+
+    .ldx-projects-cta {
+        padding: 70px 0;
+    }
+
+    .ldx-projects-cta-inner {
+        padding: 35px 24px;
+
+        border-radius: var(--ldx-public-radius-lg);
     }
 
     .ldx-projects-cta-title {
-        font-size: 40px;
-        line-height: 1.02;
+        font-size: 34px;
     }
 
     .ldx-projects-cta-description {
-        margin-top: 20px;
-        margin-bottom: 30px;
-
         font-size: 14px;
-        line-height: 1.75;
     }
 
     .ldx-projects-cta-button {
         width: 100%;
     }
 
-}npm run build
+    .ldx-project-detail-hero {
+        padding: 115px 0 55px;
+    }
+
+    .ldx-project-detail-title {
+        font-size: 42px;
+    }
+
+    .ldx-project-detail-description {
+        font-size: 15px;
+    }
+
+    .ldx-project-detail-main {
+        padding: 60px 0 80px;
+    }
+
+    .ldx-project-detail-gallery {
+        margin-top: 55px;
+    }
+
+    .ldx-project-detail-gallery-grid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+    }
+
+    .ldx-project-detail-content h2 {
+        font-size: 29px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .ldx-projects-hero-title {
+        font-size: 38px;
+    }
+
+    .ldx-projects-section-title {
+        font-size: 32px;
+    }
+
+    .ldx-project-card-content {
+        padding: 20px;
+    }
+
+    .ldx-project-card-title {
+        font-size: 21px;
+    }
+
+    .ldx-projects-cta-inner {
+        padding: 30px 20px;
+    }
+
+    .ldx-projects-cta-title {
+        font-size: 31px;
+    }
+
+    .ldx-project-detail-title {
+        font-size: 38px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .ldx-project-card,
+    .ldx-project-card-image img,
+    .ldx-project-card-arrow,
+    .ldx-project-card-title,
+    .ldx-projects-filter-link,
+    .ldx-projects-cta-button,
+    .ldx-projects-cta-button svg,
+    .ldx-project-detail-breadcrumb a,
+    .ldx-project-detail-gallery-item img {
+        transition: none;
+    }
+}
 
 
 /* =========================================================

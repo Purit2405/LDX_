@@ -1,8 +1,8 @@
 @extends('layouts.public.app')
 
-@section('title', 'LDX Elevator | Elevator Solutions')
+@section('title', 'LDX Elevator | โซลูชันระบบลิฟต์')
 
-@section('description', 'LDX Elevator provides professional elevator installation, modernization, maintenance and repair solutions for modern buildings and businesses.')
+@section('description', 'LDX Elevator ให้บริการติดตั้ง ปรับปรุง บำรุงรักษา และซ่อมแซมระบบลิฟต์อย่างมืออาชีพ สำหรับอาคารและธุรกิจสมัยใหม่')
 
 @section('content')
 
@@ -33,27 +33,27 @@
                     <span class="ldx-home-eyebrow-line"></span>
 
                     <span>
-                        ELEVATOR SOLUTIONS
+                        โซลูชันระบบลิฟต์
                     </span>
 
                 </div>
 
 
                 <h1>
-                    Moving People.
+                    ขับเคลื่อนผู้คน
                     <br>
 
                     <span>
-                        Elevating
+                        ยกระดับ
                     </span>
 
-                    Possibilities.
+                    ทุกความเป็นไปได้
                 </h1>
 
 
                 <p>
-                    Reliable elevator solutions designed for
-                    modern buildings, businesses and communities.
+                    โซลูชันระบบลิฟต์ที่เชื่อถือได้ ออกแบบมาเพื่อ
+                    อาคารสมัยใหม่ ธุรกิจ และชุมชน
                 </p>
 
 
@@ -63,7 +63,7 @@
                        class="ldx-home-button ldx-home-button-primary">
 
                         <span>
-                            Explore Services
+                            ดูบริการ
                         </span>
 
                         <span>
@@ -77,7 +77,7 @@
                        class="ldx-home-button ldx-home-button-outline">
 
                         <span>
-                            Contact Us
+                            ติดต่อเรา
                         </span>
 
                         <span>
@@ -155,9 +155,9 @@
                     </strong>
 
                     <span>
-                        Years of
+                        ประสบการณ์
                         <br>
-                        Experience
+                        หลายปี
                     </span>
 
                 </div>
@@ -190,7 +190,7 @@
                 </div>
 
                 <span class="ldx-home-scroll">
-                    SCROLL TO EXPLORE ↓
+                    เลื่อนเพื่อสำรวจ ↓
                 </span>
 
             </div>
@@ -217,7 +217,7 @@
             <span class="line"></span>
 
             <span>
-                ABOUT LDX
+                เกี่ยวกับ LDX
             </span>
 
         </div>
@@ -228,9 +228,9 @@
             <div class="ldx-home-about-heading">
 
                 <h2>
-                    Engineering movement
+                    วิศวกรรมที่ขับเคลื่อน
                     <span>
-                        with confidence.
+                        อย่างมั่นใจ
                     </span>
                 </h2>
 
@@ -240,16 +240,16 @@
             <div class="ldx-home-about-content">
 
                 <p class="lead">
-                    LDX Elevator provides dependable elevator
-                    solutions focused on safety, quality and
-                    long-term performance.
+                    LDX Elevator ให้บริการโซลูชันระบบลิฟต์
+                    ที่ไว้วางใจได้ โดยให้ความสำคัญกับ
+                    ความปลอดภัย คุณภาพ และประสิทธิภาพในระยะยาว
                 </p>
 
                 <p>
-                    From new elevator installations to modernization,
-                    maintenance and repair, our team delivers
-                    solutions tailored to the requirements of
-                    each building.
+                    ตั้งแต่การติดตั้งลิฟต์ใหม่ การปรับปรุงระบบ
+                    การบำรุงรักษา ไปจนถึงการซ่อมแซม
+                    ทีมงานของเรานำเสนอโซลูชันที่เหมาะกับ
+                    ความต้องการของแต่ละอาคาร
                 </p>
 
 
@@ -257,7 +257,7 @@
                    class="ldx-home-text-link">
 
                     <span>
-                        Discover LDX
+                        รู้จัก LDX เพิ่มเติม
                     </span>
 
                     <span>
@@ -280,9 +280,9 @@
                 </strong>
 
                 <span>
-                    Years of
+                    ประสบการณ์
                     <br>
-                    Experience
+                    ปี
                 </span>
 
             </div>
@@ -295,9 +295,9 @@
                 </strong>
 
                 <span>
-                    Projects
+                    โครงการ
                     <br>
-                    Completed
+                    แล้วเสร็จ
                 </span>
 
             </div>
@@ -310,9 +310,9 @@
                 </strong>
 
                 <span>
-                    Service &
+                    บริการและ
                     <br>
-                    Support
+                    การดูแล
                 </span>
 
             </div>
@@ -325,9 +325,9 @@
                 </strong>
 
                 <span>
-                    Safety
+                    ความปลอดภัย
                     <br>
-                    Focused
+                    ใส่ใจทุกขั้นตอน
                 </span>
 
             </div>
@@ -356,7 +356,7 @@
                 <span class="line"></span>
 
                 <span>
-                    OUR SERVICES
+                    บริการของเรา
                 </span>
 
             </div>
@@ -365,10 +365,10 @@
             <div class="ldx-home-section-header-row">
 
                 <h2>
-                    Solutions built
+                    โซลูชันที่สร้างขึ้น
                     <br>
                     <span>
-                        for every journey.
+                        เพื่อทุกการเดินทาง
                     </span>
                 </h2>
 
@@ -377,7 +377,7 @@
                    class="ldx-home-outline-link">
 
                     <span>
-                        View All Services
+                        ดูบริการทั้งหมด
                     </span>
 
                     <span>
@@ -429,12 +429,12 @@
                 <div class="ldx-home-service-content">
 
                     <h3>
-                        Elevator Installation
+                        ติดตั้งลิฟต์
                     </h3>
 
                     <p>
-                        Complete elevator installation solutions
-                        designed around your building requirements.
+                        โซลูชันติดตั้งลิฟต์แบบครบวงจร
+                        ออกแบบให้เหมาะกับความต้องการของอาคาร
                     </p>
 
                 </div>
@@ -481,12 +481,12 @@
                 <div class="ldx-home-service-content">
 
                     <h3>
-                        Modernization
+                        ปรับปรุงระบบลิฟต์
                     </h3>
 
                     <p>
-                        Upgrade existing elevator systems for
-                        improved safety, performance and efficiency.
+                        ปรับปรุงระบบลิฟต์เดิมเพื่อเพิ่ม
+                        ความปลอดภัย ประสิทธิภาพ และความคุ้มค่า
                     </p>
 
                 </div>
@@ -531,12 +531,12 @@
                 <div class="ldx-home-service-content">
 
                     <h3>
-                        Maintenance
+                        บำรุงรักษา
                     </h3>
 
                     <p>
-                        Preventive maintenance programs that help
-                        keep your elevator operating reliably.
+                        โปรแกรมบำรุงรักษาเชิงป้องกัน
+                        ที่ช่วยให้ระบบลิฟต์ทำงานได้อย่างน่าเชื่อถือ
                     </p>
 
                 </div>
@@ -579,12 +579,12 @@
                 <div class="ldx-home-service-content">
 
                     <h3>
-                        Repair & Inspection
+                        ซ่อมแซมและตรวจสอบ
                     </h3>
 
                     <p>
-                        Professional inspection and repair services
-                        to maintain safety and system performance.
+                        บริการตรวจสอบและซ่อมแซมอย่างมืออาชีพ
+                        เพื่อรักษาความปลอดภัยและประสิทธิภาพของระบบ
                     </p>
 
                 </div>
@@ -620,7 +620,7 @@
                 <span class="line"></span>
 
                 <span>
-                    FEATURED PROJECTS
+                    โครงการเด่น
                 </span>
 
             </div>
@@ -629,10 +629,10 @@
             <div class="ldx-home-section-header-row">
 
                 <h2>
-                    Built for performance.
+                    สร้างขึ้นเพื่อประสิทธิภาพ
                     <br>
                     <span>
-                        Designed to last.
+                        ออกแบบเพื่อการใช้งานที่ยาวนาน
                     </span>
                 </h2>
 
@@ -641,7 +641,7 @@
                    class="ldx-home-outline-link">
 
                     <span>
-                        View Projects
+                        ดูโครงการ
                     </span>
 
                     <span>
@@ -667,13 +667,13 @@
                     <div class="ldx-home-project-placeholder">
 
                         <span>
-                            PROJECT 01
+                            โครงการ 01
                         </span>
 
                         <strong>
-                            Commercial
+                            อาคารพาณิชย์
                             <br>
-                            Building
+                            สมัยใหม่
                         </strong>
 
                     </div>
@@ -686,11 +686,11 @@
                     <div>
 
                         <span>
-                            COMMERCIAL
+                            อาคารพาณิชย์
                         </span>
 
                         <h3>
-                            Modern Commercial Elevator
+                            ลิฟต์สำหรับอาคารพาณิชย์สมัยใหม่
                         </h3>
 
                     </div>
@@ -714,13 +714,13 @@
                     <div class="ldx-home-project-placeholder">
 
                         <span>
-                            PROJECT 02
+                            โครงการ 02
                         </span>
 
                         <strong>
-                            Residential
+                            อาคารพักอาศัย
                             <br>
-                            Tower
+                            อาคารสูง
                         </strong>
 
                     </div>
@@ -733,11 +733,11 @@
                     <div>
 
                         <span>
-                            RESIDENTIAL
+                            ที่พักอาศัย
                         </span>
 
                         <h3>
-                            High-Rise Residential
+                            ลิฟต์สำหรับอาคารพักอาศัยสูง
                         </h3>
 
                     </div>
@@ -761,13 +761,13 @@
                     <div class="ldx-home-project-placeholder">
 
                         <span>
-                            PROJECT 03
+                            โครงการ 03
                         </span>
 
                         <strong>
-                            Office
+                            อาคารสำนักงาน
                             <br>
-                            Complex
+                            องค์กร
                         </strong>
 
                     </div>
@@ -780,11 +780,11 @@
                     <div>
 
                         <span>
-                            OFFICE
+                            สำนักงาน
                         </span>
 
                         <h3>
-                            Corporate Office Elevator
+                            ลิฟต์สำหรับอาคารสำนักงาน
                         </h3>
 
                     </div>
@@ -819,7 +819,7 @@
             <span class="line"></span>
 
             <span>
-                WHY LDX
+                ทำไมต้อง LDX
             </span>
 
         </div>
@@ -830,16 +830,16 @@
             <div class="ldx-home-why-heading">
 
                 <h2>
-                    More than an elevator.
+                    มากกว่าระบบลิฟต์
                     <span>
-                        A complete solution.
+                        คือโซลูชันที่ครบวงจร
                     </span>
                 </h2>
 
                 <p>
-                    We combine engineering expertise, quality
-                    workmanship and responsive service to deliver
-                    elevator systems you can depend on.
+                    เราผสานความเชี่ยวชาญด้านวิศวกรรม
+                    คุณภาพงานติดตั้ง และบริการที่รวดเร็ว
+                    เพื่อส่งมอบระบบลิฟต์ที่คุณไว้วางใจได้
                 </p>
 
             </div>
@@ -857,12 +857,13 @@
                     <div>
 
                         <h3>
-                            Safety First
+                            ความปลอดภัยต้องมาก่อน
                         </h3>
 
                         <p>
-                            Every solution is designed with safety,
-                            reliability and compliance in mind.
+                            ทุกโซลูชันได้รับการออกแบบโดยคำนึงถึง
+                            ความปลอดภัย ความน่าเชื่อถือ
+                            และมาตรฐานที่เกี่ยวข้อง
                         </p>
 
                     </div>
@@ -879,12 +880,12 @@
                     <div>
 
                         <h3>
-                            Quality Engineering
+                            วิศวกรรมคุณภาพ
                         </h3>
 
                         <p>
-                            Practical engineering solutions built
-                            for long-term performance.
+                            โซลูชันทางวิศวกรรมที่ใช้งานได้จริง
+                            และออกแบบมาเพื่อประสิทธิภาพในระยะยาว
                         </p>
 
                     </div>
@@ -901,12 +902,12 @@
                     <div>
 
                         <h3>
-                            Professional Service
+                            บริการอย่างมืออาชีพ
                         </h3>
 
                         <p>
-                            Our team provides reliable support from
-                            installation through ongoing maintenance.
+                            ทีมงานของเราให้บริการดูแลอย่างต่อเนื่อง
+                            ตั้งแต่การติดตั้งจนถึงการบำรุงรักษา
                         </p>
 
                     </div>
@@ -923,12 +924,12 @@
                     <div>
 
                         <h3>
-                            Customer Focus
+                            ใส่ใจลูกค้า
                         </h3>
 
                         <p>
-                            Every project is tailored to the unique
-                            needs of our customers and their buildings.
+                            ทุกโครงการได้รับการออกแบบให้เหมาะกับ
+                            ความต้องการเฉพาะของลูกค้าและอาคารแต่ละแห่ง
                         </p>
 
                     </div>
@@ -961,7 +962,7 @@
                 <span class="line"></span>
 
                 <span>
-                    LATEST NEWS
+                    ข่าวสารล่าสุด
                 </span>
 
             </div>
@@ -970,10 +971,10 @@
             <div class="ldx-home-section-header-row">
 
                 <h2>
-                    Insights from
+                    เรื่องราวและข้อมูลจาก
                     <br>
                     <span>
-                        LDX Elevator.
+                        LDX Elevator
                     </span>
                 </h2>
 
@@ -982,7 +983,7 @@
                    class="ldx-home-outline-link">
 
                     <span>
-                        View All News
+                        ดูข่าวทั้งหมด
                     </span>
 
                     <span>
@@ -999,14 +1000,14 @@
         <div class="ldx-home-news-grid">
 
 
-            {{-- NEWS 01 --}}
+            {{-- ข่าวสาร 01 --}}
             <a href="{{ url('/news') }}"
                class="ldx-home-news-card">
 
                 <div class="ldx-home-news-image">
 
                     <div class="ldx-home-news-placeholder">
-                        NEWS
+                        ข่าวสาร
                     </div>
 
                 </div>
@@ -1017,7 +1018,7 @@
                     <div class="ldx-home-news-meta">
 
                         <span>
-                            COMPANY
+                            บริษัท
                         </span>
 
                         <span>
@@ -1027,12 +1028,12 @@
                     </div>
 
                     <h3>
-                        Building better vertical
-                        transportation solutions
+                        ยกระดับระบบขนส่งแนวดิ่ง
+                        ให้ดียิ่งขึ้น
                     </h3>
 
                     <span class="ldx-home-news-link">
-                        Read Article →
+                        อ่านบทความ →
                     </span>
 
                 </div>
@@ -1041,14 +1042,14 @@
 
 
 
-            {{-- NEWS 02 --}}
+            {{-- ข่าวสาร 02 --}}
             <a href="{{ url('/news') }}"
                class="ldx-home-news-card">
 
                 <div class="ldx-home-news-image">
 
                     <div class="ldx-home-news-placeholder">
-                        NEWS
+                        ข่าวสาร
                     </div>
 
                 </div>
@@ -1059,7 +1060,7 @@
                     <div class="ldx-home-news-meta">
 
                         <span>
-                            TECHNOLOGY
+                            เทคโนโลยี
                         </span>
 
                         <span>
@@ -1069,12 +1070,12 @@
                     </div>
 
                     <h3>
-                        Why elevator modernization
-                        matters for existing buildings
+                        ทำไมการปรับปรุงระบบลิฟต์
+                        จึงสำคัญสำหรับอาคารเดิม
                     </h3>
 
                     <span class="ldx-home-news-link">
-                        Read Article →
+                        อ่านบทความ →
                     </span>
 
                 </div>
@@ -1083,14 +1084,14 @@
 
 
 
-            {{-- NEWS 03 --}}
+            {{-- ข่าวสาร 03 --}}
             <a href="{{ url('/news') }}"
                class="ldx-home-news-card">
 
                 <div class="ldx-home-news-image">
 
                     <div class="ldx-home-news-placeholder">
-                        NEWS
+                        ข่าวสาร
                     </div>
 
                 </div>
@@ -1101,7 +1102,7 @@
                     <div class="ldx-home-news-meta">
 
                         <span>
-                            MAINTENANCE
+                            การบำรุงรักษา
                         </span>
 
                         <span>
@@ -1111,12 +1112,12 @@
                     </div>
 
                     <h3>
-                        Simple steps to improve
-                        elevator reliability
+                        ขั้นตอนง่าย ๆ เพื่อเพิ่ม
+                        ความน่าเชื่อถือของระบบลิฟต์
                     </h3>
 
                     <span class="ldx-home-news-link">
-                        Read Article →
+                        อ่านบทความ →
                     </span>
 
                 </div>
@@ -1148,25 +1149,26 @@
                 <span class="ldx-home-eyebrow-line"></span>
 
                 <span>
-                    START YOUR PROJECT
+                    เริ่มต้นโครงการของคุณ
                 </span>
 
             </div>
 
 
             <h2>
-                Ready to move
+                พร้อมขับเคลื่อน
                 <br>
 
                 <span>
-                    your project forward?
+                    โครงการของคุณไปข้างหน้าหรือยัง?
                 </span>
             </h2>
 
 
             <p>
-                Talk to our team about your elevator requirements
-                and discover the right solution for your building.
+                พูดคุยกับทีมงานของเราเกี่ยวกับ
+                ความต้องการด้านลิฟต์ และค้นหาโซลูชัน
+                ที่เหมาะสมสำหรับอาคารของคุณ
             </p>
 
 
@@ -1174,7 +1176,7 @@
                class="ldx-home-button ldx-home-button-primary">
 
                 <span>
-                    Contact LDX Elevator
+                    ติดต่อ LDX Elevator
                 </span>
 
                 <span>

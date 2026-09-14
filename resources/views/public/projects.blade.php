@@ -1,6 +1,7 @@
+
 @extends('layouts.public.app')
 
-@section('title', 'Projects | LDX Elevator')
+@section('title', 'โครงการ | LDX Elevator')
 
 @section('content')
 
@@ -14,37 +15,39 @@
 
         <div class="ldx-container">
 
-            <div class="ldx-projects-hero-grid">
+            <div class="ldx-projects-hero-inner">
 
                 <div class="ldx-projects-hero-content">
 
                     <span class="ldx-projects-eyebrow">
-                        OUR PROJECTS
+                        โครงการของเรา
                     </span>
 
-                    <h1 class="ldx-projects-title">
-                        Projects That
-                        <span>Move People.</span>
+                    <h1 class="ldx-projects-hero-title">
+                        โครงการที่
+                        <span>ขับเคลื่อนผู้คน</span>
                     </h1>
 
-                    <p class="ldx-projects-description">
-                        Explore our elevator and vertical transportation
-                        projects delivered for buildings, businesses,
-                        and communities.
+                    <p class="ldx-projects-hero-description">
+                        สำรวจผลงานด้านลิฟต์และระบบขนส่งแนวดิ่ง
+                        ที่ LDX Elevator ได้ส่งมอบให้กับอาคาร
+                        ธุรกิจ และชุมชนในหลากหลายรูปแบบ
                     </p>
 
                 </div>
 
 
-                <div class="ldx-projects-hero-number">
+                {{-- จำนวนโครงการ --}}
 
-                    <span>
-                        PROJECTS
+                <div class="ldx-projects-hero-stat">
+
+                    <span class="ldx-projects-hero-stat-label">
+                        จำนวนโครงการ
                     </span>
 
-                    <strong>
+                    <span class="ldx-projects-hero-stat-number">
                         {{ $projects->count() }}
-                    </strong>
+                    </span>
 
                 </div>
 
@@ -66,25 +69,23 @@
 
             <div class="ldx-projects-filter">
 
+                {{-- ทุกโครงการ --}}
+
                 <a
                     href="{{ route('public.projects') }}"
-                    class="
-                        ldx-projects-filter-item
-                        {{ !$selectedCategory ? 'is-active' : '' }}
-                    "
+                    class="ldx-projects-filter-link {{ !$selectedCategory ? 'is-active' : '' }}"
                 >
-                    All Projects
+                    ทุกโครงการ
                 </a>
 
+
+                {{-- หมวดหมู่ --}}
 
                 @foreach($categories as $category)
 
                     <a
                         href="{{ route('public.projects', ['category' => $category->slug]) }}"
-                        class="
-                            ldx-projects-filter-item
-                            {{ $selectedCategory === $category->slug ? 'is-active' : '' }}
-                        "
+                        class="ldx-projects-filter-link {{ $selectedCategory === $category->slug ? 'is-active' : '' }}"
                     >
                         {{ $category->name }}
                     </a>
@@ -98,38 +99,57 @@
     </section>
 
 
-
     {{-- =====================================================
         PROJECTS
     ====================================================== --}}
 
-    <section class="ldx-projects-content">
+    <section class="ldx-projects-section">
 
         <div class="ldx-container">
+
+            {{-- Section Header --}}
 
             <div class="ldx-projects-section-header">
 
                 <div>
 
                     <span class="ldx-projects-section-eyebrow">
-                        {{ $currentCategory?->name ?? 'ALL PROJECTS' }}
+
+                        @if($currentCategory)
+                            {{ $currentCategory->name }}
+                        @else
+                            โครงการของเรา
+                        @endif
+
                     </span>
 
-                    <h2>
-                        {{ $currentCategory?->name ?? 'Featured Projects' }}
+                    <h2 class="ldx-projects-section-title">
+
+                        @if($currentCategory)
+                            {{ $currentCategory->name }}
+                        @else
+                            ผลงานโครงการของเรา
+                        @endif
+
                     </h2>
 
                 </div>
 
 
-                <span class="ldx-projects-result-count">
+                <span class="ldx-projects-section-count">
+
                     {{ $projects->count() }}
-                    {{ $projects->count() === 1 ? 'Project' : 'Projects' }}
+
+                    โครงการ
+
                 </span>
 
             </div>
 
 
+            {{-- =================================================
+                PROJECT LIST
+            ================================================== --}}
 
             @if($projects->count())
 
@@ -141,122 +161,156 @@
                             $projectImage = $project->images->first();
                         @endphp
 
-                        <a
-                            href="{{ route('public.projects.show', $project->slug) }}"
-                            class="ldx-project-card"
-                        >
 
-                            {{-- IMAGE --}}
+                        <article class="ldx-project-card">
 
-                            <div class="ldx-project-card-media">
+                            <a
+                                href="{{ route('public.projects.show', $project->slug) }}"
+                                class="ldx-project-card-link"
+                                aria-label="ดูรายละเอียดโครงการ {{ $project->title }}"
+                            >
 
-                                @if($projectImage)
+                                {{-- =================================
+                                    IMAGE
+                                ================================== --}}
 
-                                    <img
-                                        src="{{ asset('storage/' . $projectImage->path) }}"
-                                        alt="{{ $projectImage->alt ?? $project->title }}"
-                                        loading="lazy"
-                                    >
+                                <div class="ldx-project-card-image">
 
-                                @else
+                                    @if($projectImage)
 
-                                    <div class="ldx-project-card-placeholder">
-                                        <span>LDX</span>
+                                        <img
+                                            src="{{ asset('storage/' . $projectImage->path) }}"
+                                            alt="{{ $projectImage->alt ?? $project->title }}"
+                                            loading="lazy"
+                                        >
+
+                                    @else
+
+                                        <div class="ldx-project-card-placeholder">
+
+                                            <span>
+                                                LDX
+                                            </span>
+
+                                        </div>
+
+                                    @endif
+
+
+                                    {{-- Image Overlay --}}
+
+                                    <div class="ldx-project-card-overlay">
+
+                                        <span class="ldx-project-card-number">
+                                            {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
+                                        </span>
+
+
+                                        <span
+                                            class="ldx-project-card-arrow"
+                                            aria-hidden="true"
+                                        >
+                                            →
+                                        </span>
+
                                     </div>
 
-                                @endif
+                                </div>
 
 
-                                <div class="ldx-project-card-overlay"></div>
+                                {{-- =================================
+                                    CONTENT
+                                ================================== --}}
 
+                                <div class="ldx-project-card-content">
 
-                                <span class="ldx-project-card-number">
-                                    {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
-                                </span>
+                                    {{-- Category --}}
 
+                                    @if($project->category)
 
-                                <span class="ldx-project-card-arrow">
-                                    →
-                                </span>
-
-                            </div>
-
-
-                            {{-- CONTENT --}}
-
-                            <div class="ldx-project-card-content">
-
-                                @if($project->category)
-
-                                    <span class="ldx-project-card-category">
-                                        {{ $project->category->name }}
-                                    </span>
-
-                                @endif
-
-
-                                <h3>
-                                    {{ $project->title }}
-                                </h3>
-
-
-                                @if($project->short_description)
-
-                                    <p>
-                                        {{ $project->short_description }}
-                                    </p>
-
-                                @elseif($project->location)
-
-                                    <p>
-                                        {{ $project->location }}
-                                    </p>
-
-                                @endif
-
-
-                                <div class="ldx-project-card-meta">
-
-                                    @if($project->client)
-
-                                        <span>
-                                            {{ $project->client }}
+                                        <span class="ldx-project-card-category">
+                                            {{ $project->category->name }}
                                         </span>
 
                                     @endif
 
-                                    @if($project->project_date)
 
-                                        <span>
-                                            {{ \Carbon\Carbon::parse($project->project_date)->format('Y') }}
-                                        </span>
+                                    {{-- Title --}}
+
+                                    <h3 class="ldx-project-card-title">
+                                        {{ $project->title }}
+                                    </h3>
+
+
+                                    {{-- Description --}}
+
+                                    @if($project->short_description)
+
+                                        <p class="ldx-project-card-description">
+                                            {{ $project->short_description }}
+                                        </p>
+
+                                    @elseif($project->location)
+
+                                        <p class="ldx-project-card-description">
+                                            {{ $project->location }}
+                                        </p>
+
+                                    @endif
+
+
+                                    {{-- Meta --}}
+
+                                    @if($project->client || $project->project_date)
+
+                                        <div class="ldx-project-card-meta">
+
+                                            @if($project->client)
+
+                                                <span class="ldx-project-card-meta-item">
+                                                    ลูกค้า: {{ $project->client }}
+                                                </span>
+
+                                            @endif
+
+
+                                            @if($project->project_date)
+
+                                                <span class="ldx-project-card-meta-item">
+                                                    {{ \Carbon\Carbon::parse($project->project_date)->format('Y') }}
+                                                </span>
+
+                                            @endif
+
+                                        </div>
 
                                     @endif
 
                                 </div>
 
-                            </div>
+                            </a>
 
-                        </a>
+                        </article>
 
                     @endforeach
 
                 </div>
 
+
+            {{-- =================================================
+                EMPTY STATE
+            ================================================== --}}
+
             @else
 
                 <div class="ldx-projects-empty">
 
-                    <div class="ldx-projects-empty-icon">
-                        —
-                    </div>
-
-                    <h3>
-                        No Projects Found
+                    <h3 class="ldx-projects-empty-title">
+                        ไม่พบโครงการ
                     </h3>
 
-                    <p>
-                        There are currently no projects in this category.
+                    <p class="ldx-projects-empty-description">
+                        ขณะนี้ยังไม่มีโครงการในหมวดหมู่นี้
                     </p>
 
 
@@ -266,7 +320,7 @@
                             href="{{ route('public.projects') }}"
                             class="ldx-projects-empty-link"
                         >
-                            View All Projects
+                            ดูโครงการทั้งหมด
                         </a>
 
                     @endif
@@ -294,32 +348,42 @@
                 <div>
 
                     <span class="ldx-projects-cta-eyebrow">
-                        HAVE A PROJECT IN MIND?
+                        มีโครงการอยู่ในใจหรือไม่?
                     </span>
 
-                    <h2>
-                        Let's build something
-                        that moves.
+                    <h2 class="ldx-projects-cta-title">
+                        มาสร้างโครงการ
+                        <br>
+                        ที่ขับเคลื่อนไปด้วยกัน
                     </h2>
 
-                    <p>
-                        Talk to our team about your elevator
-                        or vertical transportation project.
+                    <p class="ldx-projects-cta-description">
+                        พูดคุยกับทีมงานของเราเกี่ยวกับโครงการลิฟต์
+                        หรือระบบขนส่งแนวดิ่งที่คุณกำลังวางแผน
                     </p>
 
                 </div>
 
 
+                {{-- CTA Button --}}
+
                 <a
                     href="{{ route('public.quote') }}"
                     class="ldx-projects-cta-button"
                 >
-                    <span>Request a Quote</span>
 
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <span>
+                        ขอใบเสนอราคา
+                    </span>
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
                         <path d="M5 12h13"></path>
                         <path d="m13 6 6 6-6 6"></path>
                     </svg>
+
                 </a>
 
             </div>

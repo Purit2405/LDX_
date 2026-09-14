@@ -1,6 +1,6 @@
 @extends('layouts.public.app')
 
-@section('title', 'Contact Us | LDX Elevator')
+@section('title', 'ติดต่อเรา | LDX Elevator')
 
 @section('content')
 
@@ -20,13 +20,13 @@
 
                     <div class="ldx-public-eyebrow">
                         <span></span>
-                        CONTACT US
+                        ติดต่อเรา
                     </div>
 
                     <h1 class="ldx-contact-title">
-                        Let's Talk.
+                        พูดคุยกับเรา
                         <br>
-                        <span>We're Here to Help.</span>
+                        <span>เราพร้อมให้ความช่วยเหลือ</span>
                     </h1>
 
                     <p class="ldx-contact-description">
@@ -39,16 +39,16 @@
 
                     <div class="ldx-contact-hero-actions">
 
-                        {{-- REQUEST A QUOTE --}}
+                        {{-- ขอใบเสนอราคา --}}
                         <a
                             href="{{ route('public.quote') }}"
                             class="ldx-contact-primary-button"
                         >
-                            <span>REQUEST A QUOTE</span>
+                            <span>ขอใบเสนอราคา</span>
                             <span>→</span>
                         </a>
 
-                        {{-- CALL US --}}
+                        {{-- โทรหาเรา --}}
                         <a
                             href="tel:020000000"
                             class="ldx-contact-secondary-button"
@@ -58,7 +58,7 @@
                             </span>
 
                             <span>
-                                <small>CALL US</small>
+                                <small>โทรหาเรา</small>
                                 <strong>02-000-0000</strong>
                             </span>
                         </a>
@@ -71,7 +71,7 @@
                 <div class="ldx-contact-hero-side">
 
                     <div class="ldx-contact-hero-side-label">
-                        GET IN TOUCH
+                        ติดต่อเรา
                     </div>
 
                     <div class="ldx-contact-hero-side-line"></div>
@@ -109,7 +109,7 @@
 
                     <div class="ldx-public-eyebrow">
                         <span></span>
-                        CONTACT INFORMATION
+                        ช่องทางการติดต่อ
                     </div>
 
                     <h2>
@@ -150,7 +150,7 @@
                     </div>
 
                     <div class="ldx-contact-card-label">
-                        PHONE
+                        โทรศัพท์
                     </div>
 
                     <h3>
@@ -186,7 +186,7 @@
                     </div>
 
                     <div class="ldx-contact-card-label">
-                        EMAIL
+                        อีเมล
                     </div>
 
                     <h3>
@@ -283,7 +283,7 @@
 
 
     {{-- =========================================================
-        OFFICE + MAP
+        สำนักงานและแผนที่
     ========================================================== --}}
 
     <section class="ldx-contact-location">
@@ -293,14 +293,14 @@
             <div class="ldx-contact-location-grid">
 
                 {{-- =================================================
-                    LEFT : OFFICE INFORMATION
+                    LEFT : สำนักงาน INFORMATION
                 ================================================== --}}
 
                 <div class="ldx-contact-location-content">
 
                     <div class="ldx-public-eyebrow">
                         <span></span>
-                        VISIT OUR OFFICE
+                        เยี่ยมชมสำนักงานของเรา
                     </div>
 
                     <h2>
@@ -324,7 +324,7 @@
                         <div>
 
                             <div class="ldx-contact-address-label">
-                                ADDRESS
+                                ที่อยู่
                             </div>
 
                             <p>
@@ -342,11 +342,11 @@
                     </div>
 
 
-                    {{-- OFFICE DETAILS --}}
+                    {{-- สำนักงาน DETAILS --}}
 
                     <div class="ldx-contact-office-details">
 
-                        {{-- BUSINESS HOURS --}}
+                        {{-- เวลาทำการ --}}
 
                         <div class="ldx-contact-office-detail">
 
@@ -357,11 +357,11 @@
                             <div>
 
                                 <small>
-                                    BUSINESS HOURS
+                                    เวลาทำการ
                                 </small>
 
                                 <strong>
-                                    Mon — Fri / 09:00 — 18:00
+                                    จันทร์ — ศุกร์ / 09:00 — 18:00
                                 </strong>
 
                             </div>
@@ -380,7 +380,7 @@
                             <div>
 
                                 <small>
-                                    PHONE
+                                    โทรศัพท์
                                 </small>
 
                                 <strong>
@@ -404,7 +404,7 @@
                     >
 
                         <span>
-                            OPEN IN GOOGLE MAPS
+                            เปิดใน Google Maps
                         </span>
 
                         <span>
@@ -472,7 +472,7 @@
                     </div>
 
                     <h2>
-                        Have a project in mind?
+                        มีโครงการที่กำลังวางแผนอยู่หรือไม่?
                     </h2>
 
                     <p>
@@ -491,7 +491,7 @@
                 >
 
                     <span>
-                        START A CONVERSATION
+                        เริ่มพูดคุยกับเรา
                     </span>
 
                     <span>

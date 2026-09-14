@@ -78,6 +78,8 @@ Route::get('/projects', [PublicProjectController::class, 'index'])
 Route::get('/projects/{slug}', [PublicProjectController::class, 'show'])
     ->name('public.projects.show');
 
+    
+
 
 // ============================================================
 // NEWS
@@ -246,10 +248,30 @@ Route::middleware('auth')
             ProjectController::class
         );
 
+
+        // --------------------------------------------------------
+        // Toggle Project Status
+        // --------------------------------------------------------
+
         Route::patch(
             '/projects/{project}/toggle',
             [ProjectController::class, 'toggle']
         )->name('projects.toggle');
+
+
+        // --------------------------------------------------------
+        // Upload Project Images
+        // --------------------------------------------------------
+
+        Route::post(
+            '/projects/{project}/images',
+            [ProjectController::class, 'uploadImages']
+        )->name('projects.images.upload');
+
+
+        // --------------------------------------------------------
+        // Delete Project Image
+        // --------------------------------------------------------
 
         Route::delete(
             '/project-images/{projectImage}',
