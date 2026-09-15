@@ -2,7 +2,10 @@
 
 @section('title', 'LDX Elevator | โซลูชันระบบลิฟต์')
 
-@section('description', 'LDX Elevator ให้บริการติดตั้ง ปรับปรุง บำรุงรักษา และซ่อมแซมระบบลิฟต์อย่างมืออาชีพ สำหรับอาคารและธุรกิจสมัยใหม่')
+@section(
+    'description',
+    'LDX Elevator ให้บริการติดตั้ง ปรับปรุง บำรุงรักษา และซ่อมแซมระบบลิฟต์อย่างมืออาชีพ สำหรับอาคารและธุรกิจสมัยใหม่'
+)
 
 @section('content')
 
@@ -10,6 +13,7 @@
 {{-- ======================================================================
      HERO
      ====================================================================== --}}
+
 <section class="ldx-home-hero">
 
     <div class="ldx-home-hero-background">
@@ -26,6 +30,7 @@
             {{-- ==========================================================
                  HERO CONTENT
                  ========================================================== --}}
+
             <div class="ldx-home-hero-content">
 
                 <div class="ldx-home-eyebrow">
@@ -52,15 +57,18 @@
 
 
                 <p>
-                    โซลูชันระบบลิฟต์ที่เชื่อถือได้ ออกแบบมาเพื่อ
-                    อาคารสมัยใหม่ ธุรกิจ และชุมชน
+                    LDX Elevator ให้บริการโซลูชันระบบลิฟต์
+                    ตั้งแต่การติดตั้ง ปรับปรุง บำรุงรักษา
+                    และซ่อมแซม สำหรับอาคารและธุรกิจสมัยใหม่
                 </p>
 
 
                 <div class="ldx-home-hero-actions">
 
-                    <a href="{{ url('/services') }}"
-                       class="ldx-home-button ldx-home-button-primary">
+                    <a
+                        href="{{ url('/services') }}"
+                        class="ldx-home-button ldx-home-button-primary"
+                    >
 
                         <span>
                             ดูบริการ
@@ -73,8 +81,10 @@
                     </a>
 
 
-                    <a href="{{ url('/contact') }}"
-                       class="ldx-home-button ldx-home-button-outline">
+                    <a
+                        href="{{ url('/contact') }}"
+                        class="ldx-home-button ldx-home-button-outline"
+                    >
 
                         <span>
                             ติดต่อเรา
@@ -94,6 +104,7 @@
             {{-- ==========================================================
                  HERO VISUAL
                  ========================================================== --}}
+
             <div class="ldx-home-hero-visual">
 
                 <div class="ldx-home-building">
@@ -112,6 +123,7 @@
                         <div class="ldx-home-elevator">
 
                             <div class="ldx-home-elevator-door left"></div>
+
                             <div class="ldx-home-elevator-door right"></div>
 
                             <div class="ldx-home-elevator-light"></div>
@@ -206,13 +218,16 @@
 {{-- ======================================================================
      ABOUT
      ====================================================================== --}}
+
 <section class="ldx-home-about">
 
     <div class="ldx-public-container">
 
         <div class="ldx-home-section-label">
 
-            <span>01</span>
+            <span>
+                01
+            </span>
 
             <span class="line"></span>
 
@@ -248,13 +263,15 @@
                 <p>
                     ตั้งแต่การติดตั้งลิฟต์ใหม่ การปรับปรุงระบบ
                     การบำรุงรักษา ไปจนถึงการซ่อมแซม
-                    ทีมงานของเรานำเสนอโซลูชันที่เหมาะกับ
+                    เราพร้อมดูแลระบบลิฟต์ให้เหมาะสมกับ
                     ความต้องการของแต่ละอาคาร
                 </p>
 
 
-                <a href="{{ url('/about') }}"
-                   class="ldx-home-text-link">
+                <a
+                    href="{{ url('/about') }}"
+                    class="ldx-home-text-link"
+                >
 
                     <span>
                         รู้จัก LDX เพิ่มเติม
@@ -291,13 +308,13 @@
             <div class="ldx-home-stat">
 
                 <strong>
-                    500+
+                    {{ $projects->count() > 0 ? $projects->count() . '+' : '500+' }}
                 </strong>
 
                 <span>
                     โครงการ
                     <br>
-                    แล้วเสร็จ
+                    ตัวอย่าง
                 </span>
 
             </div>
@@ -325,9 +342,9 @@
                 </strong>
 
                 <span>
-                    ความปลอดภัย
+                    ใส่ใจ
                     <br>
-                    ใส่ใจทุกขั้นตอน
+                    ทุกขั้นตอน
                 </span>
 
             </div>
@@ -343,6 +360,7 @@
 {{-- ======================================================================
      SERVICES
      ====================================================================== --}}
+
 <section class="ldx-home-services">
 
     <div class="ldx-public-container">
@@ -351,7 +369,9 @@
 
             <div class="ldx-home-section-label">
 
-                <span>02</span>
+                <span>
+                    02
+                </span>
 
                 <span class="line"></span>
 
@@ -367,14 +387,17 @@
                 <h2>
                     โซลูชันที่สร้างขึ้น
                     <br>
+
                     <span>
                         เพื่อทุกการเดินทาง
                     </span>
                 </h2>
 
 
-                <a href="{{ url('/services') }}"
-                   class="ldx-home-outline-link">
+                <a
+                    href="{{ url('/services') }}"
+                    class="ldx-home-outline-link"
+                >
 
                     <span>
                         ดูบริการทั้งหมด
@@ -394,207 +417,92 @@
         <div class="ldx-home-services-grid">
 
 
-            {{-- SERVICE 01 --}}
-            <a href="{{ url('/services') }}"
-               class="ldx-home-service-card">
+            @forelse($services as $index => $service)
 
-                <span class="ldx-home-service-number">
-                    01
-                </span>
+                <a
+                    href="{{ url('/services/' . $service->slug) }}"
+                    class="ldx-home-service-card"
+                >
 
-
-                <div class="ldx-home-service-icon">
-
-                    <svg viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="1.4"
-                         aria-hidden="true">
-
-                        <rect x="5"
-                              y="3"
-                              width="14"
-                              height="18"
-                              rx="2"/>
-
-                        <path d="M9 3v18"/>
-                        <path d="M15 3v18"/>
-                        <path d="M8 12h8"/>
-
-                    </svg>
-
-                </div>
+                    <span class="ldx-home-service-number">
+                        {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
+                    </span>
 
 
-                <div class="ldx-home-service-content">
+                    <div class="ldx-home-service-icon">
 
-                    <h3>
-                        ติดตั้งลิฟต์
-                    </h3>
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.4"
+                            aria-hidden="true"
+                        >
 
-                    <p>
-                        โซลูชันติดตั้งลิฟต์แบบครบวงจร
-                        ออกแบบให้เหมาะกับความต้องการของอาคาร
-                    </p>
+                            <rect
+                                x="5"
+                                y="3"
+                                width="14"
+                                height="18"
+                                rx="2"
+                            />
 
-                </div>
+                            <path d="M9 3v18" />
 
+                            <path d="M15 3v18" />
 
-                <span class="ldx-home-service-arrow">
-                    ↗
-                </span>
+                            <path d="M8 12h8" />
 
-            </a>
+                        </svg>
 
-
-
-            {{-- SERVICE 02 --}}
-            <a href="{{ url('/services') }}"
-               class="ldx-home-service-card">
-
-                <span class="ldx-home-service-number">
-                    02
-                </span>
+                    </div>
 
 
-                <div class="ldx-home-service-icon">
+                    <div class="ldx-home-service-content">
 
-                    <svg viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="1.4"
-                         aria-hidden="true">
+                        <h3>
+                            {{ $service->title }}
+                        </h3>
 
-                        <path d="M12 3v18"/>
-                        <path d="M5 7h14"/>
-                        <path d="M5 17h14"/>
+                        <p>
+                            {{
+                                \Illuminate\Support\Str::limit(
+                                    $service->description
+                                    ?? $service->excerpt
+                                    ?? '',
+                                    150
+                                )
+                            }}
+                        </p>
 
-                        <circle cx="12"
-                                cy="12"
-                                r="7"/>
-
-                    </svg>
-
-                </div>
+                    </div>
 
 
-                <div class="ldx-home-service-content">
+                    <span class="ldx-home-service-arrow">
+                        ↗
+                    </span>
 
-                    <h3>
-                        ปรับปรุงระบบลิฟต์
-                    </h3>
+                </a>
 
-                    <p>
-                        ปรับปรุงระบบลิฟต์เดิมเพื่อเพิ่ม
-                        ความปลอดภัย ประสิทธิภาพ และความคุ้มค่า
-                    </p>
+            @empty
+
+                <div class="ldx-home-service-card">
+
+                    <div class="ldx-home-service-content">
+
+                        <h3>
+                            ยังไม่มีข้อมูลบริการ
+                        </h3>
+
+                        <p>
+                            ขณะนี้ยังไม่มีบริการที่เปิดแสดงบนเว็บไซต์
+                        </p>
+
+                    </div>
 
                 </div>
 
-
-                <span class="ldx-home-service-arrow">
-                    ↗
-                </span>
-
-            </a>
-
-
-
-            {{-- SERVICE 03 --}}
-            <a href="{{ url('/services') }}"
-               class="ldx-home-service-card">
-
-                <span class="ldx-home-service-number">
-                    03
-                </span>
-
-
-                <div class="ldx-home-service-icon">
-
-                    <svg viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="1.4"
-                         aria-hidden="true">
-
-                        <circle cx="12"
-                                cy="12"
-                                r="8"/>
-
-                        <path d="M12 8v4l3 2"/>
-
-                    </svg>
-
-                </div>
-
-
-                <div class="ldx-home-service-content">
-
-                    <h3>
-                        บำรุงรักษา
-                    </h3>
-
-                    <p>
-                        โปรแกรมบำรุงรักษาเชิงป้องกัน
-                        ที่ช่วยให้ระบบลิฟต์ทำงานได้อย่างน่าเชื่อถือ
-                    </p>
-
-                </div>
-
-
-                <span class="ldx-home-service-arrow">
-                    ↗
-                </span>
-
-            </a>
-
-
-
-            {{-- SERVICE 04 --}}
-            <a href="{{ url('/services') }}"
-               class="ldx-home-service-card">
-
-                <span class="ldx-home-service-number">
-                    04
-                </span>
-
-
-                <div class="ldx-home-service-icon">
-
-                    <svg viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="1.4"
-                         aria-hidden="true">
-
-                        <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/>
-
-                        <path d="M9 12l2 2 4-4"/>
-
-                    </svg>
-
-                </div>
-
-
-                <div class="ldx-home-service-content">
-
-                    <h3>
-                        ซ่อมแซมและตรวจสอบ
-                    </h3>
-
-                    <p>
-                        บริการตรวจสอบและซ่อมแซมอย่างมืออาชีพ
-                        เพื่อรักษาความปลอดภัยและประสิทธิภาพของระบบ
-                    </p>
-
-                </div>
-
-
-                <span class="ldx-home-service-arrow">
-                    ↗
-                </span>
-
-            </a>
+            @endforelse
 
         </div>
 
@@ -607,6 +515,7 @@
 {{-- ======================================================================
      PROJECTS
      ====================================================================== --}}
+
 <section class="ldx-home-projects">
 
     <div class="ldx-public-container">
@@ -615,7 +524,9 @@
 
             <div class="ldx-home-section-label">
 
-                <span>03</span>
+                <span>
+                    03
+                </span>
 
                 <span class="line"></span>
 
@@ -631,14 +542,17 @@
                 <h2>
                     สร้างขึ้นเพื่อประสิทธิภาพ
                     <br>
+
                     <span>
                         ออกแบบเพื่อการใช้งานที่ยาวนาน
                     </span>
                 </h2>
 
 
-                <a href="{{ url('/projects') }}"
-                   class="ldx-home-outline-link">
+                <a
+                    href="{{ url('/projects') }}"
+                    class="ldx-home-outline-link"
+                >
 
                     <span>
                         ดูโครงการ
@@ -658,144 +572,94 @@
         <div class="ldx-home-projects-grid">
 
 
-            {{-- PROJECT 01 --}}
-            <a href="{{ url('/projects') }}"
-               class="ldx-home-project-card ldx-home-project-large">
+            @forelse($projects as $index => $project)
 
-                <div class="ldx-home-project-image">
+                @php
+                    $projectImage = optional($project->images->first())->image
+                        ?? optional($project->images->first())->image_path
+                        ?? optional($project->images->first())->path;
+                @endphp
 
-                    <div class="ldx-home-project-placeholder">
 
-                        <span>
-                            โครงการ 01
+                <a
+                    href="{{ url('/projects/' . $project->slug) }}"
+                    class="ldx-home-project-card {{ $index === 0 ? 'ldx-home-project-large' : '' }}"
+                >
+
+                    <div class="ldx-home-project-image">
+
+                        @if($projectImage)
+
+                            <img
+                                src="{{ asset('storage/' . $projectImage) }}"
+                                alt="{{ $project->title }}"
+                                loading="lazy"
+                            >
+
+                        @else
+
+                            <div class="ldx-home-project-placeholder">
+
+                                <span>
+                                    โครงการ {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
+                                </span>
+
+                                <strong>
+                                    {{ $project->title }}
+                                </strong>
+
+                            </div>
+
+                        @endif
+
+                    </div>
+
+
+                    <div class="ldx-home-project-info">
+
+                        <div>
+
+                            <span>
+                                {{ optional($project->category)->name ?? 'โครงการ' }}
+                            </span>
+
+                            <h3>
+                                {{ $project->title }}
+                            </h3>
+
+                        </div>
+
+                        <span class="arrow">
+                            ↗
                         </span>
 
-                        <strong>
-                            อาคารพาณิชย์
-                            <br>
-                            สมัยใหม่
-                        </strong>
+                    </div>
+
+                </a>
+
+            @empty
+
+                <div class="ldx-home-project-card">
+
+                    <div class="ldx-home-project-image">
+
+                        <div class="ldx-home-project-placeholder">
+
+                            <span>
+                                โครงการ
+                            </span>
+
+                            <strong>
+                                ยังไม่มีข้อมูลโครงการ
+                            </strong>
+
+                        </div>
 
                     </div>
 
                 </div>
 
-
-                <div class="ldx-home-project-info">
-
-                    <div>
-
-                        <span>
-                            อาคารพาณิชย์
-                        </span>
-
-                        <h3>
-                            ลิฟต์สำหรับอาคารพาณิชย์สมัยใหม่
-                        </h3>
-
-                    </div>
-
-                    <span class="arrow">
-                        ↗
-                    </span>
-
-                </div>
-
-            </a>
-
-
-
-            {{-- PROJECT 02 --}}
-            <a href="{{ url('/projects') }}"
-               class="ldx-home-project-card">
-
-                <div class="ldx-home-project-image">
-
-                    <div class="ldx-home-project-placeholder">
-
-                        <span>
-                            โครงการ 02
-                        </span>
-
-                        <strong>
-                            อาคารพักอาศัย
-                            <br>
-                            อาคารสูง
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <div class="ldx-home-project-info">
-
-                    <div>
-
-                        <span>
-                            ที่พักอาศัย
-                        </span>
-
-                        <h3>
-                            ลิฟต์สำหรับอาคารพักอาศัยสูง
-                        </h3>
-
-                    </div>
-
-                    <span class="arrow">
-                        ↗
-                    </span>
-
-                </div>
-
-            </a>
-
-
-
-            {{-- PROJECT 03 --}}
-            <a href="{{ url('/projects') }}"
-               class="ldx-home-project-card">
-
-                <div class="ldx-home-project-image">
-
-                    <div class="ldx-home-project-placeholder">
-
-                        <span>
-                            โครงการ 03
-                        </span>
-
-                        <strong>
-                            อาคารสำนักงาน
-                            <br>
-                            องค์กร
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <div class="ldx-home-project-info">
-
-                    <div>
-
-                        <span>
-                            สำนักงาน
-                        </span>
-
-                        <h3>
-                            ลิฟต์สำหรับอาคารสำนักงาน
-                        </h3>
-
-                    </div>
-
-                    <span class="arrow">
-                        ↗
-                    </span>
-
-                </div>
-
-            </a>
+            @endforelse
 
         </div>
 
@@ -808,13 +672,16 @@
 {{-- ======================================================================
      WHY LDX
      ====================================================================== --}}
+
 <section class="ldx-home-why">
 
     <div class="ldx-public-container">
 
         <div class="ldx-home-section-label">
 
-            <span>04</span>
+            <span>
+                04
+            </span>
 
             <span class="line"></span>
 
@@ -936,6 +803,7 @@
 
                 </div>
 
+
             </div>
 
         </div>
@@ -949,6 +817,7 @@
 {{-- ======================================================================
      NEWS
      ====================================================================== --}}
+
 <section class="ldx-home-news">
 
     <div class="ldx-public-container">
@@ -957,7 +826,9 @@
 
             <div class="ldx-home-section-label">
 
-                <span>05</span>
+                <span>
+                    05
+                </span>
 
                 <span class="line"></span>
 
@@ -973,14 +844,17 @@
                 <h2>
                     เรื่องราวและข้อมูลจาก
                     <br>
+
                     <span>
                         LDX Elevator
                     </span>
                 </h2>
 
 
-                <a href="{{ url('/news') }}"
-                   class="ldx-home-outline-link">
+                <a
+                    href="{{ url('/news') }}"
+                    class="ldx-home-outline-link"
+                >
 
                     <span>
                         ดูข่าวทั้งหมด
@@ -1000,129 +874,105 @@
         <div class="ldx-home-news-grid">
 
 
-            {{-- ข่าวสาร 01 --}}
-            <a href="{{ url('/news') }}"
-               class="ldx-home-news-card">
+            @forelse($news as $article)
 
-                <div class="ldx-home-news-image">
-
-                    <div class="ldx-home-news-placeholder">
-                        ข่าวสาร
-                    </div>
-
-                </div>
+                @php
+                    $newsImage = optional($article->images->first())->image
+                        ?? optional($article->images->first())->image_path
+                        ?? optional($article->images->first())->path;
+                @endphp
 
 
-                <div class="ldx-home-news-content">
+                <a
+                    href="{{ url('/news/' . $article->slug) }}"
+                    class="ldx-home-news-card"
+                >
 
-                    <div class="ldx-home-news-meta">
+                    <div class="ldx-home-news-image">
 
-                        <span>
-                            บริษัท
-                        </span>
+                        @if($newsImage)
 
-                        <span>
-                            01 SEP 2026
-                        </span>
+                            <img
+                                src="{{ asset('storage/' . $newsImage) }}"
+                                alt="{{ $article->title }}"
+                                loading="lazy"
+                            >
 
-                    </div>
+                        @else
 
-                    <h3>
-                        ยกระดับระบบขนส่งแนวดิ่ง
-                        ให้ดียิ่งขึ้น
-                    </h3>
+                            <div class="ldx-home-news-placeholder">
+                                ข่าวสาร
+                            </div>
 
-                    <span class="ldx-home-news-link">
-                        อ่านบทความ →
-                    </span>
-
-                </div>
-
-            </a>
-
-
-
-            {{-- ข่าวสาร 02 --}}
-            <a href="{{ url('/news') }}"
-               class="ldx-home-news-card">
-
-                <div class="ldx-home-news-image">
-
-                    <div class="ldx-home-news-placeholder">
-                        ข่าวสาร
-                    </div>
-
-                </div>
-
-
-                <div class="ldx-home-news-content">
-
-                    <div class="ldx-home-news-meta">
-
-                        <span>
-                            เทคโนโลยี
-                        </span>
-
-                        <span>
-                            25 AUG 2026
-                        </span>
+                        @endif
 
                     </div>
 
-                    <h3>
-                        ทำไมการปรับปรุงระบบลิฟต์
-                        จึงสำคัญสำหรับอาคารเดิม
-                    </h3>
 
-                    <span class="ldx-home-news-link">
-                        อ่านบทความ →
-                    </span>
+                    <div class="ldx-home-news-content">
 
-                </div>
+                        <div class="ldx-home-news-meta">
 
-            </a>
+                            <span>
+                                {{ optional($article->category)->name ?? 'ข่าวสาร' }}
+                            </span>
 
 
+                            <span>
 
-            {{-- ข่าวสาร 03 --}}
-            <a href="{{ url('/news') }}"
-               class="ldx-home-news-card">
+                                @if($article->published_at)
 
-                <div class="ldx-home-news-image">
+                                    {{ \Carbon\Carbon::parse($article->published_at)->format('d M Y') }}
 
-                    <div class="ldx-home-news-placeholder">
-                        ข่าวสาร
-                    </div>
+                                @else
 
-                </div>
+                                    ข่าวสาร
+
+                                @endif
+
+                            </span>
+
+                        </div>
 
 
-                <div class="ldx-home-news-content">
+                        <h3>
+                            {{ $article->title }}
+                        </h3>
 
-                    <div class="ldx-home-news-meta">
 
-                        <span>
-                            การบำรุงรักษา
-                        </span>
-
-                        <span>
-                            18 AUG 2026
+                        <span class="ldx-home-news-link">
+                            อ่านบทความ →
                         </span>
 
                     </div>
 
-                    <h3>
-                        ขั้นตอนง่าย ๆ เพื่อเพิ่ม
-                        ความน่าเชื่อถือของระบบลิฟต์
-                    </h3>
+                </a>
 
-                    <span class="ldx-home-news-link">
-                        อ่านบทความ →
-                    </span>
+            @empty
+
+                <div class="ldx-home-news-card">
+
+                    <div class="ldx-home-news-image">
+
+                        <div class="ldx-home-news-placeholder">
+                            ข่าวสาร
+                        </div>
+
+                    </div>
+
+
+                    <div class="ldx-home-news-content">
+
+                        <h3>
+                            ยังไม่มีข่าวสาร
+                        </h3>
+
+                    </div>
 
                 </div>
 
-            </a>
+            @endforelse
+
 
         </div>
 
@@ -1135,6 +985,7 @@
 {{-- ======================================================================
      CTA
      ====================================================================== --}}
+
 <section class="ldx-home-cta">
 
     <div class="ldx-home-cta-grid"></div>
@@ -1156,12 +1007,14 @@
 
 
             <h2>
+
                 พร้อมขับเคลื่อน
                 <br>
 
                 <span>
                     โครงการของคุณไปข้างหน้าหรือยัง?
                 </span>
+
             </h2>
 
 
@@ -1172,8 +1025,10 @@
             </p>
 
 
-            <a href="{{ url('/contact') }}"
-               class="ldx-home-button ldx-home-button-primary">
+            <a
+                href="{{ url('/contact') }}"
+                class="ldx-home-button ldx-home-button-primary"
+            >
 
                 <span>
                     ติดต่อ LDX Elevator
