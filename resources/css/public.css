@@ -4,7 +4,15 @@
    Vanilla CSS
    Public Website only
    ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap');
 
+body {
+    font-family: 'Noto Sans Thai', sans-serif;
+}
+
+.ldx-heading {
+    font-family: 'Inter', 'Noto Sans Thai', sans-serif;
+}
 
 /* ==========================================================================
    01. DESIGN TOKENS
@@ -5982,7 +5990,6 @@ p {
     color: var(--ldx-public-text);
 
     background: var(--ldx-public-surface);
-    transform: translateY(-1px);
 }
 
 .ldx-projects-filter-link.is-active {
@@ -6226,7 +6233,6 @@ p {
 
     font-size: 18px;
 
-    transform: translateY(8px);
     opacity: 0;
 
     transform: translateY(8px);
@@ -6243,11 +6249,7 @@ p {
     opacity: 1;
 
     transform: translateY(0);
-}
 
-.ldx-project-card-link:hover .ldx-project-card-arrow {
-    background: var(--ldx-public-accent);
-    border-color: var(--ldx-public-accent);
     color: #111;
 
     border-color: var(--ldx-public-accent);
@@ -6433,7 +6435,6 @@ p {
 
     border-radius: var(--ldx-public-radius-lg);
 
-    text-align: center;
     background: var(--ldx-public-surface);
 }
 
@@ -6739,8 +6740,6 @@ p {
 .ldx-project-detail-gallery-item {
     display: block;
 
-    overflow: hidden;
-
     aspect-ratio: 4 / 3;
 
     overflow: hidden;
@@ -6768,10 +6767,6 @@ p {
     transform: scale(1.05);
 }
 
-
-/* ---------------------------------------------------------
-   CTA
---------------------------------------------------------- */
 
 /* =========================================================
    PROJECTS CTA
@@ -6815,11 +6810,6 @@ p {
             circle at 88% 50%,
             rgba(240, 173, 69, 0.09),
             transparent 32%
-        ),
-        radial-gradient(
-            circle at 100% 0%,
-            rgba(255, 255, 255, 0.035),
-            transparent 28%
         ),
         var(--ldx-public-surface);
 }
@@ -6931,7 +6921,6 @@ p {
 ========================================================= */
 
 .ldx-projects-cta-button {
-    margin-top: 30px;
     position: relative;
     z-index: 3;
 
@@ -6966,7 +6955,6 @@ p {
     text-decoration: none;
 
     transition:
-        background var(--ldx-public-speed) var(--ldx-public-ease),
         color var(--ldx-public-speed) var(--ldx-public-ease),
         background var(--ldx-public-speed) var(--ldx-public-ease),
         transform var(--ldx-public-speed) var(--ldx-public-ease),
@@ -6982,11 +6970,6 @@ p {
 
     box-shadow: var(--ldx-public-shadow);
 }
-
-
-/* =========================================================
-   BUTTON ARROW
-========================================================= */
 
 .ldx-projects-cta-button svg {
     width: 18px;
